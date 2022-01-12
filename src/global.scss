@@ -1,0 +1,13 @@
+@import '~normalize.css';
+@import 'variables';
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: $text-font;
+  font-size: $text-size-base;
+  color: $text-color;
+  background-color: $bg-color;
+}

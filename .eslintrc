@@ -1,12 +1,7 @@
 {
   "root": true,
   "plugins": ["@typescript-eslint", "prettier"],
-  "extends": [
-    "airbnb-base",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
-  ],
+  "extends": ["airbnb-base", "eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2020,
@@ -20,6 +15,8 @@
   "rules": {
     "no-debugger": "off",
     "no-console": "off",
-    "@typescript-eslint/no-explicit-any": "Error"
+    "max-len": ["error", { "code": 150 }],
+    "@typescript-eslint/no-explicit-any": "Error",
+    "allowForLoopAfterthoughts": true
   }
 }

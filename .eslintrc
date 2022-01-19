@@ -17,6 +17,9 @@
     "no-console": "off",
     "max-len": ["error", { "code": 150 }],
     "@typescript-eslint/no-explicit-any": "Error",
-    "allowForLoopAfterthoughts": true
+    "class-methods-use-this": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "no-plusplus": "off"
   }
 }

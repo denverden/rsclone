@@ -4,6 +4,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import routerUser from './routes/userRouter.js';
+import routerGroup from './routes/groupRouter.js';
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/api/user', routerUser);
+app.use('/api/group', routerGroup);
 
 app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT || 3000}!`));

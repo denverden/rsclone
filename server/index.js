@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import routerUser from './routes/userRouter.js';
 import routerGroup from './routes/groupRouter.js';
+import routerText from './routes/textRouter.js';
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use(bodyParser.json());
 
 app.use('/api/user', routerUser);
 app.use('/api/group', routerGroup);
+app.use('/api/text', routerText);
 
-app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT || 3000}!`));
+app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT || 3030}!`));

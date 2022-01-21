@@ -8,5 +8,5 @@
     "allowJs": false,
     "moduleResolution": "node"
   },
-  "include": ["src/custom.d.ts"]
+  "include": ["src/components", "src/custom.d.ts"]
 }

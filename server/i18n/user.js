@@ -4,7 +4,7 @@ const message = {
     SUCCESS_AUTHORIZATION: 'Authorization successfully.',
     SUCCESS_INFO: 'User data received.',
     SUCCESS_UPDATE: 'The user has been successfully updated.',
-    SUCCESS_DELETE: 'The user has been successfully update.',
+    SUCCESS_DELETE: 'The user has been successfully delete.',
     ERROR_USERNAME: 'A user with the same name already exists.',
     ERROR_REGISTRATION: 'Registration error.',
     ERROR_LOGIN: 'Invalid login.',

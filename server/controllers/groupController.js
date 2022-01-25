@@ -18,7 +18,7 @@ class GroupController {
       const candidate = await Group.findOne({ name: groupname });
 
       if (candidate) {
-        return res.status(400).json({ apiMessage: message[lang].ERROR_GROUPNAME });
+        return res.status(400).json({ apiMessage: message[lang].ERROR_GROUPNAME, error: 'ERROR_GROUPNAME' });
       }
 
       const group = new Group({
@@ -30,15 +30,12 @@ class GroupController {
       await group.save().then(() => {
         res.status(200).json({
           apiMessage: message[lang].SUCCESS_CREAT_GROUP,
-          addGroup: {
-            _id: group._id,
-            name: group.name,
-            learn: group.learn,
-          },
+          info: group,
+          error: 'NO',
         });
       });
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_CREAT_GROUP, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_CREAT_GROUP, error: err.message });
     }
   }
 
@@ -48,18 +45,16 @@ class GroupController {
       const groups = await Group.find();
 
       const response = {
-        count: groups.length,
-        groups: groups.map((record) => {
-          return {
-            _id: record._id,
-            name: record.name,
-          };
+        apiMessage: message[lang].SUCCESS_INFO_ALL,
+        info: groups.map((record) => {
+          return record;
         }),
+        error: 'NO',
       };
 
       return res.status(200).json(response);
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_CREAT_GROUP, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_CREAT_GROUP, error: err.message });
     }
   }
 
@@ -69,15 +64,16 @@ class GroupController {
       const group = await Group.findById(req.params.id);
 
       if (!group) {
-        return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_GROUP });
+        return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_GROUP, error: 'ERROR_NOT_GROUP' });
       }
 
       return res.status(200).json({
         apiMessage: message[lang].SUCCESS_INFO,
         info: group,
+        error: 'NO',
       });
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_ACCESS, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_ACCESS, error: err.message });
     }
   }
 
@@ -85,22 +81,20 @@ class GroupController {
     const lang = getLangName(req.headers);
     try {
       const group = await Group.findById(req.params.id);
-      let newGroup = group;
 
       if (!group) {
-        return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_GROUP });
+        return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_GROUP, error: 'ERROR_NOT_GROUP' });
       }
 
       const { groupname, learn } = req.body;
-      newGroup.name = groupname ? groupname : newGroup.name;
-      newGroup.learn = learn ? learn : newGroup.learn;
+      group.name = groupname ? groupname : group.name;
+      group.learn = learn ? learn : group.learn;
 
-      Group.findByIdAndUpdate(req.params.id, newGroup).then(() => {
+      Group.findByIdAndUpdate(req.params.id, group).then(() => {
         res.status(200).json({
           apiMessage: message[lang].SUCCESS_UPDATE,
-          updateGroup: {
-            _id: req.params.id,
-          },
+          info: group,
+          error: 'NO',
         });
       });
     } catch (err) {
@@ -114,19 +108,18 @@ class GroupController {
       const group = await Group.findById(req.params.id);
 
       if (!group) {
-        return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_GROUP });
+        return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_GROUP, error: 'ERROR_NOT_GROUP' });
       }
 
       await Group.deleteOne({ _id: req.params.id }).then(() => {
         res.status(200).json({
           apiMessage: message[lang].SUCCESS_DELETE,
-          deletedGroup: {
-            _id: req.params.id,
-          },
+          info: group,
+          error: 'NO',
         });
       });
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_DELETE, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_DELETE, error: err.message });
     }
   }
 }

@@ -12,9 +12,9 @@ const TextModel = new mongoose.Schema({
     default: 'ru',
   },
   lesson: {
-    type: Number,
-    require: false,
-    default: 0,
+    type: String,
+    require: true,
+    default: '0',
   },
   groups: [{ type: String, ref: 'Group' }],
 });

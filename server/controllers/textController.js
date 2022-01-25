@@ -31,26 +31,20 @@ class TextController {
       await newText.save().then(() => {
         res.status(200).json({
           apiMessage: message[lang].SUCCESS_CREAT_TEXT,
-          addGroup: {
-            _id: newText._id,
-            text: newText.text,
-            lang: newText.lang,
-            lesson: newText.lesson,
-            groups: newText.groups,
-          },
+          info: newText,
+          err: 'NO',
         });
       });
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_CREAT_TEXT, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_CREAT_TEXT, error: err.message });
     }
   }
 
   async getText(req, res) {
     const lang = getLangName(req.headers);
     try {
-      // TODO: make it more efficient to return a random entry
       const group = await Group.findById(req.params.groupId);
-      const filter = group ? { groups: [group.name] } : {};
+      const filter = group ? { groups: [group.name], lesson: '0' } : { lesson: '0' };
       const count = await Text.countDocuments(filter);
       const randRecord = randomInteger(count);
       const record = await Text.find(filter)
@@ -58,16 +52,14 @@ class TextController {
         .limit(1);
 
       const response = {
-        _id: record[0]._id,
-        groups: record[0].groups,
-        text: record[0].text,
-        lang: record[0].lang,
-        lesson: record[0].lesson,
+        apiMessage: message[lang].SUCCESS_TEXT,
+        info: record[0],
+        error: 'NO',
       };
 
       return res.status(200).json(response);
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_TEXT, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_TEXT, error: err.message });
     }
   }
 
@@ -79,21 +71,16 @@ class TextController {
       const texts = await Text.find(filter);
 
       const response = {
-        count: texts.length,
+        apiMessage: message[lang].SUCCESS_TEXT_ALL,
         texts: texts.map((record) => {
-          return {
-            _id: record._id,
-            groups: record.groups,
-            text: record.text,
-            lang: record.lang,
-            lesson: record.lesson,
-          };
+          return record;
         }),
+        error: 'NO',
       };
 
       return res.status(200).json(response);
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_TEXT, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_TEXT, error: err.message });
     }
   }
 
@@ -111,29 +98,28 @@ class TextController {
       Text.findByIdAndUpdate(req.params.id, newText).then(() => {
         res.status(200).json({
           apiMessage: message[langs].SUCCESS_UPDATE,
-          updateText: {
-            _id: req.params.id,
-          },
+          info: newText,
+          error: 'NO',
         });
       });
     } catch (err) {
-      res.status(400).json({ apiMessage: message[langs].ERROR_UPDATE, error: err });
+      res.status(400).json({ apiMessage: message[langs].ERROR_UPDATE, error: err.message });
     }
   }
 
   async deleteTexts(req, res) {
     const lang = getLangName(req.headers);
     try {
+      let newText = await Text.findById(req.params.id);
+
       await Text.deleteOne({ _id: req.params.id }).then(() => {
         res.status(200).json({
           apiMessage: message[lang].SUCCESS_DELETE,
-          deletedText: {
-            _id: req.params.id,
-          },
+          info: newText,
         });
       });
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_DELETE, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_DELETE, error: err.message });
     }
   }
 }

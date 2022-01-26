@@ -1,5 +1,6 @@
 @import '../../variables';
 
+
 .login-container {
   width: 500px;
   height: 300px;
@@ -15,25 +16,39 @@
   flex-direction: row;
   height: 50px;
 }
+
 .login-btn,
 .registration-btn {
   width: 50%;
   height: 100%;
 }
+
+.inputs{
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+}
+
 .login-inputs {
-  height: 100%;
+  height: 250px;
+  min-width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-
 }
-.login-putter {
+
+.login-putter,
+.registration-putter {
   width: 100px;
   height: 50px;
 }
 .registration-inputs {
-  display: none;
+  height: 250px;
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
-.registration-putter {
-}
+

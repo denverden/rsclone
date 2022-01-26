@@ -1,8 +1,33 @@
 import Component from '../Component';
 import './login.scss'
 
-const login = new Component({
-  selector: '.app',
+class LoginClass extends Component{
+  afterRender(): void {
+    const loginBtn = document.querySelector(".login-btn") as HTMLElement;
+    const registrationBtn = document.querySelector(".registration-btn") as HTMLElement;
+    const loginInputs = document.querySelector(".login-inputs") as HTMLElement;
+    const registrationInputs = document.querySelector(".registration-inputs") as HTMLElement;
+
+    loginBtn.addEventListener("click", (e)=>{
+      loginInputs.style.transform = "translateX(0)";
+      registrationInputs.style.transform = "translateX(0)";
+      loginBtn.style.backgroundColor = "gray";
+      registrationBtn.style.backgroundColor = "white";
+    })
+
+    registrationBtn.addEventListener("click", (e)=>{
+      loginInputs.style.transform = "translateX(-100%)";
+      registrationInputs.style.transform = "translateX(-100%)";
+      loginBtn.style.backgroundColor = "white";
+      registrationBtn.style.backgroundColor = "gray";
+    })
+
+
+  }
+}
+
+const login = new LoginClass({
+  selector: '.page',
   template: `
     <div class="login-container">
       <div class="login-nav">
@@ -25,5 +50,7 @@ const login = new Component({
     </div>
   `
 })
+
+
 
 export default login;

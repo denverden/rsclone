@@ -141,6 +141,7 @@ class Keyboard extends Component {
       const insertLineBreak = ['Backspace', 'BracketRight', 'Enter'].indexOf(key) !== -1;
       keyElement.setAttribute('type', 'button');
       keyElement.classList.add('keyboard__key');
+      keyElement.setAttribute('data-key', key);
       if (this.lang === 'ru') {
         keyElement.textContent = keyLayoutRu[key];
         keyElement.setAttribute('data-lang', keyLayoutRu[key]);
@@ -169,7 +170,7 @@ class Keyboard extends Component {
 
     const showKeyboard = document.querySelector('.show-keyboard');
     const showHand = document.querySelector('.show-hand');
-    const rightHandOne = document.querySelector('.right-hand-one');
+    const rightHandOne = document.getElementById('hands');
 
     showKeyboard.addEventListener('click', () => {
       showKeyboard.classList.toggle('hide-keyboard');
@@ -186,8 +187,17 @@ class Keyboard extends Component {
 
       const resultArr = textAll.split('');
       let i = 0;
+
       const btn = document.querySelector(`.keyboard__key[data-lang="${resultArr[i]}"]`) as HTMLElement;
       btn.style.backgroundColor = 'red';
+      const position = btn.getBoundingClientRect();
+      const x = position.left;
+      const y = position.top;
+      const rightHand = document.getElementById('lhand1');
+
+      rightHand.style.left = `${x}px`;
+      rightHand.style.top = `${y + 12}px`;
+      rightHand.style.display = 'block';
       document.addEventListener('keydown', (event) => {
         if (event.key === resultArr[i]) {
           document.querySelectorAll('.keyboard__key').forEach((item: HTMLElement) => {
@@ -199,8 +209,25 @@ class Keyboard extends Component {
           const btn2 = document.querySelector(`.keyboard__key[data-lang="${resultTwo.toUpperCase()}"]`) as HTMLElement;
           btn2.style.backgroundColor = 'red';
           i++;
+
+          const firstLetter = resultArr[i].toUpperCase();
+          // const element = document.querySelector(`.keyboard__key[data-key="${event.code}"]`);
+          // console.log(element);
+          const position = btn2.getBoundingClientRect();
+          const x = position.left;
+          const y = position.top;
+          const rightHand = document.getElementById('lhand1');
+
+          rightHand.style.left = `${x}px`;
+          rightHand.style.top = `${y + 12}px`;
+          rightHand.style.display = 'block';
+          if (firstLetter === 'В' || firstLetter === 'А') {
+            // const rightHand = document.getElementById('lhand1');
+            // rightHand.style.left = `${x}px`;
+            // rightHand.style.top = `${y + 12}px`;
+            // rightHand.style.display = 'block';
+          }
         }
-        console.log(i);
       });
     }, 3000);
   }
@@ -210,7 +237,6 @@ class Keyboard extends Component {
     this.stateTemplate.text = txt.info.text;
     this.elem.querySelector('.text').innerHTML = txt.info.text;
     this.lang = txt.info.lang;
-    console.log(this.lang);
   }
 
   afterRender() {
@@ -225,7 +251,17 @@ const keyboard = new Keyboard({
   template: `
   <div class="text">{{ text }}</div>
   <div class="container-keyboard">
-  <div id="hands">
+  <div id="hands" >
+  <div class="hand lhand" id="lhand4" ></div>
+<div class="hand lhand" id="lhand3" ></div>
+<div class="hand lhand" id="lhand2" ></div>
+<div class="hand lhand" id="lhand1" ></div>
+<div class="hand lhand" id="lhand0" ></div>
+<div class="hand rhand" id="rhand0" ></div>
+<div class="hand rhand" id="rhand1" ></div>
+<div class="hand rhand" id="rhand2" ></div>
+<div class="hand rhand" id="rhand3" ></div>
+<div class="hand rhand" id="rhand4" ></div>
     <div class="hand right-hand-one" id="rhand1"></div>
   </div>
   <span class="show-keyboard" title="Скрыть клавиатуру"></span>

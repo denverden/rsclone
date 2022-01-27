@@ -1,0 +1,273 @@
+.container-keyboard {
+  width: 100%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.keyboard {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 5px 0;
+  background: #f0f7f5;
+}
+
+.keyboard__keys {
+  text-align: center;
+}
+
+.keyboard__key {
+  height: 45px;
+  width: 5%;
+  max-width: 90px;
+  margin: 3px;
+  border-radius: 4px;
+  border: none;
+  background: #fff;
+  color: #0a0a0a;
+  border: 1px solid #c7d0d4;
+  font-size: 1.05rem;
+  outline: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: top;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+.keyboard__key--coloring:nth-child(1) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(2) {
+  background: #729fcf;
+}
+.keyboard__key--coloring:nth-child(3) {
+  background: #73d216;
+}
+.keyboard__key--coloring:nth-child(4) {
+  background: #fcaf3e;
+}
+.keyboard__key--coloring:nth-child(5) {
+  background: #fcaf3e;
+}
+.keyboard__key--coloring:nth-child(6) {
+  background: #fce94f;
+}
+.keyboard__key--coloring:nth-child(7) {
+  background: #fce94f;
+}
+.keyboard__key--coloring:nth-child(8) {
+  background: #73d216;
+}
+.keyboard__key--coloring:nth-child(9) {
+  background: #729fcf;
+}
+.keyboard__key--coloring:nth-child(10) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(11) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(12) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(13) {
+  background: #ddd;
+}
+.keyboard__key--coloring:nth-child(14) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(15) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(16) {
+  background: #729fcf;
+}
+.keyboard__key--coloring:nth-child(17) {
+  background: #73d216;
+}
+.keyboard__key--coloring:nth-child(18) {
+  background: #fcaf3e;
+}
+.keyboard__key--coloring:nth-child(19) {
+  background: #fcaf3e;
+}
+.keyboard__key--coloring:nth-child(20) {
+  background: #fce94f;
+}
+.keyboard__key--coloring:nth-child(21) {
+  background: #fce94f;
+}
+.keyboard__key--coloring:nth-child(22) {
+  background: #73d216;
+}
+.keyboard__key--coloring:nth-child(23) {
+  background: #729fcf;
+}
+.keyboard__key--coloring:nth-child(24) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(25) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(26) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(27) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(28) {
+  background: #ddd;
+}
+.keyboard__key--coloring:nth-child(29) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(30) {
+  background: #729fcf;
+}
+.keyboard__key--coloring:nth-child(31) {
+  background: #73d216;
+}
+.keyboard__key--coloring:nth-child(32) {
+  background: #fcaf3e;
+}
+.keyboard__key--coloring:nth-child(33) {
+  background: #fcaf3e;
+}
+.keyboard__key--coloring:nth-child(34) {
+  background: #fce94f;
+}
+.keyboard__key--coloring:nth-child(35) {
+  background: #fce94f;
+}
+.keyboard__key--coloring:nth-child(36) {
+  background: #73d216;
+}
+.keyboard__key--coloring:nth-child(37) {
+  background: #729fcf;
+}
+.keyboard__key--coloring:nth-child(38) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(39) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(40) {
+  background: #ddd;
+}
+.keyboard__key--coloring:nth-child(42) {
+  background: #ddd;
+}
+.keyboard__key--coloring:nth-child(43) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(44) {
+  background: #729fcf;
+}
+.keyboard__key--coloring:nth-child(45) {
+  background: #73d216;
+}
+.keyboard__key--coloring:nth-child(46) {
+  background: #fcaf3e;
+}
+.keyboard__key--coloring:nth-child(47) {
+  background: #fcaf3e;
+}
+.keyboard__key--coloring:nth-child(48) {
+  background: #fce94f;
+}
+.keyboard__key--coloring:nth-child(49) {
+  background: #fce94f;
+}
+.keyboard__key--coloring:nth-child(50) {
+  background: #73d216;
+}
+.keyboard__key--coloring:nth-child(51) {
+  background: #729fcf;
+}
+.keyboard__key--coloring:nth-child(52) {
+  background: #ad7fa8;
+}
+
+.keyboard__key:nth-last-child(1) {
+  width: 50%;
+  max-width: 424px;
+}
+/* .hide-keyboard {
+cursor: pointer;
+margin-top: 3px;
+margin-left: 15px;
+width: 32px;
+height: 20px;
+display: inline-block;
+background: url(i/iconsa.png) no-repeat 0 -50px;
+z-index: 2;
+} */
+.show-keyboard {
+  cursor: pointer;
+  margin-top: 3px;
+  margin-left: 15px;
+  width: 32px;
+  height: 20px;
+  display: inline-block;
+  background: url(./iconsa.png) no-repeat 0 -50px;
+  z-index: 2;
+}
+.hide-keyboard {
+  background: url(./iconsa.png) no-repeat 0 -100px;
+}
+
+.show-color {
+  cursor: pointer;
+  margin-top: 3px;
+  margin-left: 15px;
+  width: 32px;
+  height: 20px;
+  display: inline-block;
+  background: url(./iconsa.png) no-repeat 0 -650px;
+}
+.hide-color {
+  background: url(./iconsa.png) no-repeat 0 -700px;
+}
+.show-hand {
+  cursor: pointer;
+  margin-top: 3px;
+  margin-left: 15px;
+  width: 32px;
+  height: 20px;
+  display: inline-block;
+  background: url(./iconsa.png) no-repeat 0 -200px;
+}
+.hide-hand {
+  background: url(./iconsa.png) no-repeat 0 -150px;
+}
+.keyboard--hidden {
+  display: none;
+}
+
+.active {
+  background: #f50303;
+}
+
+#hands #rhand1 {
+  background-position: -348px 0;
+}
+
+.right-hand-one {
+  display: none;
+  position: absolute;
+  width: 58px;
+  height: 100px;
+  z-index: 1;
+  zoom: 1;
+  opacity: 0.7;
+  background: url(./hands2.png) no-repeat;
+}
+.active--hand {
+  display: block;
+}

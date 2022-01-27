@@ -195,8 +195,8 @@ class Keyboard extends Component {
       const y = position.top;
       const rightHand = document.getElementById('lhand1');
 
-      rightHand.style.left = `${x}px`;
-      rightHand.style.top = `${y + 12}px`;
+      rightHand.style.left = `${x - 10}px`;
+      rightHand.style.top = `${y + 19}px`;
       rightHand.style.display = 'block';
       document.addEventListener('keydown', (event) => {
         if (event.key === resultArr[i]) {
@@ -213,14 +213,14 @@ class Keyboard extends Component {
           const firstLetter = resultArr[i].toUpperCase();
           // const element = document.querySelector(`.keyboard__key[data-key="${event.code}"]`);
           // console.log(element);
-          const position = btn2.getBoundingClientRect();
-          const x = position.left;
-          const y = position.top;
-          const rightHand = document.getElementById('lhand1');
+          const position2 = btn2.getBoundingClientRect();
+          const x2 = position2.left;
+          const y2 = position2.top;
+          const rightHand2 = document.getElementById('lhand1');
 
-          rightHand.style.left = `${x}px`;
-          rightHand.style.top = `${y + 12}px`;
-          rightHand.style.display = 'block';
+          rightHand2.style.left = `${x2 - 10}px`;
+          rightHand2.style.top = `${y2 + 19}px`;
+          rightHand2.style.display = 'block';
           if (firstLetter === 'В' || firstLetter === 'А') {
             // const rightHand = document.getElementById('lhand1');
             // rightHand.style.left = `${x}px`;

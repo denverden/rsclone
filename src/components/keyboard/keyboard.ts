@@ -12,7 +12,7 @@ class Keyboard extends Component {
 
   constructor(data: IData) {
     super(data);
-    this.lang = 'ru';
+    this.lang = 'en';
     this.keysContainer = null;
     this.stateTemplate = { text: 'loading...' };
   }
@@ -78,7 +78,7 @@ class Keyboard extends Component {
       Period: '.',
       Slash: '?',
       ShiftRight: 'shift',
-      Space: 'space',
+      Space: ' ',
     };
     const keyLayoutRu: IKeyLayout = {
       Backquote: 'Ё',

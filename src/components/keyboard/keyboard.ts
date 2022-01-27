@@ -7,6 +7,7 @@ import './keyboard.scss';
 
 class Keyboard extends Component {
   private keysContainer: HTMLElement;
+
   private lang: string;
 
   constructor(data: IData) {
@@ -129,9 +130,9 @@ class Keyboard extends Component {
       KeyM: 'Ь',
       Comma: 'Б',
       Period: 'Ю',
-      Slash: '.',
+      Slash: ',',
       ShiftRight: 'shift',
-      Space: 'space',
+      Space: ' ',
     };
 
     const keys = Object.keys(keyLayout);
@@ -142,10 +143,10 @@ class Keyboard extends Component {
       keyElement.classList.add('keyboard__key');
       if (this.lang === 'ru') {
         keyElement.textContent = keyLayoutRu[key];
-        keyElement.setAttribute('data', keyLayoutRu[key]);
+        keyElement.setAttribute('data-lang', keyLayoutRu[key]);
       } else {
         keyElement.textContent = keyLayout[key];
-        keyElement.setAttribute('data', keyLayout[key]);
+        keyElement.setAttribute('data-lang', keyLayout[key]);
       }
 
       fragment.appendChild(keyElement);
@@ -170,34 +171,36 @@ class Keyboard extends Component {
     const showHand = document.querySelector('.show-hand');
     const rightHandOne = document.querySelector('.right-hand-one');
 
-    showKeyboard.addEventListener('click', (event) => {
+    showKeyboard.addEventListener('click', () => {
       showKeyboard.classList.toggle('hide-keyboard');
       this.elem.querySelector('#keyboard').classList.toggle('keyboard--hidden');
     });
 
-    showHand.addEventListener('click', (event) => {
+    showHand.addEventListener('click', () => {
       showHand.classList.toggle('hide-hand');
       rightHandOne.classList.toggle('active--hand');
     });
 
-    setTimeout(function () {
+    setTimeout(() => {
       const textAll = document.querySelector('.text').innerHTML;
 
-      let resultArr = textAll.split('');
-      let result = resultArr[0];
-      console.log(result);
-
-      const btn = document.querySelector('.keyboard__key[data="' + resultArr[0] + '"]') as HTMLElement;
+      const resultArr = textAll.split('');
+      let i = 0;
+      const btn = document.querySelector(`.keyboard__key[data-lang="${resultArr[i]}"]`) as HTMLElement;
       btn.style.backgroundColor = 'red';
       document.addEventListener('keydown', (event) => {
-     
-        let i = 0;
-        if (event.key === result) {
-          btn.style.backgroundColor = '';
-          console.log(resultArr[i + 1]);
-          const btn2 = document.querySelector('.keyboard__key[data="' + resultArr[i + 1].toUpperCase() + '"]') as HTMLElement;
+        if (event.key === resultArr[i]) {
+          document.querySelectorAll('.keyboard__key').forEach((item: HTMLElement) => {
+            const itemElem = item;
+            itemElem.style.backgroundColor = '';
+          });
+          const resultTwo = resultArr[i + 1];
+
+          const btn2 = document.querySelector(`.keyboard__key[data-lang="${resultTwo.toUpperCase()}"]`) as HTMLElement;
           btn2.style.backgroundColor = 'red';
+          i++;
         }
+        console.log(i);
       });
     }, 3000);
   }

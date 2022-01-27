@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { IData } from '../../interface/IData';
 import { IKeyLayout } from '../../interface/IKeyLayout';
 import { IText } from '../../interface/IText';
@@ -12,7 +13,7 @@ class Keyboard extends Component {
 
   constructor(data: IData) {
     super(data);
-    this.lang = 'en';
+    this.lang = 'ru';
     this.keysContainer = null;
     this.stateTemplate = { text: 'loading...' };
   }
@@ -190,19 +191,66 @@ class Keyboard extends Component {
 
       const btn = document.querySelector(`.keyboard__key[data-lang="${resultArr[i]}"]`) as HTMLElement;
       btn.style.backgroundColor = 'red';
+
+      const dataKey = btn.dataset.key;
       const position = btn.getBoundingClientRect();
       const x = position.left;
       const y = position.top;
-      const rightHand = document.getElementById('lhand1');
 
-      rightHand.style.left = `${x - 10}px`;
-      rightHand.style.top = `${y + 19}px`;
-      rightHand.style.display = 'block';
+      const arrHand = ['lhand1', 'lhand2', 'lhand3', 'lhand4', 'lhand0', 'rhand0', 'rhand1', 'rhand2', 'rhand3', 'rhand4'];
+
+      const handImg = (numberHand: string) => {
+        const rightHand = document.getElementById(`${numberHand}`);
+        rightHand.style.left = `${x - 10}px`;
+        rightHand.style.top = `${y + 19}px`;
+        rightHand.style.display = 'block';
+      };
+
+      if (
+        dataKey === 'Digit4' ||
+        dataKey === 'Digit5' ||
+        dataKey === 'KeyY' ||
+        dataKey === 'KeyU' ||
+        dataKey === 'KeyF' ||
+        dataKey === 'KeyG' ||
+        dataKey === 'KeyV' ||
+        dataKey === 'KeyB'
+      ) {
+        handImg(arrHand[0]);
+      } else if (dataKey === 'Digit3' || dataKey === 'KeyE' || dataKey === 'KeyD' || dataKey === 'KeyC') {
+        handImg(arrHand[1]);
+      } else if (dataKey === 'Digit2' || dataKey === 'KeyW' || dataKey === 'KeyS' || dataKey === 'KeyX') {
+        handImg(arrHand[2]);
+      } else if (dataKey === 'Backquote' || dataKey === 'Digit1' || dataKey === 'KeyQ' || dataKey === 'KeyA' || dataKey === 'KeyZ') {
+        handImg(arrHand[3]);
+      }
+      if (
+        dataKey === 'Digit6' ||
+        dataKey === 'Digit7' ||
+        dataKey === 'KeyR' ||
+        dataKey === 'KeyT' ||
+        dataKey === 'KeyH' ||
+        dataKey === 'KeyJ' ||
+        dataKey === 'KeyN' ||
+        dataKey === 'KeyM'
+      ) {
+        handImg(arrHand[6]);
+      } else if (dataKey === 'Digit8' || dataKey === 'KeyI' || dataKey === 'KeyK' || dataKey === 'Comma') {
+        handImg(arrHand[7]);
+      } else if (dataKey === 'Digit9' || dataKey === 'KeyO' || dataKey === 'KeyL' || dataKey === 'Period') {
+        handImg(arrHand[8]);
+      } else if (dataKey === 'Digit0' || dataKey === 'KeyP' || dataKey === 'Semicolon' || dataKey === 'BracketLeft' || dataKey === 'BracketRight') {
+        handImg(arrHand[9]);
+      }
       document.addEventListener('keydown', (event) => {
         if (event.key === resultArr[i]) {
           document.querySelectorAll('.keyboard__key').forEach((item: HTMLElement) => {
             const itemElem = item;
             itemElem.style.backgroundColor = '';
+          });
+          document.querySelectorAll('.hand').forEach((item: HTMLElement) => {
+            const itemElem = item;
+            itemElem.style.display = 'none';
           });
           const resultTwo = resultArr[i + 1];
 
@@ -210,23 +258,16 @@ class Keyboard extends Component {
           btn2.style.backgroundColor = 'red';
           i++;
 
-          const firstLetter = resultArr[i].toUpperCase();
-          // const element = document.querySelector(`.keyboard__key[data-key="${event.code}"]`);
-          // console.log(element);
+          console.log(btn2);
           const position2 = btn2.getBoundingClientRect();
+
           const x2 = position2.left;
           const y2 = position2.top;
-          const rightHand2 = document.getElementById('lhand1');
+          const rightHand2 = document.getElementById('rhand2');
 
           rightHand2.style.left = `${x2 - 10}px`;
           rightHand2.style.top = `${y2 + 19}px`;
           rightHand2.style.display = 'block';
-          if (firstLetter === 'В' || firstLetter === 'А') {
-            // const rightHand = document.getElementById('lhand1');
-            // rightHand.style.left = `${x}px`;
-            // rightHand.style.top = `${y + 12}px`;
-            // rightHand.style.display = 'block';
-          }
         }
       });
     }, 3000);
@@ -262,7 +303,7 @@ const keyboard = new Keyboard({
 <div class="hand rhand" id="rhand2" ></div>
 <div class="hand rhand" id="rhand3" ></div>
 <div class="hand rhand" id="rhand4" ></div>
-    <div class="hand right-hand-one" id="rhand1"></div>
+
   </div>
   <span class="show-keyboard" title="Скрыть клавиатуру"></span>
   <span class="show-color" title="Показать цвет"></span>

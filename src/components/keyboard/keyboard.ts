@@ -198,7 +198,6 @@ class Keyboard extends Component {
       const leftLittleArr = ['Backquote', 'Digit1', 'KeyQ', 'KeyA', 'KeyZ'];
       const allArrRightHand = [...rightPointerArr, ...rightMiddleArr, ...rightRingArr, ...rightLittleArr];
       const allArrLeftHand = [...leftPointerArr, ...leftMiddleArr, ...leftRingArr, ...leftLittleArr];
-      console.log(allArrRightHand);
       let i = 0;
 
       const btn = document.querySelector(`.keyboard__key[data-lang="${resultArr[i]}"]`) as HTMLElement;
@@ -206,6 +205,7 @@ class Keyboard extends Component {
       const btnShiftRight = document.querySelector(`.keyboard__key[data-key="ShiftRight"]`) as HTMLElement;
       console.log(btnShiftLeft);
       btn.style.backgroundColor = 'red';
+
       if (allArrLeftHand.includes(btn.dataset.key)) {
         btnShiftRight.style.backgroundColor = 'red';
       } else if (allArrRightHand.includes(btn.dataset.key)) {
@@ -229,6 +229,17 @@ class Keyboard extends Component {
           rightHand.style.display = 'block';
         };
 
+        const handImgShift = (numberHand: string, argShift: HTMLElement) => {
+          const positionShift = argShift.getBoundingClientRect();
+          const xShift = positionShift.left;
+          const yShift = positionShift.top;
+          const rightHand = document.getElementById(`${numberHand}`);
+          const correctionFactorLeft = 12;
+          const correctionFactorTop = 20;
+          rightHand.style.left = `${xShift - correctionFactorLeft}px`;
+          rightHand.style.top = `${yShift + correctionFactorTop}px`;
+          rightHand.style.display = 'block';
+        };
         if (leftPointerArr.includes(dataKey)) {
           handImg(arrHand[0]);
         } else if (leftMiddleArr.includes(dataKey)) {
@@ -247,6 +258,11 @@ class Keyboard extends Component {
           handImg(arrHand[8]);
         } else if (rightLittleArr.includes(dataKey)) {
           handImg(arrHand[9]);
+        }
+        if (btnShiftRight.style.backgroundColor === 'red') {
+          handImgShift(arrHand[9], btnShiftRight);
+        } else {
+          handImgShift(arrHand[3], btnShiftLeft);
         }
       };
       handImgKey(btn);

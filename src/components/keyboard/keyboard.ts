@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { IData } from '../../interface/IData';
 import { IKeyLayout } from '../../interface/IKeyLayout';
 import { IText } from '../../interface/IText';
@@ -177,10 +176,10 @@ class Keyboard extends Component {
       showKeyboard.classList.toggle('hide-keyboard');
       this.elem.querySelector('#keyboard').classList.toggle('keyboard--hidden');
     });
-
+    rightHandOne.style.display = 'none';
     showHand.addEventListener('click', () => {
       showHand.classList.toggle('hide-hand');
-      rightHandOne.classList.toggle('active--hand');
+      rightHandOne.style.display = 'block';
     });
 
     setTimeout(() => {
@@ -192,56 +191,52 @@ class Keyboard extends Component {
       const btn = document.querySelector(`.keyboard__key[data-lang="${resultArr[i]}"]`) as HTMLElement;
       btn.style.backgroundColor = 'red';
 
-      const dataKey = btn.dataset.key;
-      const position = btn.getBoundingClientRect();
-      const x = position.left;
-      const y = position.top;
+      const handImgKey = (arg: HTMLElement) => {
+        const dataKey = arg.dataset.key;
+        const position = arg.getBoundingClientRect();
+        const x = position.left;
+        const y = position.top;
 
-      const arrHand = ['lhand1', 'lhand2', 'lhand3', 'lhand4', 'lhand0', 'rhand0', 'rhand1', 'rhand2', 'rhand3', 'rhand4'];
+        const arrHand = ['lhand1', 'lhand2', 'lhand3', 'lhand4', 'lhand0', 'rhand0', 'rhand1', 'rhand2', 'rhand3', 'rhand4'];
 
-      const handImg = (numberHand: string) => {
-        const rightHand = document.getElementById(`${numberHand}`);
-        rightHand.style.left = `${x - 10}px`;
-        rightHand.style.top = `${y + 19}px`;
-        rightHand.style.display = 'block';
+        const handImg = (numberHand: string) => {
+          const rightHand = document.getElementById(`${numberHand}`);
+          rightHand.style.left = `${x - 12}px`;
+          rightHand.style.top = `${y + 20}px`;
+          rightHand.style.display = 'block';
+        };
+        const rightThumbArr = ['Space'];
+        const rightPointerArr = ['Digit6', 'Digit7', 'KeyR', 'KeyT', 'KeyH', 'KeyJ', 'KeyN', 'KeyM'];
+        const rightMiddleArr = ['Digit8', 'KeyI', 'KeyK', 'Comma'];
+        const rightRingArr = ['Digit9', 'KeyO', 'KeyL', 'Period'];
+        const rightLittleArr = ['Digit0', 'KeyP', 'Semicolon', 'BracketLeft', 'BracketRight'];
+        const leftThumbArr = ['Space'];
+        const leftPointerArr = ['Digit4', 'Digit5', 'KeyY', 'KeyU', 'KeyF', 'KeyG', 'KeyV', 'KeyB'];
+        const leftMiddleArr = ['Digit3', 'KeyE', 'KeyD', 'KeyC'];
+        const leftRingArr = ['Digit2', 'KeyW', 'KeyS', 'KeyX'];
+        const leftLittleArr = ['Backquote', 'Digit1', 'KeyQ', 'KeyA', 'KeyZ'];
+
+        if (leftPointerArr.includes(dataKey)) {
+          handImg(arrHand[0]);
+        } else if (leftMiddleArr.includes(dataKey)) {
+          handImg(arrHand[1]);
+        } else if (leftRingArr.includes(dataKey)) {
+          handImg(arrHand[2]);
+        } else if (leftLittleArr.includes(dataKey)) {
+          handImg(arrHand[3]);
+        } else if (leftThumbArr.includes(dataKey)) {
+          handImg(arrHand[4]);
+        } else if (rightPointerArr.includes(dataKey)) {
+          handImg(arrHand[6]);
+        } else if (rightMiddleArr.includes(dataKey)) {
+          handImg(arrHand[7]);
+        } else if (rightRingArr.includes(dataKey)) {
+          handImg(arrHand[8]);
+        } else if (rightLittleArr.includes(dataKey)) {
+          handImg(arrHand[9]);
+        }
       };
-
-      if (
-        dataKey === 'Digit4' ||
-        dataKey === 'Digit5' ||
-        dataKey === 'KeyY' ||
-        dataKey === 'KeyU' ||
-        dataKey === 'KeyF' ||
-        dataKey === 'KeyG' ||
-        dataKey === 'KeyV' ||
-        dataKey === 'KeyB'
-      ) {
-        handImg(arrHand[0]);
-      } else if (dataKey === 'Digit3' || dataKey === 'KeyE' || dataKey === 'KeyD' || dataKey === 'KeyC') {
-        handImg(arrHand[1]);
-      } else if (dataKey === 'Digit2' || dataKey === 'KeyW' || dataKey === 'KeyS' || dataKey === 'KeyX') {
-        handImg(arrHand[2]);
-      } else if (dataKey === 'Backquote' || dataKey === 'Digit1' || dataKey === 'KeyQ' || dataKey === 'KeyA' || dataKey === 'KeyZ') {
-        handImg(arrHand[3]);
-      }
-      if (
-        dataKey === 'Digit6' ||
-        dataKey === 'Digit7' ||
-        dataKey === 'KeyR' ||
-        dataKey === 'KeyT' ||
-        dataKey === 'KeyH' ||
-        dataKey === 'KeyJ' ||
-        dataKey === 'KeyN' ||
-        dataKey === 'KeyM'
-      ) {
-        handImg(arrHand[6]);
-      } else if (dataKey === 'Digit8' || dataKey === 'KeyI' || dataKey === 'KeyK' || dataKey === 'Comma') {
-        handImg(arrHand[7]);
-      } else if (dataKey === 'Digit9' || dataKey === 'KeyO' || dataKey === 'KeyL' || dataKey === 'Period') {
-        handImg(arrHand[8]);
-      } else if (dataKey === 'Digit0' || dataKey === 'KeyP' || dataKey === 'Semicolon' || dataKey === 'BracketLeft' || dataKey === 'BracketRight') {
-        handImg(arrHand[9]);
-      }
+      handImgKey(btn);
       document.addEventListener('keydown', (event) => {
         if (event.key === resultArr[i]) {
           document.querySelectorAll('.keyboard__key').forEach((item: HTMLElement) => {
@@ -258,16 +253,17 @@ class Keyboard extends Component {
           btn2.style.backgroundColor = 'red';
           i++;
 
-          console.log(btn2);
-          const position2 = btn2.getBoundingClientRect();
+          // console.log(btn2);
+          // const position2 = btn2.getBoundingClientRect();
 
-          const x2 = position2.left;
-          const y2 = position2.top;
-          const rightHand2 = document.getElementById('rhand2');
+          // const x2 = position2.left;
+          // const y2 = position2.top;
+          // const rightHand2 = document.getElementById('rhand2');
 
-          rightHand2.style.left = `${x2 - 10}px`;
-          rightHand2.style.top = `${y2 + 19}px`;
-          rightHand2.style.display = 'block';
+          // rightHand2.style.left = `${x2 - 10}px`;
+          // rightHand2.style.top = `${y2 + 19}px`;
+          // rightHand2.style.display = 'block';
+          handImgKey(btn2);
         }
       });
     }, 3000);

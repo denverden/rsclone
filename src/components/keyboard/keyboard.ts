@@ -261,7 +261,7 @@ class Keyboard extends Component {
         }
         if (btnShiftRight.style.backgroundColor === 'red') {
           handImgShift(arrHand[9], btnShiftRight);
-        } else {
+        } else if (btnShiftLeft.style.backgroundColor === 'red') {
           handImgShift(arrHand[3], btnShiftLeft);
         }
       };
@@ -276,6 +276,7 @@ class Keyboard extends Component {
             const itemElem = item;
             itemElem.style.display = 'none';
           });
+
           const resultTwo = resultArr[i + 1];
 
           const btn2 = document.querySelector(`.keyboard__key[data-lang="${resultTwo.toUpperCase()}"]`) as HTMLElement;

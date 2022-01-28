@@ -179,7 +179,7 @@ class Keyboard extends Component {
     rightHandOne.style.display = 'none';
     showHand.addEventListener('click', () => {
       showHand.classList.toggle('hide-hand');
-      rightHandOne.style.display = 'block';
+      rightHandOne.style.display = rightHandOne.style.display === 'none' ? 'block' : 'none';
     });
 
     setTimeout(() => {

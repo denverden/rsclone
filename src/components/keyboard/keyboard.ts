@@ -161,7 +161,7 @@ class Keyboard extends Component {
 
   eventBtn() {
     const showColor = document.querySelector('.show-color');
-    showColor.addEventListener('click', (event) => {
+    showColor.addEventListener('click', () => {
       showColor.classList.toggle('hide-color');
       document.querySelectorAll('.keyboard__key').forEach((elem) => {
         elem.classList.toggle('keyboard__key--coloring');
@@ -186,10 +186,31 @@ class Keyboard extends Component {
       const textAll = document.querySelector('.text').innerHTML;
 
       const resultArr = textAll.split('');
+      const rightThumbArr = ['Space'];
+      const rightPointerArr = ['Digit6', 'Digit7', 'KeyY', 'KeyU', 'KeyH', 'KeyJ', 'KeyN', 'KeyM'];
+      const rightMiddleArr = ['Digit8', 'KeyI', 'KeyK', 'Comma'];
+      const rightRingArr = ['Digit9', 'KeyO', 'KeyL', 'Period'];
+      const rightLittleArr = ['Digit0', 'KeyP', 'Semicolon', 'BracketLeft', 'BracketRight'];
+      const leftThumbArr = ['Space'];
+      const leftPointerArr = ['Digit4', 'Digit5', 'KeyR', 'KeyT', 'KeyF', 'KeyG', 'KeyV', 'KeyB'];
+      const leftMiddleArr = ['Digit3', 'KeyE', 'KeyD', 'KeyC'];
+      const leftRingArr = ['Digit2', 'KeyW', 'KeyS', 'KeyX'];
+      const leftLittleArr = ['Backquote', 'Digit1', 'KeyQ', 'KeyA', 'KeyZ'];
+      const allArrRightHand = [...rightPointerArr, ...rightMiddleArr, ...rightRingArr, ...rightLittleArr];
+      const allArrLeftHand = [...leftPointerArr, ...leftMiddleArr, ...leftRingArr, ...leftLittleArr];
+      console.log(allArrRightHand);
       let i = 0;
 
       const btn = document.querySelector(`.keyboard__key[data-lang="${resultArr[i]}"]`) as HTMLElement;
+      const btnShiftLeft = document.querySelector(`.keyboard__key[data-key="ShiftLeft"]`) as HTMLElement;
+      const btnShiftRight = document.querySelector(`.keyboard__key[data-key="ShiftRight"]`) as HTMLElement;
+      console.log(btnShiftLeft);
       btn.style.backgroundColor = 'red';
+      if (allArrLeftHand.includes(btn.dataset.key)) {
+        btnShiftRight.style.backgroundColor = 'red';
+      } else if (allArrRightHand.includes(btn.dataset.key)) {
+        btnShiftLeft.style.backgroundColor = 'red';
+      }
 
       const handImgKey = (arg: HTMLElement) => {
         const dataKey = arg.dataset.key;
@@ -201,20 +222,12 @@ class Keyboard extends Component {
 
         const handImg = (numberHand: string) => {
           const rightHand = document.getElementById(`${numberHand}`);
-          rightHand.style.left = `${x - 12}px`;
-          rightHand.style.top = `${y + 20}px`;
+          const correctionFactorLeft = 12;
+          const correctionFactorTop = 20;
+          rightHand.style.left = `${x - correctionFactorLeft}px`;
+          rightHand.style.top = `${y + correctionFactorTop}px`;
           rightHand.style.display = 'block';
         };
-        const rightThumbArr = ['Space'];
-        const rightPointerArr = ['Digit6', 'Digit7', 'KeyR', 'KeyT', 'KeyH', 'KeyJ', 'KeyN', 'KeyM'];
-        const rightMiddleArr = ['Digit8', 'KeyI', 'KeyK', 'Comma'];
-        const rightRingArr = ['Digit9', 'KeyO', 'KeyL', 'Period'];
-        const rightLittleArr = ['Digit0', 'KeyP', 'Semicolon', 'BracketLeft', 'BracketRight'];
-        const leftThumbArr = ['Space'];
-        const leftPointerArr = ['Digit4', 'Digit5', 'KeyY', 'KeyU', 'KeyF', 'KeyG', 'KeyV', 'KeyB'];
-        const leftMiddleArr = ['Digit3', 'KeyE', 'KeyD', 'KeyC'];
-        const leftRingArr = ['Digit2', 'KeyW', 'KeyS', 'KeyX'];
-        const leftLittleArr = ['Backquote', 'Digit1', 'KeyQ', 'KeyA', 'KeyZ'];
 
         if (leftPointerArr.includes(dataKey)) {
           handImg(arrHand[0]);
@@ -253,16 +266,6 @@ class Keyboard extends Component {
           btn2.style.backgroundColor = 'red';
           i++;
 
-          // console.log(btn2);
-          // const position2 = btn2.getBoundingClientRect();
-
-          // const x2 = position2.left;
-          // const y2 = position2.top;
-          // const rightHand2 = document.getElementById('rhand2');
-
-          // rightHand2.style.left = `${x2 - 10}px`;
-          // rightHand2.style.top = `${y2 + 19}px`;
-          // rightHand2.style.display = 'block';
           handImgKey(btn2);
         }
       });
@@ -301,9 +304,11 @@ const keyboard = new Keyboard({
 <div class="hand rhand" id="rhand4" ></div>
 
   </div>
+  <div class="show">
   <span class="show-keyboard" title="Скрыть клавиатуру"></span>
   <span class="show-color" title="Показать цвет"></span>
   <span class="show-hand" title="Показать руки"></span>
+  </div>
   <div id="keyboard"></div>
 </div>`,
 });

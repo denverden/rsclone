@@ -6,38 +6,39 @@
 }
 
 .keyboard {
-  position: fixed;
+  position: relative;
   left: 0;
   bottom: 0;
   width: 100%;
   padding: 5px 0;
   background: #f0f7f5;
-}
 
-.keyboard__keys {
-  text-align: center;
-}
+  &__keys {
+    text-align: center;
+    & sup {
+      margin-left: 5px;
+    }
+  }
 
-.keyboard__key {
-  height: 45px;
-  width: 5%;
-  max-width: 90px;
-  margin: 3px;
-  border-radius: 4px;
-  border: none;
-  background: #fff;
-  color: #0a0a0a;
-  border: 1px solid #c7d0d4;
-  font-size: 1.05rem;
-  outline: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: top;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
+  &__key {
+    height: 45px;
+    width: 5%;
+    max-width: 90px;
+    margin: 3px;
+    border-radius: 4px;
+    border: none;
+    background: #fff;
+    color: #0a0a0a;
+    border: 1px solid #c7d0d4;
+    font-size: 1.05rem;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    padding: 0;
+    position: relative;
+  }
 }
 
 .keyboard__key--coloring:nth-child(1) {
@@ -232,9 +233,11 @@
   display: inline-block;
   background: url(./iconsa.png) no-repeat 0 -650px;
 }
+
 .hide-color {
   background: url(./iconsa.png) no-repeat 0 -700px;
 }
+
 .show-hand {
   cursor: pointer;
   margin-top: 3px;
@@ -244,63 +247,132 @@
   display: inline-block;
   background: url(./iconsa.png) no-repeat 0 -200px;
 }
+
 .hide-hand {
   background: url(./iconsa.png) no-repeat 0 -150px;
 }
+
 .keyboard--hidden {
   display: none;
 }
 
+.hand {
+  &::before {
+    content: '';
+    display: none;
+    position: absolute;
+    width: 58px;
+    height: 100px;
+    z-index: 1;
+    zoom: 1;
+    opacity: 0.7;
+    background: url(./hands2.png) no-repeat;
+  }
+}
+
+.lhand4 {
+  &::before {
+    top: 5px;
+    left: 25px;
+    background-position: 0 0;
+  }
+}
+
+.lhand3 {
+  &::before {
+    top: 25px;
+    left: 10px;
+    background-position: -58px 0;
+  }
+}
+
+.lhand2 {
+  &::before {
+    top: 30px;
+    left: 0px;
+    background-position: -116px 0;
+  }
+}
+
+.lhand1 {
+  &::before {
+    top: 20px;
+    left: -15px;
+    background-position: -174px 0;
+  }
+}
+
+.lhand0 {
+  &::before {
+    top: 0px;
+    background-position: -232px 0;
+  }
+}
+
+.rhand0 {
+  &::before {
+    top: 0px;
+    background-position: -290px 0;
+  }
+}
+
+.rhand1 {
+  &::before {
+    top: 20px;
+    left: 8px;
+    background-position: -348px 0;
+  }
+}
+
+.rhand2 {
+  &::before {
+    top: 30px;
+    left: -5px;
+    background-position: -406px 0;
+  }
+}
+
+.rhand3 {
+  &::before {
+    top: 25px;
+    left: -20px;
+    background-position: -464px 0;
+  }
+}
+
+.rhand4 {
+  &::before {
+    top: 10px;
+    left: -30px;
+    background-position: -522px 0;
+  }
+}
+
 .active {
   background: #f50303;
+  &::before {
+    display: block;
+  }
 }
 
-#hands #lhand4 {
-  background-position: 0 0;
-}
-#hands #lhand3 {
-  background-position: -58px 0;
-}
-#hands #lhand2 {
-  background-position: -116px 0;
-}
-#hands #lhand1 {
-  background-position: -174px 0;
-}
-#hands #lhand0 {
-  background-position: -232px 0;
-}
-#hands #rhand0 {
-  background-position: -290px 0;
-}
-#hands #rhand1 {
-  background-position: -348px 0;
-}
-#hands #rhand2 {
-  background-position: -406px 0;
-}
-#hands #rhand3 {
-  background-position: -464px 0;
-}
-#hands #rhand4 {
-  background-position: -522px 0;
+.text {
+  width: 1000px;
+  margin: 20px auto;
 }
 
-.hand {
+.red {
+  color: red;
+  text-decoration: underline;
+}
+
+.black {
+  opacity: 1;
+}
+
+.gray {
+  opacity: 0.5;
+}
+
+.hand--hidden .active::before {
   display: none;
-  position: absolute;
-  width: 58px;
-  height: 100px;
-  z-index: 1;
-  zoom: 1;
-  opacity: 0.7;
-  background: url(./hands2.png) no-repeat;
-}
-
-.active--hand {
-  display: block;
-}
-
-#keyboard {
-  position: relative;
 }

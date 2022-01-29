@@ -1,3 +1,8 @@
 export interface IKeyLayout {
-  [key: string]: string;
+  [key: string]: {
+    classHand: string;
+    btnName: string;
+    normal: string;
+    alt: string;
+  };
 }

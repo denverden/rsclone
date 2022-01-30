@@ -29,7 +29,7 @@ const keyLayoutRu: IKeyLayout = {
   BracketLeft: { classHand: 'rhand4', btnName: 'Х', normal: 'х', alt: 'Х' },
   BracketRight: { classHand: 'rhand4', btnName: 'Ъ', normal: 'ъ', alt: 'Ъ' },
   Backslash: { classHand: 'rhand4', btnName: '\\<sup>/</sup>', normal: '\\', alt: '/' },
-  CapsLock: { classHand: 'rhand4', btnName: 'caps', normal: '', alt: '' },
+  CapsLock: { classHand: 'rhand4', btnName: 'Caps', normal: '', alt: '' },
   KeyA: { classHand: 'lhand4', btnName: 'Ф', normal: 'ф', alt: 'Ф' },
   KeyS: { classHand: 'lhand3', btnName: 'Ы', normal: 'ы', alt: 'Ы' },
   KeyD: { classHand: 'lhand2', btnName: 'В', normal: 'в', alt: 'В' },
@@ -41,8 +41,8 @@ const keyLayoutRu: IKeyLayout = {
   KeyL: { classHand: 'rhand3', btnName: 'Д', normal: 'д', alt: 'Д' },
   Semicolon: { classHand: 'rhand4', btnName: 'Ж', normal: 'ж', alt: 'Ж' },
   Quote: { classHand: 'rhand4', btnName: 'Э', normal: 'э', alt: 'Э' },
-  Enter: { classHand: 'lhand4', btnName: 'enter', normal: '', alt: '' },
-  ShiftLeft: { classHand: 'lhand4', btnName: 'shift', normal: '', alt: '' },
+  Enter: { classHand: 'lhand4', btnName: 'Enter', normal: '', alt: '' },
+  ShiftLeft: { classHand: 'lhand4', btnName: 'Shift', normal: '', alt: '' },
   KeyZ: { classHand: 'lhand4', btnName: 'Я', normal: 'я', alt: 'Я' },
   KeyX: { classHand: 'lhand3', btnName: 'Ч', normal: 'ч', alt: 'Ч' },
   KeyC: { classHand: 'lhand2', btnName: 'С', normal: 'с', alt: 'С' },
@@ -53,7 +53,7 @@ const keyLayoutRu: IKeyLayout = {
   Comma: { classHand: 'rhand2', btnName: 'Б', normal: 'б', alt: 'Б' },
   Period: { classHand: 'rhand3', btnName: 'Ю', normal: 'ю', alt: 'Ю' },
   Slash: { classHand: 'rhand4', btnName: '.<sup>,</sup>', normal: '.', alt: ',' },
-  ShiftRight: { classHand: 'rhand4', btnName: 'shift', normal: '', alt: '' },
+  ShiftRight: { classHand: 'rhand4', btnName: 'Shift', normal: '', alt: '' },
   Space: { classHand: 'rhand0', btnName: ' ', normal: ' ', alt: '' },
 };
 

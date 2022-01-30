@@ -40,7 +40,7 @@ class Keyboard extends Component {
     const keys = Object.keys(keyLayout);
     keys.forEach((key) => {
       const keyElement = document.createElement('div');
-      const insertLineBreak = ['Backspace', 'BracketRight', 'Enter'].indexOf(key) !== -1;
+      const insertLineBreak = ['Backspace', 'Backslash', 'Enter'].indexOf(key) !== -1;
       keyElement.setAttribute('type', 'button');
       keyElement.classList.add('keyboard__key');
       keyElement.classList.add('hand');
@@ -125,6 +125,9 @@ class Keyboard extends Component {
           shiftRight.classList.add('active');
         }
       }
+    });
+    document.addEventListener('keydown', (event) => {
+      console.log(event.code);
     });
   }
 

@@ -71,9 +71,7 @@
 .keyboard__key--coloring:nth-child(10) {
   background: #729fcf;
 }
-// .keyboard__key--coloring:nth-child(10) {
-//   background: #ad7fa8;
-// }
+
 .keyboard__key--coloring:nth-child(11) {
   background: #ad7fa8;
 }
@@ -87,34 +85,34 @@
   background: #ddd;
 }
 .keyboard__key--coloring:nth-child(16) {
-  background: #ad7fa8;
+  background: #ddd;
 }
 .keyboard__key--coloring:nth-child(17) {
-  background: #729fcf;
+  background: #ad7fa8;
 }
 .keyboard__key--coloring:nth-child(18) {
-  background: #73d216;
+  background: #729fcf;
 }
 .keyboard__key--coloring:nth-child(19) {
-  background: #fcaf3e;
+  background: #73d216;
 }
 .keyboard__key--coloring:nth-child(20) {
   background: #fcaf3e;
 }
 .keyboard__key--coloring:nth-child(21) {
-  background: #fce94f;
+  background: #fcaf3e;
 }
 .keyboard__key--coloring:nth-child(22) {
   background: #fce94f;
 }
 .keyboard__key--coloring:nth-child(23) {
-  background: #73d216;
+  background: #fce94f;
 }
 .keyboard__key--coloring:nth-child(24) {
-  background: #729fcf;
+  background: #73d216;
 }
 .keyboard__key--coloring:nth-child(25) {
-  background: #ad7fa8;
+  background: #729fcf;
 }
 .keyboard__key--coloring:nth-child(26) {
   background: #ad7fa8;
@@ -126,88 +124,98 @@
   background: #ad7fa8;
 }
 .keyboard__key--coloring:nth-child(29) {
-  background: #ddd;
+  background: #ad7fa8;
 }
 .keyboard__key--coloring:nth-child(30) {
   background: #ad7fa8;
 }
 .keyboard__key--coloring:nth-child(31) {
-  background: #729fcf;
+  background: #ddd;
 }
 .keyboard__key--coloring:nth-child(32) {
-  background: #73d216;
+  background: #ad7fa8;
 }
 .keyboard__key--coloring:nth-child(33) {
-  background: #fcaf3e;
-}
-.keyboard__key--coloring:nth-child(34) {
-  background: #fcaf3e;
-}
-.keyboard__key--coloring:nth-child(35) {
-  background: #fce94f;
-}
-.keyboard__key--coloring:nth-child(36) {
-  background: #fce94f;
-}
-.keyboard__key--coloring:nth-child(37) {
-  background: #73d216;
-}
-.keyboard__key--coloring:nth-child(38) {
   background: #729fcf;
 }
+.keyboard__key--coloring:nth-child(34) {
+  background: #73d216;
+}
+.keyboard__key--coloring:nth-child(35) {
+  background: #fcaf3e;
+}
+.keyboard__key--coloring:nth-child(36) {
+  background: #fcaf3e;
+}
+.keyboard__key--coloring:nth-child(37) {
+  background: #fce94f;
+}
+.keyboard__key--coloring:nth-child(38) {
+  background: #fce94f;
+}
 .keyboard__key--coloring:nth-child(39) {
-  background: #ad7fa8;
+  background: #73d216;
 }
 .keyboard__key--coloring:nth-child(40) {
-  background: #ad7fa8;
+  background: #729fcf;
 }
 .keyboard__key--coloring:nth-child(41) {
-  background: #ddd;
+  background: #ad7fa8;
 }
 .keyboard__key--coloring:nth-child(42) {
-  background: #ddd;
+  background: #ad7fa8;
 }
 .keyboard__key--coloring:nth-child(43) {
   background: #ddd;
 }
 .keyboard__key--coloring:nth-child(44) {
+  background: #ddd;
+}
+.keyboard__key--coloring:nth-child(45) {
+  background: #ddd;
+}
+.keyboard__key--coloring:nth-child(46) {
   background: #ad7fa8;
 }
 
-.keyboard__key--coloring:nth-child(45) {
-  background: #729fcf;
-}
-.keyboard__key--coloring:nth-child(46) {
-  background: #73d216;
-}
 .keyboard__key--coloring:nth-child(47) {
-  background: #fcaf3e;
+  background: #729fcf;
 }
 .keyboard__key--coloring:nth-child(48) {
-  background: #fcaf3e;
-}
-.keyboard__key--coloring:nth-child(49) {
-  background: #fce94f;
-}
-.keyboard__key--coloring:nth-child(50) {
-  background: #fce94f;
-}
-.keyboard__key--coloring:nth-child(51) {
   background: #73d216;
 }
+.keyboard__key--coloring:nth-child(49) {
+  background: #fcaf3e;
+}
+.keyboard__key--coloring:nth-child(50) {
+  background: #fcaf3e;
+}
+.keyboard__key--coloring:nth-child(51) {
+  background: #fce94f;
+}
 .keyboard__key--coloring:nth-child(52) {
-  background: #729fcf;
+  background: #fce94f;
 }
 .keyboard__key--coloring:nth-child(53) {
-  background: #ad7fa8;
+  background: #73d216;
 }
 .keyboard__key--coloring:nth-child(54) {
+  background: #729fcf;
+}
+.keyboard__key--coloring:nth-child(55) {
+  background: #ad7fa8;
+}
+.keyboard__key--coloring:nth-child(56) {
   background: #ddd;
 }
 
 .keyboard__key:nth-last-child(1) {
   width: 50%;
   max-width: 424px;
+}
+.show {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .show-keyboard {
@@ -375,4 +383,11 @@
 
 .hand--hidden .active::before {
   display: none;
+}
+
+.error {
+  width: 110px;
+  margin: 20px auto;
+  text-align: center;
+  background: url(./iconsa.png) no-repeat 0 -250px;
 }

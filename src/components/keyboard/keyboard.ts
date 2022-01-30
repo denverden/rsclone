@@ -126,9 +126,6 @@ class Keyboard extends Component {
         }
       }
     });
-    document.addEventListener('keydown', (event) => {
-      console.log(event.code);
-    });
   }
 
   async loadText() {

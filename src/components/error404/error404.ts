@@ -1,4 +1,4 @@
-import Component from '../Component';
+import Component from '../component';
 
 const error404 = new Component({
   selector: 'body',

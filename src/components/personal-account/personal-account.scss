@@ -1,0 +1,125 @@
+.page__main{
+  height: 1200px;
+}
+.parallax-bg{
+  width: 100%;
+  height: 500px;
+  background-image: url('./parralax.webp');
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.big-block{
+  width: 100%;
+  height: 300px;
+}
+
+.personal-stats{
+  width: 1140px;
+  height: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  .card-img1{
+    background-image: url('./indicators_contr.png');
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    margin: 15px 15px;
+  }
+}
+
+.stats-card{
+  width: 250px;
+  height: 80px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: row;
+  color: #fff;
+
+}
+
+.main-acc-container{
+  width: 1170px;
+  height: 700px;
+  position: relative;
+  background-color: #fff;
+  top: -50px;
+  margin: 0 auto;
+  box-shadow: 5px 5px 15px rgba(117, 117, 117, 0.76);
+
+  .personal-info{
+    position: absolute;
+    top: -110px;
+    margin-left: 20px;
+    width: 260px;
+    .personal-photo{
+      width: 220px;
+      height: 220px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 5px rgb(160, 160, 160);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .photo-container{
+        width: 200px;
+        height: 200px;
+        background-image: url('./acc-photo.webp');
+        background-size: contain;
+      }
+    }
+
+    .personal-car{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .personal-car-model{
+        height: 50px;
+        width: 100px;
+        background-color: rgb(255, 0, 0);
+      }
+
+    }
+
+  }
+  .achivments{
+    width: 700px;
+    height: 600px;
+    position: absolute;
+    left:400px;
+    top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-y: scroll;
+    .achivment{
+      width: 200px;
+      height: 220px;
+      border: 2px solid black;
+      margin-bottom: 20px;
+        &-img{
+          width: 200px;
+          height: 200px;
+
+          background-image: url('./race-gold.svg');
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
+        &-info{
+          margin: 0 0 0 0;
+        }
+
+    }
+  }
+
+}

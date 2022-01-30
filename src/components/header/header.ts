@@ -1,4 +1,4 @@
-import Component from '../Component';
+import Component from '../component';
 import './header.scss';
 import logo from './logo.svg';
 

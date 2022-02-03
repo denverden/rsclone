@@ -118,6 +118,9 @@ class UserController {
         newUser.password = password ? bcrypt.hashSync(password, 7) : newUser.password;
         newUser.level = level ? level : newUser.level;
         newUser.experience = experience ? experience : newUser.experience;
+        newUser.lesson = lesson ? lesson : newUser.lesson;
+        newUser.avatar = avatar ? avatar : newUser.avatar;
+        newUser.achievements = achievements ? achievements.split(',') : newUser.achievements;
         newUser.roles = roles ? roles.split(',') : newUser.roles;
       }
 

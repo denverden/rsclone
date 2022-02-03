@@ -1,6 +1,8 @@
+import appStore from './appStore';
+
 class HTTP {
   async getText<TResponse>(idGroup = ''): Promise<TResponse> {
-    return fetch(`https://keyboardrace.herokuapp.com/api/text/rand/${idGroup}`, {
+    return fetch(`${appStore.apiUrl}/api/text/rand/${idGroup}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -13,7 +15,7 @@ class HTTP {
   }
 
   async getGroups<TResponse>(): Promise<TResponse> {
-    return fetch(`https://keyboardrace.herokuapp.com/api/group/all/`, {
+    return fetch(`${appStore.apiUrl}/api/group/all/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -26,13 +28,13 @@ class HTTP {
   }
 
   async getUser<TResponse>(idUser = ''): Promise<TResponse> {
-    return fetch(`https://keyboardrace.herokuapp.com/api/user/${idUser}`, {
+    return fetch(`${appStore.apiUrl}/api/user/${idUser}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         'Accept-Language': 'ru',
-        Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+        Authorization: `Bearer ${appStore.user.token}`,
       },
     })
       .then((response) => response.json())
@@ -40,7 +42,7 @@ class HTTP {
   }
 
   async login<TResponse>(userName: string, password: string): Promise<TResponse> {
-    return fetch(`https://keyboardrace.herokuapp.com/api/user/login`, {
+    return fetch(`${appStore.apiUrl}/api/user/login`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -57,7 +59,7 @@ class HTTP {
   }
 
   async registration<TResponse>(userName: string, password: string): Promise<TResponse> {
-    return fetch(`https://keyboardrace.herokuapp.com/api/user/registration`, {
+    return fetch(`${appStore.apiUrl}/api/user/registration`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

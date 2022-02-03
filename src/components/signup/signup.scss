@@ -1,0 +1,73 @@
+@import '../../variables';
+
+.signup {
+  display: flex;
+  box-shadow: 3px 3px 8px $shadow-color;
+  border-radius: 5px;
+  overflow: hidden;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 25px;
+  }
+
+  &__img {
+    width: 55%;
+  }
+
+  &__title {
+    color: $primary-color;
+    margin: 10px 0px;
+  }
+
+  &__username {
+    display: flex;
+    align-items: center;
+    border: none;
+    margin: 10px 0px;
+    padding: 12px 15px;
+    border-radius: 25px;
+    outline: none;
+    background-color: $bg-second-color;
+    position: relative;
+  }
+
+  &__input {
+    margin-left: 10px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+  }
+
+  &__password {
+    display: flex;
+    align-items: center;
+    border: none;
+    margin: 10px 0px;
+    padding: 12px 15px;
+    border-radius: 25px;
+    outline: none;
+    background-color: $bg-second-color;
+  }
+
+  &__btn {
+    border: none;
+    padding: 14px 25px 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 25px;
+    background-color: $primary-color;
+    margin: 10px 0px;
+    color: $primary-second-color;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $primary-hover-color;
+    }
+  }
+}

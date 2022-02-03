@@ -1,4 +1,4 @@
-import Component from '../Component';
+import Component from '../component';
 import './footer.scss';
 
 const footer = new Component({

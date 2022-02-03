@@ -37,7 +37,7 @@ class SignIn extends Component {
       document.cookie = `token=${appStore.user.token}; max-age=86400`;
       window.location.hash = '#profile';
     } else {
-      message.view(resUser.apiMessage);
+      message.view(resUser.apiMessage, 'error');
     }
 
     BTN.innerHTML = 'Войти';

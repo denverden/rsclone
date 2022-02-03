@@ -1,17 +1,16 @@
 import './message.scss';
 
 class Message {
-  view(text = '', time = 4000) {
+  view(text = '', type = 'info', time = 4000) {
     if (text !== '') {
       const toast = document.createElement('div');
       toast.classList.add('message');
+      toast.classList.add(type);
       toast.innerHTML = `
-        <div class="message1" role="alert">
-          <button type="button" class="close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <div class="message__body">${text}</div>
-        </div>
+        ${text}
+        <button type="button" class="message__close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       `;
       const currentToast = document.querySelector('.page__messages').appendChild(toast);
       setTimeout(() => {
@@ -20,7 +19,7 @@ class Message {
           currentToast.remove();
         }, 500);
       }, time);
-      currentToast.querySelector('.close').addEventListener('click', () => {
+      currentToast.querySelector('.message__close').addEventListener('click', () => {
         currentToast.classList.add('message__fade');
         setTimeout(() => {
           currentToast.remove();

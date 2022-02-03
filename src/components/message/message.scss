@@ -1,5 +1,60 @@
+@import '../../variables';
+
 .message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 50%;
   max-width: 1440px;
-  background-color: violet;
+  transition: opacity 0.5s;
+  box-shadow: 0px 0px 3px $shadow-color;
+
+  &__close {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &__fade {
+    opacity: 0;
+  }
+}
+
+.info,
+.success,
+.warning,
+.error,
+.validation {
+  border-radius: 5px;
+  border: 1px solid;
+  margin: 10px 0px;
+  padding: 15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  z-index: 10;
+}
+.info {
+  color: #00529b;
+  background-color: #bde5f8;
+  background-image: url('./info.png');
+}
+.success {
+  color: #4f8a10;
+  background-color: #dff2bf;
+  background-image: url('./success.png');
+}
+.warning {
+  color: #9f6000;
+  background-color: #feefb3;
+  background-image: url('./warning.png');
+}
+.error {
+  color: #d8000c;
+  background-color: #ffbaba;
+  background-image: url('./error.png');
+}
+.validation {
+  color: #d63301;
+  background-color: #ffccba;
+  background-image: url('./error.png');
 }

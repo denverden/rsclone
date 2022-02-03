@@ -17,7 +17,7 @@ class SignUp extends Component {
       if (PASSWORD === CONFIRM_PASSWORD) {
         this.doSingUp(LOGIN, PASSWORD);
       } else {
-        message.view('Пароли не совподают.');
+        message.view('Пароли не совподают.', 'validation');
       }
     });
   }
@@ -33,7 +33,7 @@ class SignUp extends Component {
       message.view('Пользователь зарегестрирован.');
       window.location.hash = '#signin';
     } else {
-      message.view(resUser.apiMessage);
+      message.view(resUser.apiMessage, 'error');
     }
 
     BTN.innerHTML = 'Зарегистрироваться';

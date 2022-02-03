@@ -9,6 +9,7 @@ class User extends Component {
     if (appStore.user._id !== '' && appStore.user.token !== '') {
       BTN_SINGIN.classList.add('hidden');
       BTN_USER.classList.remove('hidden');
+      BTN_USER.textContent = appStore.user.username;
     } else {
       BTN_SINGIN.classList.remove('hidden');
       BTN_USER.classList.add('hidden');

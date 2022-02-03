@@ -34,20 +34,20 @@ class UserController {
       });
 
       if (candidate) {
-        return res.status(400).json({ apiMessage: message[lang].ERROR_USERNAME });
+        return res.status(400).json({ apiMessage: message[lang].ERROR_USERNAME, error: 'ERROR_USERNAME' });
       }
 
       await user.save().then(() => {
+        user._doc.password = '--- banned from viewing ---';
+
         res.status(200).json({
           apiMessage: message[lang].SUCCESS_REGISTRATION,
-          addUser: {
-            _id: user._id,
-            username: user.username,
-          },
+          info: user,
+          error: 'NO',
         });
       });
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_REGISTRATION, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_REGISTRATION, error: err.message });
     }
   }
 
@@ -55,27 +55,30 @@ class UserController {
     try {
       const { username, password } = req.body;
       const lang = getLangName(req.headers);
-      const user = await User.findOne({ username });
+      let user = await User.findOne({ username });
 
       if (!user) {
-        return res.status(400).json({ apiMessage: message[lang].ERROR_LOGIN });
+        return res.status(400).json({ apiMessage: message[lang].ERROR_LOGIN, error: 'ERROR_LOGIN' });
       }
 
       const validPassword = bcrypt.compareSync(password, user.password);
 
       if (!validPassword) {
-        return res.status(400).json({ apiMessage: message[lang].ERROR_PASSWORD });
+        return res.status(400).json({ apiMessage: message[lang].ERROR_PASSWORD, error: 'ERROR_PASSWORD' });
       }
 
       const token = generateAccessToken(user._id, user.roles);
 
+      user._doc.token = token;
+      user._doc.password = '--- banned from viewing ---';
+
       return res.status(200).json({
         apiMessage: message[lang].SUCCESS_AUTHORIZATION,
         info: user,
-        token: token,
+        error: 'NO',
       });
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_AUTHORIZATION, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_AUTHORIZATION, error: err.message });
     }
   }
 
@@ -85,15 +88,18 @@ class UserController {
       const lang = getLangName(req.headers);
 
       if (!user) {
-        return res.status(400).json({ message: message[lang].ERROR_NOT_USER });
+        return res.status(400).json({ message: message[lang].ERROR_NOT_USER, error: 'ERROR_NOT_USER' });
       }
+
+      user._doc.password = '--- banned from viewing ---';
 
       return res.status(200).json({
         apiMessage: message[lang].SUCCESS_INFO,
         info: user,
+        error: 'NO',
       });
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_ACCESS, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_ACCESS, error: err.message });
     }
   }
 
@@ -102,18 +108,18 @@ class UserController {
       const token = jwt.decode(req.headers.authorization.split(' ')[1]);
       const lang = getLangName(req.headers);
       const user = await User.findById(req.params.id);
-      let newUser = user;
 
       if (!user) {
-        return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_USER });
+        return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_USER, error: 'ERROR_NOT_USER' });
       }
 
       if (user._id.toString() !== token.id.toString() && !token.roles.includes('ADMIN')) {
-        return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_ROLE });
+        return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_ROLE, error: 'ERROR_NOT_ROLE' });
       }
 
-      //TODO: Create a separate function or method
-      const { password, level, experience, roles } = req.body;
+      user._doc.password = '--- banned from viewing ---';
+
+      const { password, level, experience, lesson, avatar, achievements, roles } = req.body;
       if ((user._id.toString() === token.id.toString() && token.roles.includes('USER')) || token.roles.includes('ADMIN')) {
         newUser.password = password ? bcrypt.hashSync(password, 7) : newUser.password;
         newUser.level = level ? level : newUser.level;
@@ -124,16 +130,15 @@ class UserController {
         newUser.roles = roles ? roles.split(',') : newUser.roles;
       }
 
-      User.findByIdAndUpdate(req.params.id, newUser).then(() => {
+      User.findByIdAndUpdate(req.params.id, user).then(() => {
         res.status(200).json({
           apiMessage: message[lang].SUCCESS_UPDATE,
-          updateUser: {
-            _id: req.params.id,
-          },
+          info: user,
+          error: 'NO',
         });
       });
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_UPDATE, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_UPDATE, error: err.message });
     }
   }
 
@@ -144,23 +149,24 @@ class UserController {
       const user = await User.findById(req.params.id);
 
       if (!user) {
-        return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_USER });
+        return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_USER, error: 'ERROR_NOT_USER' });
       }
 
       if (user._id.toString() === token.id.toString()) {
-        return res.status(400).json({ apiMessage: message[lang].ERROR_YOURSELF_DELETE });
+        return res.status(400).json({ apiMessage: message[lang].ERROR_YOURSELF_DELETE, error: 'ERROR_YOURSELF_DELETE' });
       }
+
+      user._doc.password = '--- banned from viewing ---';
 
       await User.deleteOne({ _id: req.params.id }).then(() => {
         res.status(200).json({
           apiMessage: message[lang].SUCCESS_DELETE,
-          deletedUser: {
-            _id: req.params.id,
-          },
+          info: user,
+          error: 'NO',
         });
       });
     } catch (err) {
-      res.status(400).json({ apiMessage: message[lang].ERROR_DELETE, error: err });
+      res.status(400).json({ apiMessage: message[lang].ERROR_DELETE, error: err.message });
     }
   }
 }

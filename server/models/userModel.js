@@ -23,6 +23,22 @@ const UserModel = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  races: {
+    type: Number,
+    default: 0,
+  },
+  signs: {
+    type: Number,
+    default: 0,
+  },
+  time: {
+    type: Number,
+    default: 0,
+  },
+  mistakes: {
+    type: Number,
+    default: 0,
+  },
   avatar: {
     type: String,
     default:

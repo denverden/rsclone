@@ -119,13 +119,17 @@ class UserController {
 
       user._doc.password = '--- banned from viewing ---';
 
-      const { password, level, experience, lesson, avatar, achievements, roles } = req.body;
+      const { password, level, experience, lesson, avatar, races, signs, time, mistakes, achievements, roles } = req.body;
       if ((user._id.toString() === token.id.toString() && token.roles.includes('USER')) || token.roles.includes('ADMIN')) {
         newUser.password = password ? bcrypt.hashSync(password, 7) : newUser.password;
         newUser.level = level ? level : newUser.level;
         newUser.experience = experience ? experience : newUser.experience;
         newUser.lesson = lesson ? lesson : newUser.lesson;
         newUser.avatar = avatar ? avatar : newUser.avatar;
+        newUser.races = races ? races : newUser.races;
+        newUser.signs = signs ? signs : newUser.signs;
+        newUser.time = time ? time : newUser.time;
+        newUser.mistakes = mistakes ? mistakes : newUser.mistakes;
         newUser.achievements = achievements ? achievements.split(',') : newUser.achievements;
         newUser.roles = roles ? roles.split(',') : newUser.roles;
       }

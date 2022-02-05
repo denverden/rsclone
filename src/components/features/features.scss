@@ -1,0 +1,229 @@
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features {
+  margin-top: 20px;
+
+  &__title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 42px;
+    color: #333333;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  &__title::before {
+    content: '';
+    position: absolute;
+    right: 504px;
+    top: 0px;
+    width: 255px;
+    height: 10px;
+    background-image: url('./checkers.svg');
+  }
+  &__title::after {
+    content: '';
+    position: absolute;
+    right: 516px;
+    bottom: 0px;
+    width: 255px;
+    height: 10px;
+    background-image: url('./checkers.svg');
+  }
+}
+.features > .container {
+  position: relative;
+  margin-top: -40px;
+}
+.features > .container > .content {
+  padding-top: 20px;
+  background: #fff;
+  border: 1px solid #b3b0b0;
+}
+
+.characteristics {
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.characteristics__list-item {
+  position: relative;
+  margin-left: 83px;
+  padding-bottom: 35px;
+}
+.characteristics__list-item span {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  text-transform: uppercase;
+  color: #9e0030;
+}
+.characteristics__list-item::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -60px;
+  top: 0px;
+  width: 52px;
+  height: 552px;
+  background: url(./cheque.svg) no-repeat;
+}
+.features__img {
+  margin-top: -102px;
+}
+
+.features__img-item {
+  height: 486px;
+}
+
+.garage {
+  margin-top: -1px;
+  background: #000 url(./car-garage.png) no-repeat;
+  background-position: 50% 50%;
+  &__title {
+    padding-top: 50px;
+    padding-bottom: 44px;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 42px;
+    text-transform: uppercase;
+    color: #f2f2f2;
+    text-align: center;
+  }
+  &__item-wrapper {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  .garage__item-wrapper--padding {
+    padding-top: 150px;
+    padding-bottom: 20px;
+  }
+
+  &__item-title {
+    margin-bottom: 12px;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    text-transform: uppercase;
+
+    color: #ffffff;
+  }
+  &__item-text {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    width: 216px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  &__item-title--line-one {
+    position: relative;
+  }
+  &__item-title--line-one::after {
+    content: '';
+    position: absolute;
+    right: -101px;
+    bottom: -44px;
+    width: 319px;
+    height: 44px;
+    background-image: url('./left-line-one.svg');
+  }
+  &__item-title--line-two {
+    position: relative;
+  }
+  &__item-title--line-two::after {
+    content: '';
+    position: absolute;
+    right: 120px;
+    bottom: -44px;
+    width: 237px;
+    height: 44px;
+    background-image: url('./right-line-one.svg');
+  }
+  &__item-title--line-three {
+    position: relative;
+  }
+  &__item-title--line-three::after {
+    content: '';
+    position: absolute;
+    right: -104px;
+    bottom: -4px;
+    width: 316px;
+    height: 46px;
+    background-image: url('./left-line-two.svg');
+  }
+  &__item-title--line-four {
+    position: relative;
+  }
+  &__item-title--line-four::after {
+    content: '';
+    position: absolute;
+    right: 91px;
+    bottom: 1px;
+    width: 237px;
+    height: 46px;
+    background-image: url('./right-line-two.svg');
+  }
+}
+
+.types-races__title {
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 64px;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #333333;
+}
+.types-races__title::after {
+  content: '';
+  position: absolute;
+  left: 488px;
+  right: 0;
+  background-color: #9e0030;
+  width: 300px;
+  height: 2px;
+  bottom: -7px;
+}
+.types-card {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 95px;
+  &__wrapper {
+    display: flex;
+  }
+  &__img {
+    margin-right: 20px;
+  }
+
+  &__title {
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    text-transform: uppercase;
+    color: #333333;
+  }
+  &__text {
+    width: 248px;
+    font-size: 18px;
+    line-height: 21px;
+    color: #333333;
+  }
+}

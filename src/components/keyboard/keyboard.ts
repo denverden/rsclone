@@ -1,7 +1,7 @@
 import { IData } from '../../interface/IData';
 import { IText } from '../../interface/IText';
 import HTTP from '../http';
-import Component from '../Component';
+import Component from '../component';
 import './keyboard.scss';
 import keyLayoutRu from './buttonsRu';
 import keyLayoutEn from './buttonsEn';

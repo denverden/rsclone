@@ -1,7 +1,7 @@
-import Component from '../Component';
+import Component from '../component';
 import './features.scss';
 import road from './road.svg';
-import user from './user.svg';
+import user from './user2.svg';
 import keys from './keys.svg';
 import vector from './vector.svg';
 

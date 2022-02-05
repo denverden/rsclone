@@ -1,4 +1,4 @@
-import Component from '../Component';
+import Component from '../component';
 import './welcome.scss';
 import one from './0.jpg';
 import two from './1.jpg';
@@ -6,8 +6,36 @@ import three from './2.jpg';
 import four from './3.jpg';
 import five from './4.jpg';
 import six from './5.jpg';
+import { IData } from '../../interface/IData';
+import appStore from '../appStore';
 
 class Welcome extends Component {
+  constructor(data: IData) {
+    super(data);
+
+    this.stateTemplate = {
+      races: appStore.user.races.toString(),
+      signs: appStore.user.signs.toString(),
+      time: this.formatGameDate(appStore.user.time),
+      mistakes: this.percentMistakes(appStore.user.mistakes),
+    };
+  }
+
+  formatGameDate(timeSeconds: number) {
+    const hours = new Date(timeSeconds * 1000).getUTCHours().toString();
+    const minutes = new Date(timeSeconds * 1000).getUTCMinutes().toString();
+    const seconds = new Date(timeSeconds * 1000).getUTCSeconds().toString();
+
+    return [hours, minutes, seconds].join(':');
+  }
+
+  percentMistakes(mistakes: number) {
+    const hundredPercent = 100;
+    const percent = ((mistakes * hundredPercent) / appStore.user.signs).toFixed(1);
+
+    return `${percent}%`;
+  }
+
   addImg() {
     const images = [one, two, three, four, five, six];
     const { length } = images;
@@ -37,19 +65,19 @@ const welcome = new Welcome({
     </h2>
     <div class="info-wrapper">
       <div class="info">
-        <span class="info__value">0</span>
+        <span class="info__value">{{ races }}</span>
         <span class="info__title">Заездов пройдено</span>
       </div>
       <div class="info">
-        <span class="info__value">0</span>
+        <span class="info__value">{{ signs }}</span>
         <span class="info__title">Знаков набрано</span>
       </div>
       <div class="info">
-        <span class="info__value">00:00</span>
+        <span class="info__value">{{ time }}</span>
         <span class="info__title">Время набора</span>
       </div>
       <div class="info">
-        <span class="info__value">0.0%</span>
+        <span class="info__value">{{ mistakes }}</span>
         <span class="info__title">Процент ошибок</span>
       </div>
     </div>

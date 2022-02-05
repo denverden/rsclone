@@ -6,6 +6,10 @@ export interface IUser {
   level: number;
   experience: number;
   lesson: number;
+  races: number;
+  signs: number;
+  time: number;
+  mistakes: number;
   avatar: string;
   achievements: Array<string>;
   token?: string;

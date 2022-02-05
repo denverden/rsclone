@@ -1,4 +1,4 @@
-import Component from '../Component';
+import Component from '../component';
 import './rating.scss';
 import avatar from './avatar.png';
 

@@ -1,4 +1,5 @@
 import App from './components/app';
+import appStore from './components/appStore';
 import routes from './components/routing/routesData';
 import page from './components/page/page';
 import header from './components/header/header';
@@ -11,4 +12,4 @@ const APP = new App({
   routes,
 });
 
-APP.start();
+appStore.loadUser().then(() => APP.start());

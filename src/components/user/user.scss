@@ -1,0 +1,21 @@
+@import '../../variables';
+
+.user {
+  &__btn {
+    border: none;
+    padding: 14px 25px 12px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 25px;
+    background-color: $primary-color;
+    margin: 10px 0px;
+    color: $primary-second-color;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $primary-hover-color;
+    }
+  }
+}

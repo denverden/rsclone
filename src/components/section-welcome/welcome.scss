@@ -1,0 +1,130 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  display: block;
+  // max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a :hover {
+  color: #9d8665;
+}
+
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.welcome {
+  background: #000 url(./0.jpg) no-repeat center top fixed;
+
+  &__title {
+    color: #fff;
+    padding-bottom: 38px;
+    padding-top: 42px;
+    font-size: 40px;
+    text-shadow: 1px 1px 1px #333;
+  }
+}
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 93px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  height: 85px;
+  border-radius: 10px;
+  padding: 5px 0;
+  cursor: default;
+  background: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  box-shadow: 0 0 2px 0 #278d9f inset, 0 0 2px 2px #f0f3f0;
+  text-shadow: 1px 1px 1px #000;
+
+  &__value {
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 56px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  &__title {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+.start {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 82px;
+
+  &__tire-right {
+    width: 100%;
+    background: url(./tread-right.png);
+    max-width: 312px;
+  }
+  &__button {
+    width: 250px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 46px;
+    background: #9e0030;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #f8d632;
+  }
+  &__button:hover {
+    background: #7d0026;
+  }
+  &__tire-left {
+    width: 100%;
+    background: url(./tread-left.png);
+    max-width: 312px;
+  }
+}

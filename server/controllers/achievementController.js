@@ -30,4 +30,4 @@ class AchievementController {
   }
 }
 
-export default new TextController();
+export default new AchievementController();

@@ -119,7 +119,7 @@ class UserController {
 
       user._doc.password = '--- banned from viewing ---';
 
-      const { password, level, experience, lesson, avatar, races, signs, time, mistakes, achievements, roles } = req.body;
+      const { password, level, experience, lesson, avatar, races, signs, time, mistakes, speed, roles } = req.body;
       if ((user._id.toString() === token.id.toString() && token.roles.includes('USER')) || token.roles.includes('ADMIN')) {
         user.password = password ? bcrypt.hashSync(password, 7) : user.password;
         user.level = level ? level : user.level;

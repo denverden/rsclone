@@ -20,9 +20,9 @@ const getLangName = (headers) => {
 
 class UserController {
   async create(req, res) {
+    const lang = getLangName(req.headers);
     try {
       const { username, password } = req.body;
-      const lang = getLangName(req.headers);
       const hashPassword = bcrypt.hashSync(password, 7);
       const userRole = await Role.findOne({ value: 'USER' });
       const candidate = await User.findOne({ username });
@@ -52,9 +52,9 @@ class UserController {
   }
 
   async login(req, res) {
+    const lang = getLangName(req.headers);
     try {
       const { username, password } = req.body;
-      const lang = getLangName(req.headers);
       let user = await User.findOne({ username });
 
       if (!user) {
@@ -83,9 +83,9 @@ class UserController {
   }
 
   async getUser(req, res) {
+    const lang = getLangName(req.headers);
     try {
       const user = await User.findById(req.params.id);
-      const lang = getLangName(req.headers);
 
       if (!user) {
         return res.status(400).json({ message: message[lang].ERROR_NOT_USER, error: 'ERROR_NOT_USER' });
@@ -104,9 +104,9 @@ class UserController {
   }
 
   async updateUser(req, res) {
+    const lang = getLangName(req.headers);
     try {
       const token = jwt.decode(req.headers.authorization.split(' ')[1]);
-      const lang = getLangName(req.headers);
       const user = await User.findById(req.params.id);
 
       if (!user) {
@@ -147,9 +147,9 @@ class UserController {
   }
 
   async deleteUser(req, res) {
+    const lang = getLangName(req.headers);
     try {
       const token = jwt.decode(req.headers.authorization.split(' ')[1]);
-      const lang = getLangName(req.headers);
       const user = await User.findById(req.params.id);
 
       if (!user) {

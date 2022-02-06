@@ -5,6 +5,7 @@ import Component from '../component';
 import './keyboard.scss';
 import keyLayoutRu from './buttonsRu';
 import keyLayoutEn from './buttonsEn';
+import appStore from '../appStore';
 
 class Keyboard extends Component {
   private keysContainer: HTMLElement;

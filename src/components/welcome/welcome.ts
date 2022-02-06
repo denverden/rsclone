@@ -6,18 +6,16 @@ import three from './2.jpg';
 import four from './3.jpg';
 import five from './4.jpg';
 import six from './5.jpg';
-import { IData } from '../../interface/IData';
 import appStore from '../appStore';
 
 class Welcome extends Component {
-  constructor(data: IData) {
-    super(data);
-
+  beforeRender() {
     this.stateTemplate = {
       races: appStore.user.races.toString(),
       signs: appStore.user.signs.toString(),
       time: this.formatGameDate(appStore.user.time),
       mistakes: this.percentMistakes(appStore.user.mistakes),
+      username: appStore.user.username !== '' ? appStore.user.username : 'незнакомец',
     };
   }
 
@@ -31,7 +29,7 @@ class Welcome extends Component {
 
   percentMistakes(mistakes: number) {
     const hundredPercent = 100;
-    const percent = ((mistakes * hundredPercent) / appStore.user.signs).toFixed(1);
+    const percent = appStore.user.signs === 0 ? '0' : ((mistakes * hundredPercent) / appStore.user.signs).toFixed(1);
 
     return `${percent}%`;
   }
@@ -45,12 +43,14 @@ class Welcome extends Component {
       if (index === length) {
         index = 0;
       }
-      document.getElementById('image').style.backgroundImage = `url('${images[index++]}')`;
-    }, 7000);
+      document.getElementById('image').style.background = `linear-gradient(0deg, #0000001e, #0000001e), url('${
+        images[index++]
+      }') no-repeat center top fixed`;
+    }, 10000);
   }
 
   afterRender() {
-    this.addImg();
+    // this.addImg();
   }
 }
 
@@ -61,7 +61,7 @@ const welcome = new Welcome({
   <div class="container">
 
     <h2 class=" welcome__title">
-      Приветствуем, незнакомец
+      Приветствуем, {{ username }}
     </h2>
     <div class="info-wrapper">
       <div class="info">
@@ -83,8 +83,8 @@ const welcome = new Welcome({
     </div>
     <div class="start">
       <div class="start__tire-right"></div>
-      <a href="#" class="start__button">Быстрый старт</a>
-      <a href="#" class="start__button">Начать обучение</a>
+      <a href="#game" class="start__button">Быстрый старт</a>
+      <a href="#learn" class="start__button">Начать обучение</a>
       <div class="start__tire-left"></div>
     </div>
   </div>

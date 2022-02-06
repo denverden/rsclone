@@ -76,10 +76,7 @@ const features = new Component({
             </div>
             <div class="types-card__info">
               <h3 class="types-card__title">Гонки с людьми</h3>
-              <p class="types-card__text">Соревнуйтесь в скорости печати на клавиатуре компьютера с реальными людьми
-                со
-                всего
-                мира.</p>
+              <p class="types-card__text">Соревнуйтесь в скорости печати на клавиатуре компьютера с реальными людьми со всего мира.</p>
             </div>
           </div>
           <div class="types-card__wrapper">
@@ -87,11 +84,8 @@ const features = new Component({
               <img src="${keys}" alt="user">
             </div>
             <div class="types-card__info">
-              <h3 class="types-card__title">Гонки с людьми</h3>
-              <p class="types-card__text">Соревнуйтесь в скорости печати на клавиатуре компьютера с реальными людьми
-                со
-                всего
-                мира.</p>
+              <h3 class="types-card__title">Приватные гонки</h3>
+              <p class="types-card__text">Создавайте заезды, защищённые паролем, чтобы играть онлайн в компании своих друзей.</p>
             </div>
           </div>
           <div class="types-card__wrapper">
@@ -99,11 +93,10 @@ const features = new Component({
               <img src="${vector}" alt="user">
             </div>
             <div class="types-card__info">
-              <h3 class="types-card__title">Гонки с людьми</h3>
-              <p class="types-card__text">Соревнуйтесь в скорости печати на клавиатуре компьютера с реальными людьми
-                со
-                всего
-                мира.</p>
+              <h3 class="types-card__title">Гонки с ботами</h3>
+              <p class="types-card__text">
+                Совершенствуйте навык быстрой печати в компании ботов, чтобы набить руку в ожидании более сильных соперников.
+              </p>
             </div>
           </div>
         </div>

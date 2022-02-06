@@ -41,6 +41,21 @@ class HTTP {
       .then((data) => data as TResponse);
   }
 
+  async updateUser<TResponse>(): Promise<TResponse> {
+    return fetch(`${appStore.apiUrl}/api/user/${appStore.user._id}`, {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Accept-Language': 'ru',
+        Authorization: `Bearer ${appStore.user.token}`,
+      },
+      body: JSON.stringify(appStore.user),
+    })
+      .then((response) => response.json())
+      .then((data) => data as TResponse);
+  }
+
   async login<TResponse>(userName: string, password: string): Promise<TResponse> {
     return fetch(`${appStore.apiUrl}/api/user/login`, {
       method: 'POST',

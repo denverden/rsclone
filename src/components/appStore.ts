@@ -13,6 +13,11 @@ class AppStore {
   public user: IUser;
 
   constructor() {
+    this.reset();
+    this.apiUrl = 'https://keyboardrace.herokuapp.com';
+  }
+
+  reset() {
     this.user = {
       _id: localStorage.getItem('userId') ? localStorage.getItem('userId') : '',
       username: '',
@@ -20,16 +25,29 @@ class AppStore {
       roles: ['USER'],
       level: 0,
       experience: 0,
-      lesson: 0,
-      races: 10,
-      signs: 1000,
-      time: 0,
-      mistakes: 5,
+      lesson: localStorage.getItem('lesson') ? parseInt(localStorage.getItem('lesson'), 10) : 0,
+      races: localStorage.getItem('races') ? parseInt(localStorage.getItem('races'), 10) : 0,
+      signs: localStorage.getItem('signs') ? parseInt(localStorage.getItem('signs'), 10) : 0,
+      time: localStorage.getItem('time') ? parseInt(localStorage.getItem('time'), 10) : 0,
+      mistakes: localStorage.getItem('mistakes') ? parseInt(localStorage.getItem('mistakes'), 10) : 0,
+      speed: localStorage.getItem('speed') ? parseInt(localStorage.getItem('speed'), 10) : 0,
       avatar: '',
-      achievements: [],
       token: getCookie('token') ? getCookie('token') : '',
     };
-    this.apiUrl = 'https://keyboardrace.herokuapp.com';
+  }
+
+  async saveUser() {
+    if (this.user._id !== '' && this.user.token !== '') {
+      const resUser = await http.updateUser<IResUser>();
+      console.log(resUser);
+    } else {
+      localStorage.setItem('lesson', this.user.lesson.toString());
+      localStorage.setItem('races', this.user.races.toString());
+      localStorage.setItem('signs', this.user.signs.toString());
+      localStorage.setItem('time', this.user.time.toString());
+      localStorage.setItem('mistakes', this.user.mistakes.toString());
+      localStorage.setItem('speed', this.user.speed.toString());
+    }
   }
 
   async loadUser() {
@@ -38,6 +56,7 @@ class AppStore {
 
       if (resUser.error === 'NO') {
         this.user = JSON.parse(JSON.stringify(resUser.info));
+        this.user.token = getCookie('token') ? getCookie('token') : '';
       }
     }
   }

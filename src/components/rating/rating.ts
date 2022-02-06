@@ -6,7 +6,7 @@ const rating = new Component({
   selector: '.page__rating',
   template: `
       <section class="rating">
-        <h2 class="rating__title">Типы гонок</h2>
+        <h2 class="rating__title">РЕЙТИНГ</h2>
         <div class="rating__card-container">
           <div class="rating__card">
             <div class="rating__card-number">1</div>

@@ -5,7 +5,7 @@ import signin from '../signin/signin';
 import signup from '../signup/signup';
 import profile from '../profile/profile';
 import user from '../user/user';
-import welcome from '../section-welcome/welcome';
+import welcome from '../welcome/welcome';
 import features from '../features/features';
 import rating from '../rating/rating';
 

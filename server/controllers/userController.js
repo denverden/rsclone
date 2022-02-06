@@ -121,17 +121,17 @@ class UserController {
 
       const { password, level, experience, lesson, avatar, races, signs, time, mistakes, achievements, roles } = req.body;
       if ((user._id.toString() === token.id.toString() && token.roles.includes('USER')) || token.roles.includes('ADMIN')) {
-        newUser.password = password ? bcrypt.hashSync(password, 7) : newUser.password;
-        newUser.level = level ? level : newUser.level;
-        newUser.experience = experience ? experience : newUser.experience;
-        newUser.lesson = lesson ? lesson : newUser.lesson;
-        newUser.avatar = avatar ? avatar : newUser.avatar;
-        newUser.races = races ? races : newUser.races;
-        newUser.signs = signs ? signs : newUser.signs;
-        newUser.time = time ? time : newUser.time;
-        newUser.mistakes = mistakes ? mistakes : newUser.mistakes;
-        newUser.achievements = achievements ? achievements.split(',') : newUser.achievements;
-        newUser.roles = roles ? roles.split(',') : newUser.roles;
+        user.password = password ? bcrypt.hashSync(password, 7) : user.password;
+        user.level = level ? level : user.level;
+        user.experience = experience ? experience : user.experience;
+        user.lesson = lesson ? lesson : user.lesson;
+        user.avatar = avatar ? avatar : user.avatar;
+        user.races = races ? races : user.races;
+        user.signs = signs ? signs : user.signs;
+        user.time = time ? time : user.time;
+        user.mistakes = mistakes ? mistakes : user.mistakes;
+        user.speed = speed ? speed : user.speed;
+        user.roles = roles ? roles.split(',') : newUser.roles;
       }
 
       User.findByIdAndUpdate(req.params.id, user).then(() => {

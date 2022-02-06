@@ -9,7 +9,7 @@ const getLangName = (headers) => {
   return supportLangs.length > 0 ? supportLangs[0] : 'en';
 };
 
-class TextController {
+class AchievementController {
   async getAllAchievement(req, res) {
     const lang = getLangName(req.headers);
     try {

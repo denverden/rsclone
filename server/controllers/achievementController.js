@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import Achievement from '../models/AchievementModel.js';
+import Achievement from '../models/achievementModel.js';
 import message from '../i18n/achievement.js';
 
 const getLangName = (headers) => {

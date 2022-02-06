@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import Achievement from '../models/AchievementModel.js';
-import message from '../i18n/text.js';
+import message from '../i18n/achievement.js';
 
 const getLangName = (headers) => {
   const userLangs = headers['accept-language'] ? headers['accept-language'] : 'en';

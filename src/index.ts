@@ -5,10 +5,9 @@ import page from './components/page/page';
 import header from './components/header/header';
 import footer from './components/footer/footer';
 import './global.scss';
-import personalAcc from './components/personal-account/personal-account'
 
 const APP = new App({
-  components: [page, header, footer, personalAcc],
+  components: [page, header, footer],
   routes,
 });
 

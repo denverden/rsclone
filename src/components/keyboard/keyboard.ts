@@ -5,6 +5,9 @@ import Component from '../component';
 import './keyboard.scss';
 import keyLayoutRu from './buttonsRu';
 import keyLayoutEn from './buttonsEn';
+import appStore from '../appStore';
+import message from '../message/message';
+import learn from '../learn/learn';
 
 class Keyboard extends Component {
   private keysContainer: HTMLElement;
@@ -86,11 +89,28 @@ class Keyboard extends Component {
         const futurText = this.text.slice(this.current);
         (document.querySelector('.text') as HTMLElement).innerHTML = `<span class="black">${typedText}</span><span class="gray">${futurText}</span>`;
         this.view(this.text[this.current], this.text[this.current - 1]);
+        appStore.user.signs++;
       } else {
         this.error++;
-        (document.querySelector('.error') as HTMLElement).textContent = `Ошибок:${this.error}`;
+        appStore.user.mistakes++;
+        (document.querySelector('.error-keyboard') as HTMLElement).textContent = this.error.toString();
+      }
+      if (appStore.type === 'learn' && this.text.length === this.current) {
+        appStore.user.lesson++;
+        appStore.saveUser();
+        message.view('Урок пройден.', 'success');
+        this.reset();
       }
     });
+  }
+
+  async reset() {
+    this.current = 0;
+    this.error = 0;
+    this.text = '';
+    await this.loadText();
+    (document.querySelector('.error-keyboard') as HTMLElement).textContent = this.error.toString();
+    learn.setLessonName();
   }
 
   view(currentChar: string, previousChar = currentChar) {
@@ -129,7 +149,8 @@ class Keyboard extends Component {
   }
 
   async loadText() {
-    const txt = await HTTP.getText<IText>();
+    const txt = appStore.type === 'learn' ? await HTTP.getLesson<IText>(appStore.user.lesson) : await HTTP.getText<IText>();
+    console.log(appStore);
     this.elem.querySelector('.text').innerHTML = `<span class="gray">${txt.info.text}</span>`;
     this.text = txt.info.text;
     this.lang = txt.info.lang;
@@ -144,9 +165,9 @@ class Keyboard extends Component {
 }
 
 const keyboard = new Keyboard({
-  selector: '.page__main',
+  selector: '.keyboard',
   template: `
-  <div class="error"></div>
+  <div class="error-keyboard" title="Ошибки">0</div>
   <div class="text"></div>
   <div class="container-keyboard">
     <div class="show">

@@ -10,7 +10,7 @@ export interface IUser {
   signs: number;
   time: number;
   mistakes: number;
+  speed: number;
   avatar: string;
-  achievements: Array<string>;
   token?: string;
 }

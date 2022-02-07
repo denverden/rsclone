@@ -1,6 +1,5 @@
 import Component from '../component';
 import './rating.scss';
-import avatar from './avatar.png';
 import userStatistics from './userStatistics';
 
 class Rating extends Component {

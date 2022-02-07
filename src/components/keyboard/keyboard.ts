@@ -6,6 +6,8 @@ import './keyboard.scss';
 import keyLayoutRu from './buttonsRu';
 import keyLayoutEn from './buttonsEn';
 import appStore from '../appStore';
+import message from '../message/message';
+import learn from '../learn/learn';
 
 class Keyboard extends Component {
   private keysContainer: HTMLElement;
@@ -91,9 +93,24 @@ class Keyboard extends Component {
       } else {
         this.error++;
         appStore.user.mistakes++;
-        (document.querySelector('.error-keyboard') as HTMLElement).textContent = `Ошибок:${this.error}`;
+        (document.querySelector('.error-keyboard') as HTMLElement).textContent = this.error.toString();
+      }
+      if (appStore.type === 'learn' && this.text.length === this.current) {
+        appStore.user.lesson++;
+        appStore.saveUser();
+        message.view('Урок пройден.', 'success');
+        this.reset();
       }
     });
+  }
+
+  async reset() {
+    this.current = 0;
+    this.error = 0;
+    this.text = '';
+    await this.loadText();
+    (document.querySelector('.error-keyboard') as HTMLElement).textContent = this.error.toString();
+    learn.setLessonName();
   }
 
   view(currentChar: string, previousChar = currentChar) {
@@ -132,8 +149,8 @@ class Keyboard extends Component {
   }
 
   async loadText() {
-    const txt = appStore.type === 'game' ? await HTTP.getText<IText>() : await HTTP.getLesson<IText>(appStore.user.lesson);
-    console.log(txt);
+    const txt = appStore.type === 'learn' ? await HTTP.getLesson<IText>(appStore.user.lesson) : await HTTP.getText<IText>();
+    console.log(appStore);
     this.elem.querySelector('.text').innerHTML = `<span class="gray">${txt.info.text}</span>`;
     this.text = txt.info.text;
     this.lang = txt.info.lang;
@@ -150,7 +167,7 @@ class Keyboard extends Component {
 const keyboard = new Keyboard({
   selector: '.keyboard',
   template: `
-  <div class="error-keyboard">--/--</div>
+  <div class="error-keyboard" title="Ошибки">0</div>
   <div class="text"></div>
   <div class="container-keyboard">
     <div class="show">

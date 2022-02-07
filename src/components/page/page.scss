@@ -3,6 +3,10 @@
   flex-direction: column;
   position: relative;
 
+  &__header {
+    z-index: 1;
+  }
+
   &__main {
     display: flex;
     justify-content: center;

@@ -75,7 +75,7 @@ class TextController {
 
       const response = {
         apiMessage: message[lang].SUCCESS_TEXT,
-        info: record,
+        info: record[0],
         error: 'NO',
       };
 

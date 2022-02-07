@@ -132,7 +132,8 @@ class Keyboard extends Component {
   }
 
   async loadText() {
-    const txt = await HTTP.getText<IText>();
+    const txt = appStore.type === 'game' ? await HTTP.getText<IText>() : await HTTP.getLesson<IText>(appStore.user.lesson);
+    console.log(txt);
     this.elem.querySelector('.text').innerHTML = `<span class="gray">${txt.info.text}</span>`;
     this.text = txt.info.text;
     this.lang = txt.info.lang;

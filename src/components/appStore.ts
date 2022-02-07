@@ -12,9 +12,12 @@ class AppStore {
 
   public user: IUser;
 
+  public type: string;
+
   constructor() {
     this.reset();
     this.apiUrl = 'https://keyboardrace.herokuapp.com';
+    this.type = 'game';
   }
 
   reset() {
@@ -23,9 +26,9 @@ class AppStore {
       username: '',
       password: '',
       roles: ['USER'],
-      level: 1,
+      level: 0,
       experience: 0,
-      lesson: localStorage.getItem('lesson') ? parseInt(localStorage.getItem('lesson'), 10) : 0,
+      lesson: localStorage.getItem('lesson') ? parseInt(localStorage.getItem('lesson'), 10) : 1,
       races: localStorage.getItem('races') ? parseInt(localStorage.getItem('races'), 10) : 0,
       signs: localStorage.getItem('signs') ? parseInt(localStorage.getItem('signs'), 10) : 0,
       time: localStorage.getItem('time') ? parseInt(localStorage.getItem('time'), 10) : 0,

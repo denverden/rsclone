@@ -14,6 +14,19 @@ class HTTP {
       .then((data) => data as TResponse);
   }
 
+  async getLesson<TResponse>(numberLesson = 1): Promise<TResponse> {
+    return fetch(`${appStore.apiUrl}/api/text/lesson/${numberLesson}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Accept-Language': 'ru',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => data as TResponse);
+  }
+
   async getGroups<TResponse>(): Promise<TResponse> {
     return fetch(`${appStore.apiUrl}/api/group/all/`, {
       method: 'GET',

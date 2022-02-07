@@ -63,6 +63,28 @@ class TextController {
     }
   }
 
+  async getLesson(req, res) {
+    const lang = getLangName(req.headers);
+    try {
+      const filter = { lesson: req.params.numberLesson };
+      const record = await Text.find(filter);
+
+      if (!record) {
+        return res.status(400).json({ apiMessage: message[lang].ERROR_TEXT, error: 'ERROR_TEXT' });
+      }
+
+      const response = {
+        apiMessage: message[lang].SUCCESS_TEXT,
+        info: record,
+        error: 'NO',
+      };
+
+      return res.status(200).json(response);
+    } catch (err) {
+      res.status(400).json({ apiMessage: message[lang].ERROR_TEXT, error: err.message });
+    }
+  }
+
   async getAllText(req, res) {
     const lang = getLangName(req.headers);
     try {

@@ -8,6 +8,8 @@ router.get('/rand/:groupId?', Text.getText);
 
 router.get('/all/:groupId?', Text.getAllText);
 
+router.get('/lesson/:numberLesson?', Text.getLesson);
+
 router.post('/add', roleMiddleware(['ADMIN']), Text.createText);
 
 router.patch('/:id', roleMiddleware(['ADMIN']), Text.updateText);

@@ -117,8 +117,6 @@ class UserController {
         return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_ROLE, error: 'ERROR_NOT_ROLE' });
       }
 
-      user._doc.password = '--- banned from viewing ---';
-
       const { password, level, experience, lesson, avatar, races, signs, time, mistakes, speed } = req.body;
       if ((user._id.toString() === token.id.toString() && token.roles.includes('USER')) || token.roles.includes('ADMIN')) {
         user.password = password ? bcrypt.hashSync(password, 7) : user.password;
@@ -134,6 +132,7 @@ class UserController {
       }
 
       User.findByIdAndUpdate(req.params.id, user).then(() => {
+        user.password = '--- banned from viewing ---';
         res.status(200).json({
           apiMessage: message[lang].SUCCESS_UPDATE,
           info: user,

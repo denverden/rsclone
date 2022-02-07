@@ -21,7 +21,7 @@ const UserModel = new mongoose.Schema({
   },
   lesson: {
     type: Number,
-    default: 0,
+    default: 1,
   },
   races: {
     type: Number,

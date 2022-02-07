@@ -23,7 +23,7 @@ class AppStore {
       username: '',
       password: '',
       roles: ['USER'],
-      level: 0,
+      level: 1,
       experience: 0,
       lesson: localStorage.getItem('lesson') ? parseInt(localStorage.getItem('lesson'), 10) : 0,
       races: localStorage.getItem('races') ? parseInt(localStorage.getItem('races'), 10) : 0,
@@ -38,8 +38,7 @@ class AppStore {
 
   async saveUser() {
     if (this.user._id !== '' && this.user.token !== '') {
-      const resUser = await http.updateUser<IResUser>();
-      console.log(resUser);
+      await http.updateUser<IResUser>();
     } else {
       localStorage.setItem('lesson', this.user.lesson.toString());
       localStorage.setItem('races', this.user.races.toString());

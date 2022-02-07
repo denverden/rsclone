@@ -87,9 +87,11 @@ class Keyboard extends Component {
         const futurText = this.text.slice(this.current);
         (document.querySelector('.text') as HTMLElement).innerHTML = `<span class="black">${typedText}</span><span class="gray">${futurText}</span>`;
         this.view(this.text[this.current], this.text[this.current - 1]);
+        appStore.user.signs++;
       } else {
         this.error++;
-        (document.querySelector('.error') as HTMLElement).textContent = `Ошибок:${this.error}`;
+        appStore.user.mistakes++;
+        (document.querySelector('.error-keyboard') as HTMLElement).textContent = `Ошибок:${this.error}`;
       }
     });
   }
@@ -145,9 +147,9 @@ class Keyboard extends Component {
 }
 
 const keyboard = new Keyboard({
-  selector: '.page__main',
+  selector: '.keyboard',
   template: `
-  <div class="error"></div>
+  <div class="error-keyboard">--/--</div>
   <div class="text"></div>
   <div class="container-keyboard">
     <div class="show">

@@ -16,7 +16,6 @@ class Rating extends Component {
         <div class="rating__card-text">${value.experience}<span> опыт  </span></div>
         `
       );
-
       ratingCard.classList.add('rating__card');
       ratingCardContainer.append(ratingCard);
     });

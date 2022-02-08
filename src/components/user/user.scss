@@ -44,7 +44,7 @@
       align-items: center;
       justify-content: flex-start;
       transition: all ease 0.2s;
-      padding-left: 28px;
+      padding-left: 42px;
       font-weight: 400;
       user-select: none;
       &:hover, :focus, :active{
@@ -55,7 +55,7 @@
     &-profile{
       background-image: url('./svg/account_circle_black_24dp.svg');
       background-repeat: no-repeat;
-      background-position: 2px;
+      background-position: 10px;
       &:hover{
         background-image: url('./svg/account_circle_white_24dp.svg');
       }
@@ -63,7 +63,7 @@
     &-achievments{
       background-image: url('./svg/emoji_events_black_24dp.svg');
       background-repeat: no-repeat;
-      background-position: 2px;
+      background-position: 10px;
       &:hover{
         background-image: url('./svg/emoji_events_white_24dp.svg');
       }
@@ -71,7 +71,7 @@
     &-garage{
       background-image: url('./svg/garage_black_24dp.svg');
       background-repeat: no-repeat;
-      background-position: 2px;
+      background-position: 10px;
       &:hover{
         background-image: url('./svg/garage_white_24dp.svg');
       }
@@ -79,7 +79,7 @@
     &-logout{
       background-image: url('./svg/logout_black_24dp.svg');
       background-repeat: no-repeat;
-      background-position: 2px;
+      background-position: 10px;
       &:hover{
         background-image: url('./svg/logout_white_24dp.svg');
       }

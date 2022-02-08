@@ -1,4 +1,39 @@
-.achievment-parallax{
-  background-image: url("./img/wallpaperbetter.com_1920x1080.webp");
+.achievment-parallax {
+  background-image: url('./img/wallpaperbetter.com_1920x1080.webp');
   height: 300px;
+}
+.main__title {
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 64px;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #333333;
+}
+.main__title::after {
+  content: '';
+  position: absolute;
+  left: 415px;
+  right: 0;
+  background-color: #9e0030;
+  width: 340px;
+  height: 4px;
+  bottom: -7px;
+}
+.achievement {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+.achievement__img-item {
+  width: 200px;
+  hight: 100px;
 }

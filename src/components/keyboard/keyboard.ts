@@ -151,7 +151,10 @@ class Keyboard extends Component {
     const space = document.querySelector(`.keyboard__key[data-key="Space"]`) as HTMLElement;
     const keys = Object.keys(keyLayout);
 
-    document.querySelectorAll('.keyboard__key').forEach((el) => el.classList.remove('active'));
+    document.querySelectorAll('.keyboard__key').forEach((el: HTMLElement) => {
+      el.classList.remove('active');
+      el.style.backgroundColor = '';
+    });
 
     keys.forEach((key) => {
       const BTN_ACTIVE = document.querySelector(`.keyboard__key[data-key="${key}"]`) as HTMLElement;
@@ -166,13 +169,17 @@ class Keyboard extends Component {
       }
       if (keyLayout[key].normal === currentChar) {
         BTN_ACTIVE.classList.add('active');
+        BTN_ACTIVE.style.backgroundColor = 'red';
       }
       if (keyLayout[key].alt === currentChar) {
         BTN_ACTIVE.classList.add('active');
+        BTN_ACTIVE.style.backgroundColor = 'red';
         if (leftKey.indexOf(currentChar) === -1) {
           shiftLeft.classList.add('active');
+          shiftLeft.style.backgroundColor = 'red';
         } else {
           shiftRight.classList.add('active');
+          shiftRight.style.backgroundColor = 'red';
         }
       }
     });
@@ -197,7 +204,10 @@ class Keyboard extends Component {
 const keyboard = new Keyboard({
   selector: '.keyboard',
   template: `
-  <div class="error-keyboard" title="Ошибки">0</div>
+  <div class="instrumentation">
+    <div class="error-keyboard" title="Ошибки">0</div>
+    <div class="speed-keyboard" title="Скорость">0</div>
+  </div>
   <div class="text"></div>
   <div class="container-keyboard">
     <div class="show">

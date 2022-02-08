@@ -366,7 +366,7 @@
 
 .text {
   width: 1000px;
-  margin: 20px auto;
+  margin: 5px auto;
   text-align: center;
 }
 
@@ -386,10 +386,18 @@
 .hand--hidden .active::before {
   display: none;
 }
-
+.instrumentation {
+  margin-right: 319px;
+  display: flex;
+  justify-content: flex-end;
+}
 .error-keyboard {
-  width: 110px;
-  margin: 20px auto;
+  width: 70px;
   text-align: center;
   background: url(./iconsa.png) no-repeat 0 -250px;
+}
+.speed-keyboard {
+  width: 70px;
+  text-align: center;
+  background: url(./iconsa.png) no-repeat 0 -300px;
 }

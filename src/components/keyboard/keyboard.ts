@@ -63,7 +63,8 @@ class Keyboard extends Component {
   eventBtn() {
     const showColor = document.querySelector('.show-color');
     showColor.addEventListener('click', () => {
-      showColor.classList.toggle('hide-color');
+      const showColorKey = showColor.classList.toggle('hide-color');
+      localStorage.setItem('showColorKey', JSON.stringify(showColorKey));
       document.querySelectorAll('.keyboard__key').forEach((elem) => {
         elem.classList.toggle('keyboard__key--coloring');
       });
@@ -71,16 +72,45 @@ class Keyboard extends Component {
 
     const showKeyboard = document.querySelector('.show-keyboard');
     const showHand = document.querySelector('.show-hand');
-
     showKeyboard.addEventListener('click', () => {
-      showKeyboard.classList.toggle('hide-keyboard');
+      const showKey = showKeyboard.classList.toggle('hide-keyboard');
+      localStorage.setItem('showKey', JSON.stringify(showKey));
+      console.log(this.elem);
       this.elem.querySelector('#keyboard').classList.toggle('keyboard--hidden');
     });
 
     showHand.addEventListener('click', () => {
-      showHand.classList.toggle('hide-hand');
+      const showHandKey = showHand.classList.toggle('hide-hand');
+      localStorage.setItem('showHandKey', JSON.stringify(showHandKey));
       this.elem.querySelector('#keyboard').classList.toggle('hand--hidden');
     });
+
+    function getLocalStorage() {
+      if (localStorage.getItem('showColorKey')) {
+        const showColorLocal = JSON.parse(localStorage.getItem('showColorKey'));
+        if (showColorLocal) {
+          showColor.classList.add('hide-color');
+          document.querySelectorAll('.keyboard__key').forEach((elem) => {
+            elem.classList.add('keyboard__key--coloring');
+          });
+        }
+      }
+      if (localStorage.getItem('showKey')) {
+        const showKeyLocal = JSON.parse(localStorage.getItem('showKey'));
+        if (showKeyLocal) {
+          showKeyboard.classList.add('hide-keyboard');
+          document.querySelector('#keyboard').classList.add('keyboard--hidden');
+        }
+      }
+      if (localStorage.getItem('showHandKey')) {
+        const showHandKeyLocal = JSON.parse(localStorage.getItem('showHandKey'));
+        if (showHandKeyLocal) {
+          showHand.classList.add('hide-hand');
+          document.querySelector('#keyboard').classList.add('hand--hidden');
+        }
+      }
+    }
+    window.addEventListener('load', getLocalStorage);
 
     document.addEventListener('keypress', (event) => {
       if (event.key === this.text[this.current]) {

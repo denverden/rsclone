@@ -20,12 +20,18 @@ class Keyboard extends Component {
 
   private text: string;
 
+  private startTime: number;
+
+  private speedText: number;
+
   constructor(data: IData) {
     super(data);
     this.lang = 'ru';
     this.current = 0;
     this.error = 0;
     this.text = '';
+    this.startTime = 0;
+    this.speedText = 0;
     this.keysContainer = null;
   }
 
@@ -62,6 +68,7 @@ class Keyboard extends Component {
 
   eventBtn() {
     const showColor = document.querySelector('.show-color');
+
     showColor.addEventListener('click', () => {
       showColor.classList.toggle('hide-color');
       document.querySelectorAll('.keyboard__key').forEach((elem) => {
@@ -83,6 +90,10 @@ class Keyboard extends Component {
     });
 
     document.addEventListener('keypress', (event) => {
+      this.startTime = this.startTime === 0 ? Math.round(new Date().getTime() / 1000) : this.startTime;
+      this.speedText =
+        new Date().getTime() / 1000 - this.startTime >= 1 ? Math.round((60 * this.current) / (new Date().getTime() / 1000 - this.startTime)) : 0;
+
       if (event.key === this.text[this.current]) {
         this.current++;
         const typedText = this.text.slice(0, this.current);
@@ -96,11 +107,16 @@ class Keyboard extends Component {
         (document.querySelector('.error-keyboard') as HTMLElement).textContent = this.error.toString();
       }
       if (appStore.type === 'learn' && this.text.length === this.current) {
+        appStore.user.races++;
         appStore.user.lesson++;
+        appStore.user.time += new Date().getTime() / 1000 - this.startTime;
         appStore.saveUser();
         message.view('Урок пройден.', 'success');
         this.reset();
       }
+
+      appStore.user.speed = appStore.user.speed < this.speedText ? this.speedText : appStore.user.speed;
+      (document.querySelector('.speed-keyboard') as HTMLElement).textContent = this.speedText.toFixed(0).toString();
     });
   }
 
@@ -108,6 +124,9 @@ class Keyboard extends Component {
     this.current = 0;
     this.error = 0;
     this.text = '';
+    this.current = 0;
+    this.startTime = 0;
+    this.speedText = 0;
     await this.loadText();
     (document.querySelector('.error-keyboard') as HTMLElement).textContent = this.error.toString();
     learn.setLessonName();
@@ -150,23 +169,24 @@ class Keyboard extends Component {
 
   async loadText() {
     const txt = appStore.type === 'learn' ? await HTTP.getLesson<IText>(appStore.user.lesson) : await HTTP.getText<IText>();
-    console.log(appStore);
     this.elem.querySelector('.text').innerHTML = `<span class="gray">${txt.info.text}</span>`;
     this.text = txt.info.text;
     this.lang = txt.info.lang;
   }
 
   async afterRender() {
-    await this.loadText();
-    this.init();
-    this.eventBtn();
-    this.view(this.text[this.current]);
+    await this.loadText().then(() => {
+      this.init();
+      this.eventBtn();
+      this.view(this.text[this.current]);
+    });
   }
 }
 
 const keyboard = new Keyboard({
   selector: '.keyboard',
   template: `
+  <div class="speed-keyboard" title="Скорость">0</div>
   <div class="error-keyboard" title="Ошибки">0</div>
   <div class="text"></div>
   <div class="container-keyboard">

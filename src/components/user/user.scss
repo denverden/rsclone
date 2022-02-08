@@ -3,19 +3,88 @@
 .user {
   &__btn {
     border: none;
-    padding: 14px 25px 12px;
     text-transform: uppercase;
     text-decoration: none;
     font-weight: 700;
-    border-radius: 25px;
-    background-color: $primary-color;
-    margin: 10px 0px;
-    color: $primary-second-color;
+    background-color: $user-second-color;
+    color: $user-main-color;
+    margin: 10px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     transition: background-color 0.3s;
 
-    &:hover {
-      background-color: $primary-hover-color;
+    &-arrow{
+      width: 24px;
+      height: 24px;
+      transition: 0.3 all ease;
+      background-image: url("./svg/expand_more_black_24dp.svg");
     }
+
+
+  }
+
+  &__nav{
+    height: 1px;
+    position: absolute;
+    bottom: 0px;
+    left: -70px;
+    transition: all ease 0.2s;
+    z-index: 10;
+
+    &-item{
+      background-color: $user-second-color;
+      color: $user-main-color;
+      width: 160px;
+      height: 50px;
+      border: 1px solid $text-color;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      transition: all ease 0.2s;
+      padding-left: 42px;
+      font-weight: 400;
+      user-select: none;
+      &:hover, :focus, :active{
+        background-color: $user-main-color;
+        color: $user-second-color;
+      }
+    }
+    &-profile{
+      background-image: url('./svg/account_circle_black_24dp.svg');
+      background-repeat: no-repeat;
+      background-position: 10px;
+      &:hover{
+        background-image: url('./svg/account_circle_white_24dp.svg');
+      }
+    }
+    &-achievments{
+      background-image: url('./svg/emoji_events_black_24dp.svg');
+      background-repeat: no-repeat;
+      background-position: 10px;
+      &:hover{
+        background-image: url('./svg/emoji_events_white_24dp.svg');
+      }
+    }
+    &-garage{
+      background-image: url('./svg/garage_black_24dp.svg');
+      background-repeat: no-repeat;
+      background-position: 10px;
+      &:hover{
+        background-image: url('./svg/garage_white_24dp.svg');
+      }
+    }
+    &-logout{
+      background-image: url('./svg/logout_black_24dp.svg');
+      background-repeat: no-repeat;
+      background-position: 10px;
+      &:hover{
+        background-image: url('./svg/logout_white_24dp.svg');
+      }
+    }
+
   }
 }
+

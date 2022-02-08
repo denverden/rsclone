@@ -43,7 +43,7 @@ button {
 }
 
 .welcome {
-  background: #000 url(./0.jpg) no-repeat center top fixed;
+  background: linear-gradient(0deg, #0000001e, #0000001e), url(./0.jpg) no-repeat center top fixed;
 
   &__title {
     color: #fff;
@@ -53,6 +53,7 @@ button {
     text-shadow: 1px 1px 1px #333;
   }
 }
+
 .container {
   max-width: 1280px;
   margin-left: auto;
@@ -64,8 +65,9 @@ button {
 .info-wrapper {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 93px;
+  margin-bottom: 60px;
 }
+
 .info {
   display: flex;
   flex-direction: column;
@@ -86,6 +88,7 @@ button {
     text-align: center;
     text-transform: uppercase;
   }
+
   &__title {
     font-weight: bold;
     font-size: 18px;
@@ -98,13 +101,14 @@ button {
 .start {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 82px;
+  padding-bottom: 90px;
 
   &__tire-right {
     width: 100%;
     background: url(./tread-right.png);
     max-width: 312px;
   }
+
   &__button {
     width: 250px;
     height: 50px;
@@ -121,9 +125,11 @@ button {
     text-transform: uppercase;
     color: #f8d632;
   }
+
   &__button:hover {
     background: #7d0026;
   }
+
   &__tire-left {
     width: 100%;
     background: url(./tread-left.png);

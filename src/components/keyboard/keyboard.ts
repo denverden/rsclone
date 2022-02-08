@@ -5,6 +5,9 @@ import Component from '../component';
 import './keyboard.scss';
 import keyLayoutRu from './buttonsRu';
 import keyLayoutEn from './buttonsEn';
+import appStore from '../appStore';
+import message from '../message/message';
+import learn from '../learn/learn';
 
 class Keyboard extends Component {
   private keysContainer: HTMLElement;
@@ -60,7 +63,8 @@ class Keyboard extends Component {
   eventBtn() {
     const showColor = document.querySelector('.show-color');
     showColor.addEventListener('click', () => {
-      showColor.classList.toggle('hide-color');
+      const showColorKey = showColor.classList.toggle('hide-color');
+      localStorage.setItem('showColorKey', JSON.stringify(showColorKey));
       document.querySelectorAll('.keyboard__key').forEach((elem) => {
         elem.classList.toggle('keyboard__key--coloring');
       });
@@ -68,16 +72,45 @@ class Keyboard extends Component {
 
     const showKeyboard = document.querySelector('.show-keyboard');
     const showHand = document.querySelector('.show-hand');
-
     showKeyboard.addEventListener('click', () => {
-      showKeyboard.classList.toggle('hide-keyboard');
+      const showKey = showKeyboard.classList.toggle('hide-keyboard');
+      localStorage.setItem('showKey', JSON.stringify(showKey));
+      console.log(this.elem);
       this.elem.querySelector('#keyboard').classList.toggle('keyboard--hidden');
     });
 
     showHand.addEventListener('click', () => {
-      showHand.classList.toggle('hide-hand');
+      const showHandKey = showHand.classList.toggle('hide-hand');
+      localStorage.setItem('showHandKey', JSON.stringify(showHandKey));
       this.elem.querySelector('#keyboard').classList.toggle('hand--hidden');
     });
+
+    function getLocalStorage() {
+      if (localStorage.getItem('showColorKey')) {
+        const showColorLocal = JSON.parse(localStorage.getItem('showColorKey'));
+        if (showColorLocal) {
+          showColor.classList.add('hide-color');
+          document.querySelectorAll('.keyboard__key').forEach((elem) => {
+            elem.classList.add('keyboard__key--coloring');
+          });
+        }
+      }
+      if (localStorage.getItem('showKey')) {
+        const showKeyLocal = JSON.parse(localStorage.getItem('showKey'));
+        if (showKeyLocal) {
+          showKeyboard.classList.add('hide-keyboard');
+          document.querySelector('#keyboard').classList.add('keyboard--hidden');
+        }
+      }
+      if (localStorage.getItem('showHandKey')) {
+        const showHandKeyLocal = JSON.parse(localStorage.getItem('showHandKey'));
+        if (showHandKeyLocal) {
+          showHand.classList.add('hide-hand');
+          document.querySelector('#keyboard').classList.add('hand--hidden');
+        }
+      }
+    }
+    window.addEventListener('load', getLocalStorage);
 
     document.addEventListener('keypress', (event) => {
       if (event.key === this.text[this.current]) {
@@ -86,11 +119,28 @@ class Keyboard extends Component {
         const futurText = this.text.slice(this.current);
         (document.querySelector('.text') as HTMLElement).innerHTML = `<span class="black">${typedText}</span><span class="gray">${futurText}</span>`;
         this.view(this.text[this.current], this.text[this.current - 1]);
+        appStore.user.signs++;
       } else {
         this.error++;
-        (document.querySelector('.error') as HTMLElement).textContent = `Ошибок:${this.error}`;
+        appStore.user.mistakes++;
+        (document.querySelector('.error-keyboard') as HTMLElement).textContent = this.error.toString();
+      }
+      if (appStore.type === 'learn' && this.text.length === this.current) {
+        appStore.user.lesson++;
+        appStore.saveUser();
+        message.view('Урок пройден.', 'success');
+        this.reset();
       }
     });
+  }
+
+  async reset() {
+    this.current = 0;
+    this.error = 0;
+    this.text = '';
+    await this.loadText();
+    (document.querySelector('.error-keyboard') as HTMLElement).textContent = this.error.toString();
+    learn.setLessonName();
   }
 
   view(currentChar: string, previousChar = currentChar) {
@@ -101,7 +151,10 @@ class Keyboard extends Component {
     const space = document.querySelector(`.keyboard__key[data-key="Space"]`) as HTMLElement;
     const keys = Object.keys(keyLayout);
 
-    document.querySelectorAll('.keyboard__key').forEach((el) => el.classList.remove('active'));
+    document.querySelectorAll('.keyboard__key').forEach((el: HTMLElement) => {
+      el.classList.remove('active');
+      el.style.backgroundColor = '';
+    });
 
     keys.forEach((key) => {
       const BTN_ACTIVE = document.querySelector(`.keyboard__key[data-key="${key}"]`) as HTMLElement;
@@ -116,20 +169,25 @@ class Keyboard extends Component {
       }
       if (keyLayout[key].normal === currentChar) {
         BTN_ACTIVE.classList.add('active');
+        BTN_ACTIVE.style.backgroundColor = 'red';
       }
       if (keyLayout[key].alt === currentChar) {
         BTN_ACTIVE.classList.add('active');
+        BTN_ACTIVE.style.backgroundColor = 'red';
         if (leftKey.indexOf(currentChar) === -1) {
           shiftLeft.classList.add('active');
+          shiftLeft.style.backgroundColor = 'red';
         } else {
           shiftRight.classList.add('active');
+          shiftRight.style.backgroundColor = 'red';
         }
       }
     });
   }
 
   async loadText() {
-    const txt = await HTTP.getText<IText>();
+    const txt = appStore.type === 'learn' ? await HTTP.getLesson<IText>(appStore.user.lesson) : await HTTP.getText<IText>();
+    console.log(appStore);
     this.elem.querySelector('.text').innerHTML = `<span class="gray">${txt.info.text}</span>`;
     this.text = txt.info.text;
     this.lang = txt.info.lang;
@@ -144,9 +202,12 @@ class Keyboard extends Component {
 }
 
 const keyboard = new Keyboard({
-  selector: '.page__main',
+  selector: '.keyboard',
   template: `
-  <div class="error"></div>
+  <div class="instrumentation">
+    <div class="error-keyboard" title="Ошибки">0</div>
+    <div class="speed-keyboard" title="Скорость">0</div>
+  </div>
   <div class="text"></div>
   <div class="container-keyboard">
     <div class="show">

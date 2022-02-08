@@ -33,26 +33,31 @@
   background-position: 10px center;
   z-index: 10;
 }
+
 .info {
   color: #00529b;
   background-color: #bde5f8;
   background-image: url('./info.png');
 }
+
 .success {
   color: #4f8a10;
   background-color: #dff2bf;
   background-image: url('./success.png');
 }
+
 .warning {
   color: #9f6000;
   background-color: #feefb3;
   background-image: url('./warning.png');
 }
+
 .error {
   color: #d8000c;
   background-color: #ffbaba;
   background-image: url('./error.png');
 }
+
 .validation {
   color: #d63301;
   background-color: #ffccba;

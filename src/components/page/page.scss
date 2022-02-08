@@ -3,12 +3,16 @@
   flex-direction: column;
   position: relative;
 
+  &__header {
+    z-index: 1;
+  }
+
   &__main {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100%;
+    flex: 1 0 auto;
   }
 
   &__welcome {

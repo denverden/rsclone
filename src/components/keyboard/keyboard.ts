@@ -66,29 +66,55 @@ class Keyboard extends Component {
     return fragment;
   }
 
-  eventBtn() {
-    const showColor = document.querySelector('.show-color');
+  initStateKeyboard() {
+    const stateKeyboard = localStorage.getItem('stateKeyboard') !== null ? JSON.parse(localStorage.getItem('stateKeyboard')) : true;
+    const stateColor = localStorage.getItem('stateColor') !== null ? JSON.parse(localStorage.getItem('stateColor')) : false;
+    const stateHand = localStorage.getItem('stateHand') !== null ? JSON.parse(localStorage.getItem('stateHand')) : true;
+    console.log(stateKeyboard, stateColor, stateHand);
+    if (!stateHand) {
+      document.querySelector('.control__key--hand').classList.add('hide');
+      document.querySelector('#keyboard').classList.add('hand--hidden');
+    }
 
-    showColor.addEventListener('click', () => {
-      showColor.classList.toggle('hide-color');
+    if (stateColor) {
+      document.querySelector('.control__key--color').classList.add('hide');
       document.querySelectorAll('.keyboard__key').forEach((elem) => {
-        elem.classList.toggle('keyboard__key--coloring');
+        elem.classList.add('keyboard__key--coloring');
       });
+    }
+
+    if (!stateKeyboard) {
+      document.querySelector('.control__key--keyboard').classList.add('hide');
+      document.querySelector('#keyboard').classList.add('keyboard--hidden');
+    }
+  }
+
+  eventKeyControl() {
+    const control = document.querySelector('.control');
+
+    control.addEventListener('click', (event) => {
+      const element = event.target as HTMLInputElement;
+
+      if (element.classList.contains('control__key--keyboard')) {
+        localStorage.setItem('stateKeyboard', JSON.stringify(!element.classList.toggle('hide')));
+        this.elem.querySelector('#keyboard').classList.toggle('keyboard--hidden');
+      }
+
+      if (element.classList.contains('control__key--color')) {
+        localStorage.setItem('stateColor', JSON.stringify(element.classList.toggle('hide')));
+        document.querySelectorAll('.keyboard__key').forEach((elem) => {
+          elem.classList.toggle('keyboard__key--coloring');
+        });
+      }
+
+      if (element.classList.contains('control__key--hand')) {
+        localStorage.setItem('stateHand', JSON.stringify(!element.classList.toggle('hide')));
+        this.elem.querySelector('#keyboard').classList.toggle('hand--hidden');
+      }
     });
+  }
 
-    const showKeyboard = document.querySelector('.show-keyboard');
-    const showHand = document.querySelector('.show-hand');
-
-    showKeyboard.addEventListener('click', () => {
-      showKeyboard.classList.toggle('hide-keyboard');
-      this.elem.querySelector('#keyboard').classList.toggle('keyboard--hidden');
-    });
-
-    showHand.addEventListener('click', () => {
-      showHand.classList.toggle('hide-hand');
-      this.elem.querySelector('#keyboard').classList.toggle('hand--hidden');
-    });
-
+  eventKeyPress() {
     document.addEventListener('keypress', (event) => {
       this.startTime = this.startTime === 0 ? Math.round(new Date().getTime() / 1000) : this.startTime;
       this.speedText =
@@ -98,25 +124,27 @@ class Keyboard extends Component {
         this.current++;
         const typedText = this.text.slice(0, this.current);
         const futurText = this.text.slice(this.current);
-        (document.querySelector('.text') as HTMLElement).innerHTML = `<span class="black">${typedText}</span><span class="gray">${futurText}</span>`;
+        (
+          document.querySelector('.keyboard__text') as HTMLElement
+        ).innerHTML = `<span class="keyboard__text--black">${typedText}</span><span class="keyboard__text--gray">${futurText}</span>`;
         this.view(this.text[this.current], this.text[this.current - 1]);
         appStore.user.signs++;
       } else {
         this.error++;
         appStore.user.mistakes++;
-        (document.querySelector('.error-keyboard') as HTMLElement).textContent = this.error.toString();
+        (document.querySelector('.instrumentation__error') as HTMLElement).textContent = this.error.toString();
       }
       if (appStore.type === 'learn' && this.text.length === this.current) {
         appStore.user.races++;
         appStore.user.lesson++;
-        appStore.user.time += new Date().getTime() / 1000 - this.startTime;
+        appStore.user.time += Math.round(new Date().getTime() / 1000 - this.startTime);
         appStore.saveUser();
         message.view('Урок пройден.', 'success');
         this.reset();
       }
 
       appStore.user.speed = appStore.user.speed < this.speedText ? this.speedText : appStore.user.speed;
-      (document.querySelector('.speed-keyboard') as HTMLElement).textContent = this.speedText.toFixed(0).toString();
+      (document.querySelector('.instrumentation__speed') as HTMLElement).textContent = this.speedText.toFixed(0).toString();
     });
   }
 
@@ -128,7 +156,7 @@ class Keyboard extends Component {
     this.startTime = 0;
     this.speedText = 0;
     await this.loadText();
-    (document.querySelector('.error-keyboard') as HTMLElement).textContent = this.error.toString();
+    (document.querySelector('.instrumentation__error') as HTMLElement).textContent = this.error.toString();
     learn.setLessonName();
   }
 
@@ -140,7 +168,9 @@ class Keyboard extends Component {
     const space = document.querySelector(`.keyboard__key[data-key="Space"]`) as HTMLElement;
     const keys = Object.keys(keyLayout);
 
-    document.querySelectorAll('.keyboard__key').forEach((el) => el.classList.remove('active'));
+    document.querySelectorAll('.keyboard__key').forEach((el: HTMLElement) => {
+      el.classList.remove('active');
+    });
 
     keys.forEach((key) => {
       const BTN_ACTIVE = document.querySelector(`.keyboard__key[data-key="${key}"]`) as HTMLElement;
@@ -169,7 +199,7 @@ class Keyboard extends Component {
 
   async loadText() {
     const txt = appStore.type === 'learn' ? await HTTP.getLesson<IText>(appStore.user.lesson) : await HTTP.getText<IText>();
-    this.elem.querySelector('.text').innerHTML = `<span class="gray">${txt.info.text}</span>`;
+    this.elem.querySelector('.keyboard__text').innerHTML = `<span class="keyboard__text--gray">${txt.info.text}</span>`;
     this.text = txt.info.text;
     this.lang = txt.info.lang;
   }
@@ -177,7 +207,9 @@ class Keyboard extends Component {
   async afterRender() {
     await this.loadText().then(() => {
       this.init();
-      this.eventBtn();
+      this.initStateKeyboard();
+      this.eventKeyControl();
+      this.eventKeyPress();
       this.view(this.text[this.current]);
     });
   }
@@ -186,14 +218,16 @@ class Keyboard extends Component {
 const keyboard = new Keyboard({
   selector: '.keyboard',
   template: `
-  <div class="speed-keyboard" title="Скорость">0</div>
-  <div class="error-keyboard" title="Ошибки">0</div>
-  <div class="text"></div>
-  <div class="container-keyboard">
-    <div class="show">
-      <span class="show-keyboard" title="Скрыть клавиатуру"></span>
-      <span class="show-color" title="Показать цвет"></span>
-      <span class="show-hand" title="Показать руки"></span>
+  <div class="instrumentation">
+    <div class="instrumentation__error" title="Ошибки">0</div>
+    <div class="instrumentation__speed" title="Скорость">0</div>
+  </div>
+  <div class="keyboard__text"></div>
+  <div class="keyboard__container">
+    <div class="control">
+      <span class="control__key control__key--keyboard" title="Скрыть клавиатуру"></span>
+      <span class="control__key control__key--color" title="Показать цвет"></span>
+      <span class="control__key control__key--hand" title="Показать руки"></span>
     </div>
     <div id="keyboard"></div>
   </div>`,

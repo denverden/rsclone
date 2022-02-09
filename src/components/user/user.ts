@@ -7,7 +7,7 @@ class User extends Component {
     if (appStore.user._id !== '' && appStore.user.token !== '') {
       this.stateTemplate = {
         avatar: appStore.user.avatar,
-      }
+      };
     }
   }
 
@@ -22,15 +22,13 @@ class User extends Component {
     } else {
       BTN_SINGIN.classList.remove('hidden');
       BTN_USER.classList.add('hidden');
-      userImg.classList.add('hidden')
+      userImg.classList.add('hidden');
     }
 
     BTN_USER.addEventListener('click', () => {
       const userNav = document.querySelector('.user__nav');
-      userNav.classList.toggle('hidden')
-
-
-    })
+      userNav.classList.toggle('hidden');
+    });
   }
 }
 
@@ -45,7 +43,7 @@ const user = new User({
               <a href="#profile" class="user__nav-profile user__nav-item ">
                 Профиль
               </a>
-              <a href="#achievment" class="user__nav-achievments user__nav-item ">
+              <a href="#achievement" class="user__nav-achievements user__nav-item ">
                 Достижения
               </a>
               <a href="#garage" class="user__nav-garage user__nav-item ">
@@ -55,8 +53,7 @@ const user = new User({
                 Выход
               </a>
             </div>
-    `
+    `,
 });
 
 export default user;
-

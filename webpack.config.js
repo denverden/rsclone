@@ -3,6 +3,7 @@ const autoprefixer = require('autoprefixer');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -28,6 +29,14 @@ module.exports = {
       favicon: './assets/favicon.ico',
     }),
     new CleanWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/components/achievement/img'),
+          to: path.resolve(__dirname, 'dist/assets/images'),
+        },
+      ],
+    }),
     new MiniCssExtractPlugin({
       filename: filename('.css'),
     }),

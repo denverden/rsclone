@@ -4,4 +4,5 @@ export interface IAchievements {
   description: string;
   image: string;
   sort: number;
+  func: string;
 }

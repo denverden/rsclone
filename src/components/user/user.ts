@@ -14,6 +14,7 @@ class User extends Component {
   afterRender() {
     const BTN_SINGIN = document.querySelector('.user__btn-signin') as HTMLElement;
     const BTN_USER = document.querySelector('.user__btn-user') as HTMLElement;
+    const BTN_LOGOUT = document.querySelector('.user__nav-logout') as HTMLElement;
     const userImg = document.querySelector('.user__img');
 
     if (appStore.user._id !== '' && appStore.user.token !== '') {
@@ -37,6 +38,13 @@ class User extends Component {
         userNav.classList.add('hidden');
       }
     })
+
+    BTN_LOGOUT.addEventListener('click', () => {
+      localStorage.removeItem('userId');
+      appStore.reset();
+      document.cookie = 'token=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      document.location.hash = '';
+    });
   }
 }
 

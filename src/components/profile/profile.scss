@@ -1,6 +1,4 @@
-.page__main {
-  height: 1200px;
-}
+
 .parallax-bg {
   width: 100%;
   height: 500px;
@@ -24,6 +22,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 0;
 
   .card-img1 {
     background-image: url('./img/indicators_contr.png');

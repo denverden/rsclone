@@ -32,7 +32,7 @@
     bottom: 0px;
     left: -70px;
     transition: all ease 0.2s;
-    z-index: 10;
+    z-index: 1000;
 
     &-item{
       background-color: $user-second-color;
@@ -47,11 +47,13 @@
       padding-left: 42px;
       font-weight: 400;
       user-select: none;
+      z-index: 100;
       &:hover, :focus, :active{
         background-color: $user-main-color;
         color: $user-second-color;
       }
     }
+
     &-profile{
       background-image: url('./svg/account_circle_black_24dp.svg');
       background-repeat: no-repeat;
@@ -60,7 +62,8 @@
         background-image: url('./svg/account_circle_white_24dp.svg');
       }
     }
-    &-achievments{
+
+    &-achievements{
       background-image: url('./svg/emoji_events_black_24dp.svg');
       background-repeat: no-repeat;
       background-position: 10px;
@@ -68,6 +71,7 @@
         background-image: url('./svg/emoji_events_white_24dp.svg');
       }
     }
+
     &-garage{
       background-image: url('./svg/garage_black_24dp.svg');
       background-repeat: no-repeat;
@@ -76,6 +80,7 @@
         background-image: url('./svg/garage_white_24dp.svg');
       }
     }
+
     &-logout{
       background-image: url('./svg/logout_black_24dp.svg');
       background-repeat: no-repeat;

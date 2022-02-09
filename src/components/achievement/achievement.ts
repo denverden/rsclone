@@ -23,7 +23,7 @@ class Achievement extends Component {
       achievementItem.insertAdjacentHTML(
         'beforeend',
         `
-        <div class="achievement__item ">
+        <div class="achievement__item" title="${value.description}">
         <img class="achievement__img-item" src="assets/images/${value.image}" alt="${value.name}">
         </div>
         <h3 class="achievement__text">${value.name}</h3>

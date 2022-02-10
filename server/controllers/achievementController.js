@@ -13,7 +13,7 @@ class AchievementController {
   async getAllAchievement(req, res) {
     const lang = getLangName(req.headers);
     try {
-      const texts = await Achievement.find();
+      const texts = await Achievement.find().sort({ sort: 'asc' });
 
       const response = {
         apiMessage: message[lang].SUCCESS_ACHIEVEMENT_ALL,

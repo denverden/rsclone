@@ -13,4 +13,5 @@ export interface IUser {
   speed: number;
   avatar: string;
   token?: string;
+  [key: string]: string | number | Array<string>;
 }

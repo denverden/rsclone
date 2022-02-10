@@ -8,6 +8,8 @@ router.post('/registration', User.create);
 
 router.post('/login', User.login);
 
+router.get('/rating/:limit?', User.getRating);
+
 router.get('/:id', roleMiddleware(['USER', 'ADMIN']), User.getUser);
 
 router.patch('/:id', roleMiddleware(['USER', 'ADMIN']), User.updateUser);

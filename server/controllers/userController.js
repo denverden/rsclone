@@ -82,6 +82,27 @@ class UserController {
     }
   }
 
+  async getRating(req, res) {
+    const lang = getLangName(req.headers);
+    try {
+      const limit = (req.params.limit < 1) && (req.params.limit > 20) ? limit = 8 : req.params.limit;
+
+      const users = await User.find().sort({ level: 'desc', experience: 'desc' }).limit(Number(limit));
+
+      const response = {
+        apiMessage: message[lang].SUCCESS_INFO,
+        info: users.map((record) => {
+          return record;
+        }),
+        error: 'NO',
+      };
+
+      return res.status(200).json(response);
+    } catch (err) {
+      res.status(400).json({ apiMessage: message[lang].ERROR_ACCESS, error: err.message });
+    }
+  }
+
   async getUser(req, res) {
     const lang = getLangName(req.headers);
     try {
@@ -119,7 +140,10 @@ class UserController {
 
       const { password, level, experience, lesson, avatar, races, signs, time, mistakes, speed } = req.body;
       if ((user._id.toString() === token.id.toString() && token.roles.includes('USER')) || token.roles.includes('ADMIN')) {
-        user.password = password ? bcrypt.hashSync(password, 7) : user.password;
+        if (password !== '--- banned from viewing ---') {
+          user.password = password ? bcrypt.hashSync(password, 7) : user.password;
+        }
+
         user.level = level ? level : user.level;
         user.experience = experience ? experience : user.experience;
         user.lesson = lesson ? lesson : user.lesson;

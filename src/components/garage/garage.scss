@@ -104,6 +104,7 @@
 .radio__label {
   margin-bottom: 10px;
   display: flex;
+  cursor: pointer;
 }
 
 .radio__title {
@@ -114,6 +115,7 @@
 .radio__input {
   position: absolute;
   margin-left: -20px;
+  cursor: pointer;
 }
 
 .radio--active {
@@ -148,8 +150,17 @@
   line-height: 15px;
 }
 
+.radio__img {
+  width: 45px;
+}
+
 .car-img {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.car-img__img {
+  width: 258px;
+  height: 87px;
 }

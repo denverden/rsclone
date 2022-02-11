@@ -5,34 +5,34 @@ import http from '../http';
 import appStore from '../appStore';
 
 class Achievement extends Component {
-  async beforeRender() {
+  async afterRender() {
     const resAchievement = await http.getAchievement<IResAchievements>();
-    console.log(resAchievement);
 
     if (resAchievement.error === 'NO') {
-      // eslint-disable-next-line no-new-func
-      // const func = new Function(appStore.user.lesson.toString(), resAchievement.achievements[0].func);
-      // eslint-disable-next-line no-new-func
-      // const func = new Function(appStore.user.lesson.toString(), `return ${resAchievement.achievements[0].func}`);
-      // console.log(func());
-    }
+      const achievement = document.querySelector('.achievement');
 
-    const achievement = document.querySelector('.achievement');
-    resAchievement.achievements.forEach((value) => {
-      const achievementItem = document.createElement('div');
-      achievementItem.insertAdjacentHTML(
-        'beforeend',
-        `
-        <div class="achievement__item" title="${value.description}">
-        <img class="achievement__img-item" src="assets/images/${value.image}" alt="${value.name}">
-        </div>
-        <h3 class="achievement__text">${value.name}</h3>
-        `
-      );
-      achievementItem.classList.add('achievement__wrapper');
-      achievementItem.classList.add('achievement__item--filter');
-      achievement.append(achievementItem);
-    });
+      resAchievement.achievements.forEach((value) => {
+        const paramArg = value.func.split(',')[0];
+        const paramFunc = value.func.split(',')[1];
+        const func = new Function(paramArg, `return ${paramFunc}`);
+        const achievementItem = document.createElement('div');
+
+        achievementItem.insertAdjacentHTML(
+          'beforeend',
+          `
+          <div class="achievement__item" title="${value.description}">
+          <img class="achievement__img-item" src="assets/images/${value.image}" alt="${value.name}">
+          </div>
+          <h3 class="achievement__text">${value.name}</h3>
+          `
+        );
+        achievementItem.classList.add('achievement__wrapper');
+        if (!func(appStore.user[paramArg].toString())) {
+          achievementItem.classList.add('achievement__item--filter');
+        }
+        achievement.append(achievementItem);
+      });
+    }
   }
 }
 

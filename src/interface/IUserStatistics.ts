@@ -1,7 +1,7 @@
-export interface IUserStatistics {
-  id: string;
-  avatar: string;
-  name: string;
-  races: number;
-  experience: number;
+import { IUser } from './IUser';
+
+export interface IResUserStatistics {
+  apiMessage?: string;
+  info: Array<IUser>;
+  error?: string;
 }

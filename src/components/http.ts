@@ -14,6 +14,19 @@ class HTTP {
       .then((data) => data as TResponse);
   }
 
+  async getRating<TResponse>(limit = ''): Promise<TResponse> {
+    return fetch(`${appStore.apiUrl}/api/user/rating/${limit}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Accept-Language': 'ru',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => data as TResponse);
+  }
+
   async getAchievement<TResponse>(): Promise<TResponse> {
     return fetch(`${appStore.apiUrl}/api/achievement/all/`, {
       method: 'GET',

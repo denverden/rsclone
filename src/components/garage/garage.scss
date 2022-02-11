@@ -1,7 +1,166 @@
-.garage-parallax{
-  background-image: url("./img/1958-chevrolet-corvette-1950s-garazh-svet.webp");
+.garage-parallax {
+  background-image: url('./img/1958-chevrolet-corvette-1950s-garazh-svet.webp');
   background-position-y: top;
   height: 300px;
 }
+.background {
+  background: #444;
+}
+.button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  text-decoration: none;
+  width: 100px;
+  height: 30px;
+  background: rgb(91, 216, 129);
+  margin-top: 10px;
+}
 
+.depot__button {
+  margin-right: 40px;
+  width: 141px;
+  height: 41px;
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
+  background: #9e0030;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #f8d632;
+}
+.depot__nav-ul {
+  display: flex;
+}
 
+.button:hover {
+  background: rgb(125, 108, 167);
+}
+.wrapper-content {
+  padding: 15px 25px;
+  // background: #444;
+}
+
+.depot__button:hover {
+  background: #7d0026;
+}
+
+.car {
+  cursor: pointer;
+}
+
+.active .well1 {
+  transform-origin: 51px 65px;
+  animation: move 0.5s infinite linear;
+}
+
+.active .well2 {
+  transform-origin: 201px 65px;
+  animation: move 0.5s infinite linear;
+}
+
+.depot__car {
+  /* display: flex; */
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 1px 1px 1px #000000;
+}
+.depot__nav {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+@keyframes move {
+  from {
+    transform: rotate(-360deg);
+  }
+}
+
+.variants-wrap {
+  margin-top: 50px;
+
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.variants {
+  width: 34%;
+  color: #fff;
+  padding-top: 20px;
+  padding-left: 50px;
+}
+
+.variants__title {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.radio {
+  color: #aaa;
+}
+
+.radio__label {
+  margin-bottom: 10px;
+  display: flex;
+  cursor: pointer;
+}
+
+.radio__title {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.radio__input {
+  position: absolute;
+  margin-left: -20px;
+  cursor: pointer;
+}
+
+.radio--active {
+  color: #fff;
+}
+
+.depot--active {
+  background: #7d0026;
+}
+
+.radio__buy {
+  color: #93c54b;
+  text-decoration: none;
+}
+
+.radio__buy:hover {
+  color: #a2b683;
+  text-decoration: underline;
+}
+
+.depot__save {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.depot__button--save {
+  background-color: #ef5c0e;
+  color: #ffffff;
+  width: 222px;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.radio__img {
+  width: 45px;
+}
+
+.car-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.car-img__img {
+  width: 258px;
+  height: 87px;
+}

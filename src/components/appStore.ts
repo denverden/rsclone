@@ -1,3 +1,4 @@
+import { ILog } from '../interface/ILog';
 import { IResUser } from '../interface/IResUser';
 import { IUser } from '../interface/IUser';
 import http from './http';
@@ -41,6 +42,7 @@ class AppStore {
 
   async saveUser() {
     if (this.user._id !== '' && this.user.token !== '') {
+      http.addLog<ILog>('info', `Завершен урок №${this.user.lesson}`);
       await http.updateUser<IResUser>();
     } else {
       localStorage.setItem('lesson', this.user.lesson.toString());

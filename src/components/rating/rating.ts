@@ -2,6 +2,7 @@ import Component from '../component';
 import './rating.scss';
 import http from '../http';
 import { IResUserStatistics } from '../../interface/IResUserStatistics';
+
 class Rating extends Component {
   async afterRender() {
     const resRating = await http.getRating<IResUserStatistics>('8');

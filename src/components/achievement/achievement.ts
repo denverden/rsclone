@@ -39,7 +39,7 @@ class Achievement extends Component {
 const achievement = new Achievement({
   selector: `.page__main`,
   template: `<div class="parallax-bg achievement-parallax"></div>
-              <div class="main-acc-container achievement-container">
+              <div class="main-acc-container">
                 <h2 class="main__title">Ваши достижения </h2>
                 <div class="achievement">
                 </div>

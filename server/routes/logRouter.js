@@ -4,7 +4,7 @@ import roleMiddleware from '../middleware/roleMiddleware.js';
 
 const router = express.Router();
 
-router.get('/:id', roleMiddleware(['USER', 'ADMIN']), Log.getLog);
+router.get('/:id?', roleMiddleware(['USER', 'ADMIN']), Log.getLog);
 
 router.post('/add', roleMiddleware(['USER', 'ADMIN']), Log.createLog);
 

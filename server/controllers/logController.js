@@ -45,13 +45,14 @@ class LogController {
 
     try {
       const token = jwt.decode(req.headers.authorization.split(' ')[1]);
-      const user = await User.findById(req.params.id);
+      const id = req.params.id ? req.params.id : token.id.toString();
+      const user = await User.findById(id);
 
       if (user._id.toString() !== token.id.toString() && !token.roles.includes('ADMIN')) {
         return res.status(400).json({ apiMessage: message[lang].ERROR_NOT_ROLE, error: 'ERROR_NOT_ROLE' });
       }
 
-      const logs = await Log.find({ iduser: user._id.toString() });
+      const logs = await Log.find({ iduser: id });
 
       const response = {
         apiMessage: message[lang].SUCCESS_LOG_ALL,

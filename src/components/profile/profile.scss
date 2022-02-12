@@ -56,6 +56,7 @@
     top: -110px;
     margin-left: 20px;
     width: 260px;
+
     .personal-photo {
       width: 220px;
       height: 220px;
@@ -73,6 +74,7 @@
         background-size: contain;
       }
     }
+
     .personal-name {
       width: 220px;
       height: 50px;
@@ -98,45 +100,44 @@
   }
 }
 
-
 .table-races {
-    width: 700px;
-    height: 400px;
-    position: absolute;
-    top: 100px;
-    left: 350px;
-    border: 1px solid black;
-    padding: 10px 10px;
-    overflow-y: hidden;
+  width: 700px;
+  height: 400px;
+  position: absolute;
+  top: 100px;
+  left: 350px;
+  border: 1px solid black;
+  padding: 10px 10px;
+  overflow-y: hidden;
 
-		&__item {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin-bottom: 5px;
-    }
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
 
-    &__data{
-      width: 30%;
-      background-color: rgba(255, 255, 255, 0.404);
-      text-align: center;
-    }
+  &__data {
+    width: 30%;
+    background-color: rgba(255, 255, 255, 0.404);
+    text-align: center;
+  }
 
-    &__time{
-      width: 10%;
-      background-color: rgba(119, 54, 54, 0.404);
-      text-align: center;
-    }
+  &__time {
+    width: 10%;
+    background-color: rgba(119, 54, 54, 0.404);
+    text-align: center;
+  }
 
-    &__status{
-      width: 20%;
-      background-color: rgba(255, 255, 255, 0.404);
-      text-align: center;
-    }
+  &__status {
+    width: 20%;
+    background-color: rgba(255, 255, 255, 0.404);
+    text-align: center;
+  }
 
-    &__text{
-      width: 50%;
-      background-color: rgba(209, 46, 46, 0.404);
-      text-align: center;
-		}
+  &__text {
+    width: 50%;
+    background-color: rgba(209, 46, 46, 0.404);
+    text-align: center;
+  }
 }

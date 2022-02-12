@@ -5,7 +5,7 @@ class Message {
     if (text !== '') {
       const toast = document.createElement('div');
       toast.classList.add('message');
-      toast.classList.add(type);
+      toast.classList.add(`message--${type}`);
       toast.innerHTML = `
         ${text}
         <button type="button" class="message__close">

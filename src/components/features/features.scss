@@ -20,7 +20,7 @@
   &__title::before {
     content: '';
     position: absolute;
-    right: 504px;
+    right: calc(50% - 127px);
     top: 0px;
     width: 255px;
     height: 10px;
@@ -29,7 +29,7 @@
   &__title::after {
     content: '';
     position: absolute;
-    right: 516px;
+    right: calc(50% - 127px);
     bottom: 0px;
     width: 255px;
     height: 10px;
@@ -79,6 +79,8 @@
 }
 
 .features__img-item {
+  width: 100%;
+  min-width: 489px;
   height: 486px;
 }
 
@@ -189,7 +191,7 @@
 .types-races__title::after {
   content: '';
   position: absolute;
-  left: 488px;
+  left: calc(50% - 150px);
   right: 0;
   background-color: #9e0030;
   width: 300px;
@@ -202,6 +204,7 @@
   margin-right: auto;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding-bottom: 95px;
   &__wrapper {
     display: flex;
@@ -223,5 +226,104 @@
     font-size: 18px;
     line-height: 21px;
     color: #333333;
+  }
+}
+
+@media (max-width: 1081px) {
+  .container {
+    max-width: 900px;
+  }
+
+  .features__img-item {
+    min-width: 301px;
+  }
+
+  .garage {
+    background-size: 400px auto;
+  }
+  .garage__item-wrapper {
+    max-width: 854px;
+  }
+
+  .types-card {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 700px) {
+  .features__img {
+    display: none;
+  }
+  .container {
+    max-width: 718px;
+  }
+  .garage {
+    background-size: 310px auto;
+  }
+  .garage__item-wrapper {
+    max-width: 679px;
+  }
+  .garage__item-text {
+    font-size: 16px;
+    line-height: 18px;
+  }
+  .garage {
+    background-position: 45% 60%;
+  }
+  .garage__item-title--line-one::after {
+    bottom: -21px;
+    height: 21px;
+  }
+  .garage__item-title--line-two::after {
+    bottom: -23px;
+    height: 26px;
+  }
+
+  .garage__item-title--line-four::after {
+    right: 67px;
+    bottom: -6px;
+    width: 213px;
+    height: 45px;
+  }
+  .garage__item-title--line-three::after {
+    right: -73px;
+    bottom: -4px;
+    width: 292px;
+    height: 46px;
+  }
+}
+
+@media (max-width: 625px) {
+  .garage {
+    background-position: 38% 63%;
+  }
+  .garage__item-title--line-one::after {
+    display: none;
+  }
+  .garage__item-title--line-two::after {
+    display: none;
+  }
+
+  .garage__item-title--line-four::after {
+    display: none;
+  }
+  .garage__item-title--line-three::after {
+    display: none;
+  }
+  .container {
+    max-width: 549px;
+  }
+  .garage__item-wrapper {
+    max-width: 504px;
+  }
+  .start__button {
+    padding-left: 64px;
+  }
+  .start {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 36px;
   }
 }

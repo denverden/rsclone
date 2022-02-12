@@ -15,8 +15,9 @@ const roleMiddleware = function (roles) {
       next();
     }
 
+    const lang = getLangName(req.headers);
+
     try {
-      const lang = getLangName(req.headers);
       const token = req.headers.authorization === undefined ? false : req.headers.authorization.split(' ')[1];
 
       if (!token) {

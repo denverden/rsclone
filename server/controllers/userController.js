@@ -85,7 +85,7 @@ class UserController {
   async getRating(req, res) {
     const lang = getLangName(req.headers);
     try {
-      const limit = req.params.limit < 1 && req.params.limit > 20 ? (limit = 7) : req.params.limit;
+      const limit = req.params.limit < 1 || req.params.limit > 20 || req.params.limit === undefined ? '8' : req.params.limit;
 
       const users = await User.find().sort({ level: 'desc', experience: 'desc' }).limit(Number(limit));
 

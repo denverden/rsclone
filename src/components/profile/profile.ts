@@ -1,19 +1,29 @@
 import Component from '../component';
-import './profile.scss'
+import './profile.scss';
 import appStore from '../appStore';
+import { IResLog } from '../../interface/IResLog';
+import http from '../http';
 
-class Profile extends Component{
+class Profile extends Component {
   beforeRender() {
     this.stateTemplate = {
       races: appStore.user.races.toString(),
       signs: appStore.user.signs.toString(),
-      time: this.formatGameDate(appStore.user.time),
+      time: this.formatGameTime(appStore.user.time),
       mistakes: this.percentMistakes(appStore.user.mistakes),
       username: appStore.user.username !== '' ? appStore.user.username : 'незнакомец',
     };
   }
 
   formatGameDate(timeSeconds: number) {
+    const day = new Date(timeSeconds * 1000).getUTCDay().toString();
+    const month = new Date(timeSeconds * 1000).getUTCMonth().toString();
+    const year = new Date(timeSeconds * 1000).getUTCFullYear().toString();
+
+    return [day, month, year].join('.');
+  }
+
+  formatGameTime(timeSeconds: number) {
     const hours = new Date(timeSeconds * 1000).getUTCHours().toString();
     const minutes = new Date(timeSeconds * 1000).getUTCMinutes().toString();
     const seconds = new Date(timeSeconds * 1000).getUTCSeconds().toString();
@@ -28,12 +38,29 @@ class Profile extends Component{
     return `${percent}%`;
   }
 
-  afterRender(): void {
-      const name = document.querySelector('.personal-name')
-      name.textContent = appStore.user.username
+  async afterRender() {
+    const resLog = await http.getLog<IResLog>();
+    if (resLog.error === 'NO') {
+      const logs = resLog.info;
+
+      const logContainer = document.querySelector('.table-races');
+      logs.forEach((value) => {
+        const logCard = document.createElement('div');
+        logCard.insertAdjacentHTML(
+          'beforeend',
+          `
+          <div class="table-races__date">${this.formatGameDate(value.time)}</div>
+          <div class="table-races__time">${this.formatGameTime(value.time)}</div>
+          <div class="table-races__status">${value.type}</div>
+          <div class="table-races__text">${value.text}</div>
+        `
+        );
+        logCard.classList.add('table-races__item');
+        logContainer.append(logCard);
+      });
+    }
   }
 }
-
 
 const profile = new Profile({
   selector: '.page__main',
@@ -64,20 +91,14 @@ const profile = new Profile({
                 <div class="personal-photo">
                   <div class="photo-container"></div>
                 </div>
-                <p class="personal-name"></p>
+                <p class="personal-name">{{ username }}</p>
               </div>
               <div class="table-races">
-                <div class="table-races__item">
-                  <div class="table-races__date">09.02.2020</div>
-                  <div class="table-races__time">19:00</div>
-                  <div class="table-races__status">Завершен</div>
-                  <div class="table-races__text">Завершен заезд</div>
                 </div>
               </div>
             </div>
 
-`
+`,
 });
 
 export default profile;
-

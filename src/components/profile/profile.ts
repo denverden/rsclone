@@ -66,6 +66,15 @@ const profile = new Profile({
                 </div>
                 <p class="personal-name"></p>
               </div>
+              <div class="table-races">
+                <div class="table-races__item">
+                  <div class="table-races__date">09.02.2020</div>
+                  <div class="table-races__time">19:00</div>
+                  <div class="table-races__status">Завершен</div>
+                  <div class="table-races__text">Завершен заезд</div>
+                </div>
+              </div>
+            </div>
 
 `
 });

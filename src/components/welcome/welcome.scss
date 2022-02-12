@@ -137,3 +137,38 @@ button {
     max-width: 312px;
   }
 }
+
+@media (max-width: 1081px) {
+  .container {
+    max-width: 900px;
+  }
+  .info-wrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 36px;
+  }
+
+  .start__tire-right {
+    width: 33%;
+  }
+
+  .start__tire-left {
+    width: 33%;
+  }
+  .start__button {
+    font-size: 14px;
+    line-height: 21px;
+  }
+}
+
+@media (max-width: 700px) {
+  .start__tire-right {
+    display: none;
+  }
+  .start__tire-left {
+    display: none;
+  }
+  .start {
+    justify-content: center;
+  }
+}

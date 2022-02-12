@@ -61,3 +61,17 @@
     padding-bottom: 40px;
   }
 }
+
+@media (max-width: 1081px) {
+  .rating {
+    background: #353134;
+    height: 1070px;
+  }
+}
+
+@media (max-width: 625px) {
+  .rating__card {
+    height: 71px;
+    width: 410px;
+  }
+}

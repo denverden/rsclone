@@ -8,6 +8,7 @@ import keyLayoutEn from './buttonsEn';
 import appStore from '../appStore';
 import message from '../message/message';
 import learn from '../learn/learn';
+import { ILog } from '../../interface/ILog';
 
 class Keyboard extends Component {
   private keysContainer: HTMLElement;

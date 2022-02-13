@@ -1,52 +1,17 @@
 import Component from '../component';
-import './profile.scss'
+import './profile.scss';
 import appStore from '../appStore';
+import { IResLog } from '../../interface/IResLog';
 import http from '../http';
 
-const logExample = [{
-    iduser: {
-      type: String,
-      required: true,
-    },
-    time: {
-      type: Number,
-      default: 0,
-    },
-    type: {
-      type: String,
-      default: 'завершено',
-    },
-    text: {
-      type: String,
-      default: 'Заезд завершен',
-    },
-  },
-  {
-    iduser: {
-      type: String,
-      required: true,
-    },
-    time: {
-      type: Number,
-      default: 2345,
-    },
-    type: {
-      type: String,
-      default: 'не завршено',
-    },
-    text: {
-      type: String,
-      default: 'Урок не пройден',
-    },
-  },
-]
 
-class Profile extends Component{
+
+class Profile extends Component {
   beforeRender() {
     this.stateTemplate = {
       races: appStore.user.races.toString(),
       signs: appStore.user.signs.toString(),
-      time: this.formatGameDate(appStore.user.time),
+      time: this.formatGameTime(appStore.user.time),
       mistakes: this.percentMistakes(appStore.user.mistakes),
       username: appStore.user.username !== '' ? appStore.user.username : 'незнакомец',
       avatar: appStore.user.avatar,
@@ -55,6 +20,14 @@ class Profile extends Component{
   }
 
   formatGameDate(timeSeconds: number) {
+    const day = new Date(timeSeconds * 1000).getUTCDay().toString();
+    const month = new Date(timeSeconds * 1000).getUTCMonth().toString();
+    const year = new Date(timeSeconds * 1000).getUTCFullYear().toString();
+
+    return [day, month, year].join('.');
+  }
+
+  formatGameTime(timeSeconds: number) {
     const hours = new Date(timeSeconds * 1000).getUTCHours().toString();
     const minutes = new Date(timeSeconds * 1000).getUTCMinutes().toString();
     const seconds = new Date(timeSeconds * 1000).getUTCSeconds().toString();
@@ -69,43 +42,58 @@ class Profile extends Component{
     return `${percent}%`;
   }
 
-  afterRender(): void {
-      const name = document.querySelector('.personal-name');
-      const photoInput = document.getElementById('photo-input') as HTMLInputElement;
-      const table = document.querySelector('.table-races')
+  async afterRender() {
+    const name = document.querySelector('.personal-name');
+    const photoInput = document.getElementById('photo-input') as HTMLInputElement;
+    const photoContainer = document.getElementsByClassName('photo-container')[0] as HTMLImageElement;
 
-      name.textContent = appStore.user.username;
+    name.textContent = appStore.user.username;
+    function handleFiles() {
+      const fileList = this.files;
+      const reader = new FileReader();
 
+      reader.readAsDataURL(fileList[0])
+      reader.onload = (event) =>{
+        const imgPhoto = document.createElement('img');
+        imgPhoto.src = `${event.target.result}`;
 
+        imgPhoto.onload = () =>{
+          const canvas = document.createElement('canvas');
 
-      function handleFiles() {
-        const fileList = this.files;
-        const reader = new FileReader();
+          canvas.width = 200;
+          canvas.height = 200;
 
-        reader.readAsDataURL(fileList[0])
-        reader.onload = () =>{
-          appStore.user.avatar = `${reader.result}`
+          const imgUrl = canvas.toDataURL('image/png')
+          appStore.user.avatar = `${imgUrl}`
           http.updateUser();
+          photoContainer.src = `${imgUrl}`
         }
       }
-      logExample.forEach((elem)=>{
-        photoInput.addEventListener('change', handleFiles)
-        const tableItem = document.createElement('div')
-        tableItem.classList.add('table-races__item')
-        const tableTime = document.createElement('div')
-        tableTime.classList.add('table-races__time')
-        tableTime.textContent = `${elem.time.default}`
-        const tableStatus = document.createElement('div')
-        tableStatus.classList.add('table-races__status')
-        tableStatus.textContent = `${elem.type.default}`
-        const tableText = document.createElement('div')
-        tableText.classList.add('table-races__text')
-        tableText.textContent = `${elem.text.default}`
-        tableItem.append(tableTime, tableStatus, tableText)
-        table.appendChild(tableItem)
-      })
-  }
-}
+    }
+
+    photoInput.addEventListener("change", handleFiles)
+
+    const resLog = await http.getLog<IResLog>();
+    if (resLog.error === 'NO') {
+      const logs = resLog.info;
+
+      const logContainer = document.querySelector('.table-races');
+      logs.forEach((value) => {
+        const logCard = document.createElement('div');
+        logCard.insertAdjacentHTML(
+          'beforeend',
+          `
+          <div class="table-races__date">${this.formatGameDate(value.time)}</div>
+          <div class="table-races__time">${this.formatGameTime(value.time)}</div>
+          <div class="table-races__status">${value.type}</div>
+          <div class="table-races__text">${value.text}</div>
+        `
+        );
+        logCard.classList.add('table-races__item');
+        logContainer.append(logCard);
+      });
+    }
+  }}
 
 
 const profile = new Profile({
@@ -139,7 +127,7 @@ const profile = new Profile({
                   <input type="file" id="photo-input" class="hidden">
                   <label for="photo-input" class="photo-changer">Изменить</label>
                 </div>
-                <p class="personal-name"></p>
+                <p class="personal-name">{{ username }}</p>
               </div>
               <div class="table-races">
                 <!-- <div class="table-races__item">
@@ -150,8 +138,7 @@ const profile = new Profile({
               </div>
             </div>
 
-`
+            `,
 });
 
 export default profile;
-

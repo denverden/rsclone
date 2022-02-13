@@ -14,6 +14,39 @@ class HTTP {
       .then((data) => data as TResponse);
   }
 
+  async getLog<TResponse>(idUser = ''): Promise<TResponse> {
+    return fetch(`${appStore.apiUrl}/api/log/${idUser}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Accept-Language': 'ru',
+        Authorization: `Bearer ${appStore.user.token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => data as TResponse);
+  }
+
+  async addLog<TResponse>(type = '', text = ''): Promise<TResponse> {
+    return fetch(`${appStore.apiUrl}/api/log/add`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Accept-Language': 'ru',
+        Authorization: `Bearer ${appStore.user.token}`,
+      },
+      body: JSON.stringify({
+        time: Math.floor(Date.now() / 1000),
+        type,
+        text,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => data as TResponse);
+  }
+
   async getRating<TResponse>(limit = ''): Promise<TResponse> {
     return fetch(`${appStore.apiUrl}/api/user/rating/${limit}`, {
       method: 'GET',

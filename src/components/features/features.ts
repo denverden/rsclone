@@ -105,7 +105,7 @@ const features = new Component({
       </div>
       </div>
     </section>
-
+    <div class="page__popup"></div>
 
   `,
 });

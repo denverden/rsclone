@@ -63,7 +63,7 @@ const welcome = new Welcome({
     <h2 class=" welcome__title">
       Приветствуем, {{ username }}
     </h2>
-    <div class="info-wrapper">
+    <div class="info-wrapper submit">
       <div class="info">
         <span class="info__value">{{ races }}</span>
         <span class="info__title">Заездов пройдено</span>
@@ -83,7 +83,7 @@ const welcome = new Welcome({
     </div>
     <div class="start">
       <div class="start__tire-right"></div>
-      <a href="#game" class="start__button">Быстрый старт</a>
+      <a href="#game" class="start__button ">Быстрый старт</a>
       <a href="#learn" class="start__button">Начать обучение</a>
       <div class="start__tire-left"></div>
     </div>

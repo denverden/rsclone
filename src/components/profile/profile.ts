@@ -71,7 +71,6 @@ class Profile extends Component {
 
           const imgUrl = canvas.toDataURL('image/png')
 
-          imgPhoto.src = `${imgUrl}`;
           appStore.user.avatar = `${imgUrl}`
           const resUser = await http.updateUser<IResUser>();
 

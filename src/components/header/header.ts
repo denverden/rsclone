@@ -11,6 +11,8 @@ const header = new Component({
           <a href="/" class="logo">
             <img src="${logo}" alt="logo">
           </a>
+          <div class="buttons-container">
+          </div>
           <div class="header__user"></div>
         </div>
       </div>

@@ -56,3 +56,11 @@
     }
   }
 }
+
+.buttons-container{
+  width: 530px;
+  margin-left: 250px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

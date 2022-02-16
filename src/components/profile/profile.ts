@@ -48,6 +48,7 @@ class Profile extends Component {
   async afterRender() {
     const name = document.querySelector('.personal-name');
     const photoInput = document.getElementById('photo-input') as HTMLInputElement;
+    const photoContainer = document.querySelector('.photo-container') as HTMLImageElement;
 
     name.textContent = appStore.user.username;
     function handleFiles() {
@@ -75,6 +76,7 @@ class Profile extends Component {
           const resUser = await http.updateUser<IResUser>();
 
           if (resUser.error === 'NO') {
+            photoContainer.src = `${imgUrl}`
             user.beforeRender();
             user.render();
             user.afterRender();

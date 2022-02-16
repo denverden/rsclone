@@ -12,17 +12,19 @@ import features from '../features/features';
 import rating from '../rating/rating';
 import achievement from '../achievement/achievement';
 import garage from '../garage/garage';
+import headerWithButtons from '../header-with-buttons/header-with-buttons'
+import header from '../header/header';
 
 const routes: Array<IRoute> = [
-  { path: '', components: [user, features, welcome, rating] },
-  { path: 'learn', components: [learn, keyboard, user] },
-  { path: 'game', components: [game, keyboard, user] },
-  { path: 'signin', components: [signin, user] },
-  { path: 'signup', components: [signup, user] },
-  { path: 'profile', components: [profile, user] },
-  { path: 'garage', components: [garage, user] },
-  { path: 'achievement', components: [achievement, user] },
-  { path: '***', components: [error404, user] },
+  { path: '', components: [header, user, features, welcome, rating] },
+  { path: 'learn', components: [learn, keyboard, header, user] },
+  { path: 'game', components: [game, keyboard, header, user] },
+  { path: 'signin', components: [signin, header, user] },
+  { path: 'signup', components: [signup, header, user] },
+  { path: 'profile', components: [profile, headerWithButtons, user] },
+  { path: 'garage', components: [garage, headerWithButtons, user] },
+  { path: 'achievement', components: [achievement, headerWithButtons, user] },
+  { path: '***', components: [error404,header, user] },
 ];
 
 export default routes;

@@ -43,8 +43,6 @@
 }
 
 .main-acc-container {
-  padding: 100px 0px  0px 400px;
-
   width: 1170px;
   min-height: 700px;
   position: relative;
@@ -116,6 +114,14 @@
     overflow-y: scroll;
     background-color: rgba(102, 102, 102, 0.692);
   }
+}
+
+.profile-acc-container{
+  padding: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
 }
 
 .table-races {

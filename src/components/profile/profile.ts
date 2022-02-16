@@ -3,6 +3,9 @@ import './profile.scss';
 import appStore from '../appStore';
 import { IResLog } from '../../interface/IResLog';
 import http from '../http';
+import user from '../user/user';
+import message from '../message/message';
+import { IResUser } from '../../interface/IResUser';
 
 
 
@@ -45,7 +48,6 @@ class Profile extends Component {
   async afterRender() {
     const name = document.querySelector('.personal-name');
     const photoInput = document.getElementById('photo-input') as HTMLInputElement;
-    const photoContainer = document.getElementsByClassName('photo-container')[0] as HTMLImageElement;
 
     name.textContent = appStore.user.username;
     function handleFiles() {
@@ -57,16 +59,28 @@ class Profile extends Component {
         const imgPhoto = document.createElement('img');
         imgPhoto.src = `${event.target.result}`;
 
-        imgPhoto.onload = () =>{
+        imgPhoto.onload = async () =>{
           const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
 
-          canvas.width = 200;
-          canvas.height = 200;
+          canvas.width = 180;
+          canvas.height = 180;
+
+          ctx.drawImage(imgPhoto, 0, 0, 180, 180);
 
           const imgUrl = canvas.toDataURL('image/png')
+
+          imgPhoto.src = `${imgUrl}`;
           appStore.user.avatar = `${imgUrl}`
-          http.updateUser();
-          photoContainer.src = `${imgUrl}`
+          const resUser = await http.updateUser<IResUser>();
+
+          if (resUser.error === 'NO') {
+            user.beforeRender();
+            user.render();
+            user.afterRender();
+          } else {
+            message.view('Ошибка обновления аватара.', 'warning');
+          }
         }
       }
     }
@@ -120,7 +134,7 @@ const profile = new Profile({
                 </div>
               </div>
             </div>
-            <div class="main-acc-container">
+            <div class="main-acc-container profile-acc-container">
               <div class="personal-info">
                 <div class="personal-photo">
                   <img class="photo-container" src="{{ avatar }}"></img>

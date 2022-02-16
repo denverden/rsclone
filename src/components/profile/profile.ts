@@ -3,6 +3,11 @@ import './profile.scss';
 import appStore from '../appStore';
 import { IResLog } from '../../interface/IResLog';
 import http from '../http';
+import user from '../user/user';
+import message from '../message/message';
+import { IResUser } from '../../interface/IResUser';
+
+
 
 class Profile extends Component {
   beforeRender() {
@@ -12,7 +17,9 @@ class Profile extends Component {
       time: this.formatGameTime(appStore.user.time),
       mistakes: this.percentMistakes(appStore.user.mistakes),
       username: appStore.user.username !== '' ? appStore.user.username : 'незнакомец',
+      avatar: appStore.user.avatar,
     };
+
   }
 
   formatGameDate(timeSeconds: number) {
@@ -39,6 +46,47 @@ class Profile extends Component {
   }
 
   async afterRender() {
+    const name = document.querySelector('.personal-name');
+    const photoInput = document.getElementById('photo-input') as HTMLInputElement;
+
+    name.textContent = appStore.user.username;
+    function handleFiles() {
+      const fileList = this.files;
+      const reader = new FileReader();
+
+      reader.readAsDataURL(fileList[0])
+      reader.onload = (event) =>{
+        const imgPhoto = document.createElement('img');
+        imgPhoto.src = `${event.target.result}`;
+
+        imgPhoto.onload = async () =>{
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          canvas.width = 180;
+          canvas.height = 180;
+
+          ctx.drawImage(imgPhoto, 0, 0, 180, 180);
+
+          const imgUrl = canvas.toDataURL('image/png')
+
+          imgPhoto.src = `${imgUrl}`;
+          appStore.user.avatar = `${imgUrl}`
+          const resUser = await http.updateUser<IResUser>();
+
+          if (resUser.error === 'NO') {
+            user.beforeRender();
+            user.render();
+            user.afterRender();
+          } else {
+            message.view('Ошибка обновления аватара.', 'warning');
+          }
+        }
+      }
+    }
+
+    photoInput.addEventListener("change", handleFiles)
+
     const resLog = await http.getLog<IResLog>();
     if (resLog.error === 'NO') {
       const logs = resLog.info;
@@ -59,8 +107,8 @@ class Profile extends Component {
         logContainer.append(logCard);
       });
     }
-  }
-}
+  }}
+
 
 const profile = new Profile({
   selector: '.page__main',
@@ -86,19 +134,25 @@ const profile = new Profile({
                 </div>
               </div>
             </div>
-            <div class="main-acc-container">
+            <div class="main-acc-container profile-acc-container">
               <div class="personal-info">
                 <div class="personal-photo">
-                  <div class="photo-container"></div>
+                  <img class="photo-container" src="{{ avatar }}"></img>
+                  <input type="file" id="photo-input" class="hidden">
+                  <label for="photo-input" class="photo-changer">Изменить</label>
                 </div>
                 <p class="personal-name">{{ username }}</p>
               </div>
               <div class="table-races">
-                </div>
+                <!-- <div class="table-races__item">
+                  <div class="table-races__time">19:00</div>
+                  <div class="table-races__status">Завершен</div>
+                  <div class="table-races__text">Завершен заезд</div>
+                </div> -->
               </div>
             </div>
 
-`,
+            `,
 });
 
 export default profile;

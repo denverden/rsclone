@@ -1,5 +1,5 @@
 import Component from '../component';
-import logo from './logo.svg';
+import logo from './logo-new.svg';
 import './header-with-buttons.scss'
 const headerWithButtons = new Component({
   selector: '.page__header',

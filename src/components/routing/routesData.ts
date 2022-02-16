@@ -17,14 +17,14 @@ import header from '../header/header';
 
 const routes: Array<IRoute> = [
   { path: '', components: [header, user, features, welcome, rating] },
-  { path: 'learn', components: [learn, keyboard, header, user] },
-  { path: 'game', components: [game, keyboard, header, user] },
-  { path: 'signin', components: [signin, header, user] },
-  { path: 'signup', components: [signup, header, user] },
+  { path: 'learn', components: [learn, keyboard, headerWithButtons, user] },
+  { path: 'game', components: [game, keyboard, headerWithButtons, user] },
+  { path: 'signin', components: [signin, headerWithButtons, user] },
+  { path: 'signup', components: [signup, headerWithButtons, user] },
   { path: 'profile', components: [profile, headerWithButtons, user] },
   { path: 'garage', components: [garage, headerWithButtons, user] },
   { path: 'achievement', components: [achievement, headerWithButtons, user] },
-  { path: '***', components: [error404,header, user] },
+  { path: '***', components: [error404, headerWithButtons, user] },
 ];
 
 export default routes;

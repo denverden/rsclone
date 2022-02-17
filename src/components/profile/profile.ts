@@ -7,8 +7,6 @@ import user from '../user/user';
 import message from '../message/message';
 import { IResUser } from '../../interface/IResUser';
 
-
-
 class Profile extends Component {
   beforeRender() {
     this.stateTemplate = {
@@ -19,7 +17,6 @@ class Profile extends Component {
       username: appStore.user.username !== '' ? appStore.user.username : 'незнакомец',
       avatar: appStore.user.avatar,
     };
-
   }
 
   formatGameDate(timeSeconds: number) {
@@ -55,12 +52,12 @@ class Profile extends Component {
       const fileList = this.files;
       const reader = new FileReader();
 
-      reader.readAsDataURL(fileList[0])
-      reader.onload = (event) =>{
+      reader.readAsDataURL(fileList[0]);
+      reader.onload = (event) => {
         const imgPhoto = document.createElement('img');
         imgPhoto.src = `${event.target.result}`;
 
-        imgPhoto.onload = async () =>{
+        imgPhoto.onload = async () => {
           const canvas = document.createElement('canvas');
           const ctx = canvas.getContext('2d');
 
@@ -69,25 +66,24 @@ class Profile extends Component {
 
           ctx.drawImage(imgPhoto, 0, 0, 180, 180);
 
-          const imgUrl = canvas.toDataURL('image/png')
+          const imgUrl = canvas.toDataURL('image/png');
 
-          imgPhoto.src = `${imgUrl}`;
-          appStore.user.avatar = `${imgUrl}`
+          appStore.user.avatar = `${imgUrl}`;
           const resUser = await http.updateUser<IResUser>();
 
           if (resUser.error === 'NO') {
-            photoContainer.src = `${imgUrl}`
+            photoContainer.src = `${imgUrl}`;
             user.beforeRender();
             user.render();
             user.afterRender();
           } else {
             message.view('Ошибка обновления аватара.', 'warning');
           }
-        }
-      }
+        };
+      };
     }
 
-    photoInput.addEventListener("change", handleFiles)
+    photoInput.addEventListener('change', handleFiles);
 
     const resLog = await http.getLog<IResLog>();
     if (resLog.error === 'NO') {
@@ -109,8 +105,8 @@ class Profile extends Component {
         logContainer.append(logCard);
       });
     }
-  }}
-
+  }
+}
 
 const profile = new Profile({
   selector: '.page__main',
@@ -145,16 +141,9 @@ const profile = new Profile({
                 </div>
                 <p class="personal-name">{{ username }}</p>
               </div>
-              <div class="table-races">
-                <!-- <div class="table-races__item">
-                  <div class="table-races__time">19:00</div>
-                  <div class="table-races__status">Завершен</div>
-                  <div class="table-races__text">Завершен заезд</div>
-                </div> -->
-              </div>
+              <div class="table-races"></div>
             </div>
-
-            `,
+  `,
 });
 
 export default profile;

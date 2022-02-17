@@ -17,7 +17,7 @@ class SignUp extends Component {
       if (PASSWORD === CONFIRM_PASSWORD) {
         this.doSingUp(LOGIN, PASSWORD);
       } else {
-        message.view('Пароли не совподают.', 'validation');
+        message.view('Пароли не совпадают.', 'validation');
       }
     });
   }

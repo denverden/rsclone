@@ -71,7 +71,7 @@ class Keyboard extends Component {
     const stateKeyboard = localStorage.getItem('stateKeyboard') !== null ? JSON.parse(localStorage.getItem('stateKeyboard')) : true;
     const stateColor = localStorage.getItem('stateColor') !== null ? JSON.parse(localStorage.getItem('stateColor')) : false;
     const stateHand = localStorage.getItem('stateHand') !== null ? JSON.parse(localStorage.getItem('stateHand')) : true;
-    console.log(stateKeyboard, stateColor, stateHand);
+
     if (!stateHand) {
       document.querySelector('.control__key--hand').classList.add('hide');
       document.querySelector('#keyboard').classList.add('hand--hidden');

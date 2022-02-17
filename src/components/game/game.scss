@@ -1,14 +1,5 @@
-.race {
-  flex: 1 0 auto;
-  // align-items: flex-end;
-  // justify-content: flex-end;
-  // display: flex;
-  background: url(./road1.svg) no-repeat;
-  background-position: 100% 100%;
-  background-size: cover;
-  // background-position: 50% 100%;
-  // background-size: contain;
-  width: 100%;
-  height: auto;
-  // height: 50vh;
+.game {
+  &__title {
+    margin: 10px 0px;
+  }
 }

@@ -13,12 +13,12 @@ import rating from '../rating/rating';
 import achievement from '../achievement/achievement';
 import garage from '../garage/garage';
 import buttonsHeader from '../buttons-header/buttons-header';
-
+import race from '../race/race';
 
 const routes: Array<IRoute> = [
-  { path: '', components: [ user, features, welcome, rating] },
-  { path: 'learn', components: [learn, keyboard, user, buttonsHeader] },
-  { path: 'game', components: [game, keyboard, user, buttonsHeader] },
+  { path: '', components: [user, features, welcome, rating] },
+  { path: 'learn', components: [learn, keyboard, user, buttonsHeader, race] },
+  { path: 'game', components: [game, keyboard, user, buttonsHeader, race] },
   { path: 'signin', components: [signin, user, buttonsHeader] },
   { path: 'signup', components: [signup, user, buttonsHeader] },
   { path: 'profile', components: [profile, user, buttonsHeader] },

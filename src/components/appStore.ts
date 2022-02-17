@@ -35,7 +35,9 @@ class AppStore {
       time: localStorage.getItem('time') ? parseInt(localStorage.getItem('time'), 10) : 0,
       mistakes: localStorage.getItem('mistakes') ? parseInt(localStorage.getItem('mistakes'), 10) : 0,
       speed: localStorage.getItem('speed') ? parseInt(localStorage.getItem('speed'), 10) : 0,
+      color: localStorage.getItem('color') ? parseInt(localStorage.getItem('color'), 10) : 0,
       avatar: '',
+      car: localStorage.getItem('car') ? localStorage.getItem('car') : 'sedan',
       token: getCookie('token') ? getCookie('token') : '',
     };
   }

@@ -6,16 +6,16 @@
   flex: 1 0 auto;
 
   &__street {
-    background: url(./street3.svg) no-repeat;
+    background: url(./img/street2.svg) no-repeat;
     background-position: 100% 100%;
     background-size: cover;
     width: 100%;
-    max-height: 400px;
+    // max-height: 400px;
     height: 100%;
   }
 
   &__road {
-    background: url(./road3.svg) repeat-x;
+    background: url(./img/road3.svg) repeat-x;
     background-position: 100% 100%;
     background-size: contain;
     width: 100%;

@@ -35,6 +35,10 @@ module.exports = {
           from: path.resolve(__dirname, 'src/components/achievement/img'),
           to: path.resolve(__dirname, 'dist/assets/images'),
         },
+        {
+          from: path.resolve(__dirname, 'src/components/race/img'),
+          to: path.resolve(__dirname, 'dist/assets/images'),
+        },
       ],
     }),
     new MiniCssExtractPlugin({

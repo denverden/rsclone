@@ -8,34 +8,15 @@ import car15 from './img/car15.svg';
 import car8 from './img/car8.svg';
 
 class Garage extends Component {
-  //   updateBody(event: { target: { value: any } }) {
-  //     document.querySelectorAll('.body').forEach((patch) => {
-  //       patch.setAttribute('style', `fill: ${event.target.value}`);
-  //     });
-  //   }
+  // animCar() {
+  //   document.querySelector('.car').classList.toggle('active');
+  // }
 
-  //   updateGlass(event: { target: { value: any } }) {
-  //     document.querySelectorAll('.glass').forEach((patch) => {
-  //       patch.setAttribute('style', `fill: ${event.target.value}`);
-  //     });
-  //   }
-
-  //   animCar() {
-  //     document.querySelector('.car').classList.toggle('active');
-  //   }
-
-  //   ready() {
-  //     const carImg = document.getElementById('car');
-  //     const modalAuth = document.createElement('div');
-  //     carImg.append(modalAuth);
-  //     modalAuth.innerHTML = `
-  //     <div style="color">Body:
-  //     <input id="body" type="color" value="#89CA86" />
-  //     <button class="button" type="submit">Create</button>
-  //     <br>Glass:
-  //     <input id="glass" type="color" value="#695C61" />
-  //     <button class="button" type="submit">Create</button>
-  //     </div>
+  // ready() {
+  //   const carImg = document.getElementById('car');
+  //   const modalAuth = document.createElement('div');
+  //   carImg.append(modalAuth);
+  //   modalAuth.innerHTML = `
   //     <div class="car" style="width:350px;margin: 0 auto">
   //   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 250 83">
   //     <path class="body" fill="#89CA86" d="M69.434 71.087h172.9c4.1 0 7.5-3.4 7.5-7.5v-13c0-4.9-2.7-9.4-7-11.7-10.6-5.7-34.2-13.9-56.1-14.2-24.9-13.2-47.2-23.9-63-24.2-15.8-.4-48.9-4.1-93.5 17.4-10.7 1.5-20 .9-21.8.4-1.9-.6-9.5 9.3-6.3 15.8s-.4 13.9-1.9 20.5 4.4 10 11.9 11.9c7.5 1.9 57.3 4.6 57.3 4.6z"/>
@@ -76,10 +57,18 @@ class Garage extends Component {
   //     <path fill="#fff" fill-opacity=".25" d="M142.835 26.887l-22.1-.9c-.4 0-.7.3-.7.7 0 .4.3.7.7.7l22.1.9c.4 0 .7-.3.7-.7 0-.4-.3-.7-.7-.7zM89.335 24.687l-22.1-.9c-.4 0-.7.3-.7.7 0 .4.3.7.7.7l22.1.9c.4 0 .7-.3.7-.7 0-.3-.3-.7-.7-.7z"/>
   //   </svg></div>`;
 
-  //     document.querySelector('#body').addEventListener('input', this.updateBody);
-  //     document.querySelector('#glass').addEventListener('input', this.updateGlass);
-  //     document.querySelector('.car').addEventListener('click', this.animCar);
-  //   }
+  //   document.querySelector('.car').addEventListener('click', this.animCar);
+  // }
+
+  // readyPaint() {
+  //   document.querySelector('#body').addEventListener('input', (event: any) => {
+  //     console.log(document.querySelectorAll('.body'));
+  //     document.querySelectorAll('.body').forEach((patch) => {
+  //       patch.setAttribute('style', `fill: ${event.target.value}`);
+  //     });
+  //   });
+  // }
+
   radio() {
     const variants = document.querySelector('.variants');
 
@@ -105,6 +94,8 @@ class Garage extends Component {
 
   afterRender() {
     this.radio();
+    // this.ready();
+    // this.readyPaint();
   }
 }
 const garage = new Garage({
@@ -113,22 +104,7 @@ const garage = new Garage({
             <div class="main-acc-container garage-container background">
 						<section class="depot">
 						<div class="wrapper-content">
-							<nav class="depot__nav">
-								<ul class="depot__nav-ul">
-									<li class="depot__item ">
-										<a class="depot__button depot--active" href="#" data-toggle="tab">Кузов</a>
-									</li>
-									<li class="depot__item">
-										<a href="#" class="depot__button" data-toggle="tab">Краска</a>
-									</li>
-									<li class="depot__item">
-										<a href="#" class="depot__button" data-toggle="tab">Стекла</a>
-									</li>
-									<li class="depot__item">
-										<a href="#" class="depot__button" data-toggle="tab">Диски</a>
-									</li>
-								</ul>
-							</nav>
+            <h2 class="depot__title">Гараж</h2>
 							<div class="variants-wrap">
 								<div class="variants">
 									<h4 class="variants__title">Варианты: </h4>
@@ -192,6 +168,10 @@ const garage = new Garage({
 									<img class="car-img__img"src="${car5}" alt="car5">
 								</div>
 							</div>
+              <div style="color" class="color-wrapper">
+              <input id="body" type="color" value="#89CA86" />
+              <div class="color-text">Покраска</div>
+              </div>
 							<div class="depot__save">
 								<a href="#" class="depot__button depot__button--save" data-toggle="tab">Сохранить изменения</a>
 							</div>

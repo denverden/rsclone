@@ -164,3 +164,40 @@
   width: 258px;
   height: 87px;
 }
+
+.depot__title {
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 64px;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #ffffff;
+}
+.depot__title::after {
+  content: '';
+  position: absolute;
+  left: 443px;
+  right: 0;
+  background-color: #9e0030;
+  width: 245px;
+  height: 4px;
+  bottom: -7px;
+}
+
+.color-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 100px;
+}
+
+.color-text {
+  margin-left: 10px;
+  display: flex;
+  text-transform: uppercase;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}

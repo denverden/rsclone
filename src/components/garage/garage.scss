@@ -78,6 +78,9 @@
   }
 }
 
+.variants-wrap-container {
+  display: none;
+}
 .variants-wrap {
   margin-top: 50px;
 
@@ -163,4 +166,14 @@
 .car-img__img {
   width: 258px;
   height: 87px;
+}
+.wrapper-body {
+  display: none;
+}
+.wrapper-glass {
+  display: none;
+}
+
+.active-wrap {
+  display: block;
 }

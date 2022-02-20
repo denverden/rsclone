@@ -8,14 +8,13 @@ import keyLayoutEn from './buttonsEn';
 import appStore from '../appStore';
 import message from '../message/message';
 import learn from '../learn/learn';
+import race from '../race/race';
 import { ILog } from '../../interface/ILog';
 
 class Keyboard extends Component {
   private keysContainer: HTMLElement;
 
   private lang: string;
-
-  private current: number;
 
   private error: number;
 
@@ -28,7 +27,6 @@ class Keyboard extends Component {
   constructor(data: IData) {
     super(data);
     this.lang = 'ru';
-    this.current = 0;
     this.error = 0;
     this.text = '';
     this.startTime = 0;
@@ -119,28 +117,36 @@ class Keyboard extends Component {
     document.addEventListener('keypress', (event) => {
       this.startTime = this.startTime === 0 ? Math.round(new Date().getTime() / 1000) : this.startTime;
       this.speedText =
-        new Date().getTime() / 1000 - this.startTime >= 1 ? Math.round((60 * this.current) / (new Date().getTime() / 1000 - this.startTime)) : 0;
+        new Date().getTime() / 1000 - this.startTime >= 1 ? Math.round((60 * appStore.current) / (new Date().getTime() / 1000 - this.startTime)) : 0;
 
-      if (event.key === this.text[this.current]) {
-        this.current++;
-        const typedText = this.text.slice(0, this.current);
-        const futurText = this.text.slice(this.current);
+      if (event.key === this.text[appStore.current]) {
+        appStore.current++;
+        const typedText = this.text.slice(0, appStore.current);
+        const futurText = this.text.slice(appStore.current);
         (
           document.querySelector('.keyboard__text') as HTMLElement
         ).innerHTML = `<span class="keyboard__text--black">${typedText}</span><span class="keyboard__text--gray">${futurText}</span>`;
-        this.view(this.text[this.current], this.text[this.current - 1]);
+        this.view(this.text[appStore.current], this.text[appStore.current - 1]);
         appStore.user.signs++;
       } else {
         this.error++;
         appStore.user.mistakes++;
         (document.querySelector('.instrumentation__error') as HTMLElement).textContent = this.error.toString();
       }
-      if (appStore.type === 'learn' && this.text.length === this.current) {
+      if (appStore.type === 'learn' && this.text.length === appStore.current) {
         appStore.user.races++;
         appStore.user.lesson++;
         appStore.user.time += Math.round(new Date().getTime() / 1000 - this.startTime);
         appStore.saveUser();
         message.view('Урок пройден.', 'success');
+        this.reset();
+      }
+
+      if (appStore.type === 'game' && this.text.length === appStore.current) {
+        appStore.user.races++;
+        appStore.user.time += Math.round(new Date().getTime() / 1000 - this.startTime);
+        appStore.saveUser();
+        message.view('Заезд завершён.', 'success');
         this.reset();
       }
 
@@ -150,15 +156,20 @@ class Keyboard extends Component {
   }
 
   async reset() {
-    this.current = 0;
     this.error = 0;
     this.text = '';
-    this.current = 0;
     this.startTime = 0;
     this.speedText = 0;
     await this.loadText();
     (document.querySelector('.instrumentation__error') as HTMLElement).textContent = this.error.toString();
-    learn.setLessonName();
+    if (appStore.type === 'learn') {
+      learn.setLessonName();
+    }
+    appStore.current = 0;
+    appStore.currentcpu = 0;
+    appStore.race = this.text.length;
+    race.reset();
+    race.afterRender();
   }
 
   view(currentChar: string, previousChar = currentChar) {
@@ -207,11 +218,14 @@ class Keyboard extends Component {
 
   async afterRender() {
     await this.loadText().then(() => {
+      appStore.current = 0;
+      appStore.currentcpu = 0;
+      appStore.race = this.text.length;
       this.init();
       this.initStateKeyboard();
       this.eventKeyControl();
       this.eventKeyPress();
-      this.view(this.text[this.current]);
+      this.view(this.text[appStore.current]);
     });
   }
 }

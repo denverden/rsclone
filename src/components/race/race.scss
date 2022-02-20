@@ -35,10 +35,14 @@
 }
 
 .car {
+  position: relative;
+  transition: 0.3s all;
   width: 150px;
   margin: 10px 0px;
 }
-
+.well1, .well2 {
+  transition: 0.3s all;
+}
 .sedan .well1 {
   transform-origin: 51px 65px;
 }

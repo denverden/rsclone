@@ -15,6 +15,12 @@ class AppStore {
 
   public type: string;
 
+  public current: number;
+
+  public currentcpu: number;
+
+  public race: number;
+
   constructor() {
     this.reset();
     this.apiUrl = 'https://keyboardrace.herokuapp.com';

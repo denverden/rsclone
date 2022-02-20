@@ -4,11 +4,9 @@ import './user.scss';
 
 class User extends Component {
   beforeRender(): void {
-    if (appStore.user._id !== '' && appStore.user.token !== '') {
-      this.stateTemplate = {
-        avatar: appStore.user.avatar,
-      };
-    }
+    this.stateTemplate = {
+      avatar: appStore.user.avatar,
+    };
   }
 
   afterRender() {

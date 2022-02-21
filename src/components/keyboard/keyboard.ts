@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import { IData } from '../../interface/IData';
 import { IText } from '../../interface/IText';
-import HTTP from '../http';
 import Component from '../component';
 import './keyboard.scss';
 import keyLayoutRu from './buttonsRu';
@@ -10,6 +9,8 @@ import appStore from '../appStore';
 import message from '../message/message';
 import learn from '../learn/learn';
 import race from '../race/race';
+import { ILog } from '../../interface/ILog';
+import http from '../http';
 
 class Keyboard extends Component {
   private keysContainer: HTMLElement;
@@ -145,18 +146,20 @@ class Keyboard extends Component {
         appStore.user.lesson++;
         appStore.user.time += Math.round(new Date().getTime() / 1000 - this.startTime);
         appStore.saveUser();
+        http.addLog<ILog>('info', `Завершен урок №${appStore.user.lesson}`);
         message.view('Урок пройден.', 'success');
         this.reset();
       }
 
       if (appStore.type === 'game' && this.text.length === appStore.current) {
         appStore.user.races++;
-        appStore.user.experience += 10;
+        appStore.user.experience += 20;
         if (appStore.user.experience >= 1000) {
           appStore.user.level++;
           appStore.user.experience -= 1000;
         }
         appStore.user.time += Math.round(new Date().getTime() / 1000 - this.startTime);
+        http.addLog<ILog>('info', `Завершен заезд. Вы победили!`);
         appStore.saveUser();
         message.view('Заезд завершён.', 'success');
         this.reset();
@@ -222,7 +225,7 @@ class Keyboard extends Component {
   }
 
   async loadText() {
-    const txt = appStore.type === 'learn' ? await HTTP.getLesson<IText>(appStore.user.lesson) : await HTTP.getText<IText>();
+    const txt = appStore.type === 'learn' ? await http.getLesson<IText>(appStore.user.lesson) : await http.getText<IText>();
     this.elem.querySelector('.keyboard__text').innerHTML = `<span class="keyboard__text--current">${
       txt.info.text[0]
     }</span><span class="keyboard__text--gray">${txt.info.text.slice(1)}</span>`;

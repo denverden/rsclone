@@ -47,25 +47,24 @@ class Garage extends Component {
       patch.setAttribute('style', `fill: ${appStore.user.carcolor}`);
     });
 
-    inputColor.value = appStore.user.carcolor
+    inputColor.value = appStore.user.carcolor;
 
     saveBTN.addEventListener('click', (event)=>{
       event.preventDefault()
       radioInputsCars.forEach((input: HTMLInputElement) =>{
         if(input.checked){
           if(appStore.user.car !== input.value){
-            appStore.user.car = `${input.value}`
-            appStore.user.countcar++
-            http.addLog('', 'Вы сменили машину')
+            appStore.user.car = `${input.value}`;
+            appStore.user.countcar++;
+            http.addLog('', 'Вы сменили машину');
           }
           if(appStore.user.carcolor !== inputColor.value){
-            appStore.user.carcolor = inputColor.value
-            appStore.user.countcolor++
-            http.addLog('', 'Вы сменили цвет машины')
+            appStore.user.carcolor = inputColor.value;
+            appStore.user.countcolor++;
+            http.addLog('', 'Вы сменили цвет машины');
           }
 
-          http.updateUser()
-          // localStorage.setItem('carcolor', inputColor.value)
+          http.updateUser();
         }
       })
     })

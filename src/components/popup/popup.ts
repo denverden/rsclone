@@ -5,11 +5,7 @@ import './popup.scss';
 class Popup extends Component {
   submit() {
     const modal = document.querySelector('.overlay');
-    const modalBtn = document.querySelector('.submit');
-    console.log(modalBtn);
-    modalBtn.addEventListener('click', () => {
-      (modal as HTMLElement).style.transform = 'translateX(0)';
-    });
+    (modal as HTMLElement).style.transform = 'translateX(0)';
 
     modal.addEventListener('click', (event) => {
       const { target } = event;
@@ -61,7 +57,7 @@ const popup = new Popup({
             Следи за безымянными пальцами и мизинцами, так как они часто остаются незадействованными.</li>
       </div>
       <div class="popup__item">
-        <a href="#" class="popup__button">Далее </a>
+        <button class="popup__button">Далее </button>
       </div>
     </div>
   </div>

@@ -1,14 +1,14 @@
+import { ILog } from '../../interface/ILog';
 import appStore from '../appStore';
 import Component from '../component';
+import http from '../http';
 import './user.scss';
 
 class User extends Component {
   beforeRender(): void {
-    if (appStore.user._id !== '' && appStore.user.token !== '') {
-      this.stateTemplate = {
-        avatar: appStore.user.avatar,
-      };
-    }
+    this.stateTemplate = {
+      avatar: appStore.user.avatar,
+    };
   }
 
   afterRender() {
@@ -27,19 +27,19 @@ class User extends Component {
     }
 
     BTN_USER.addEventListener('click', () => {
-
       const userNav = document.querySelector('.user__nav');
       userNav.classList.toggle('hidden');
     });
 
-    document.addEventListener('click', (event)=>{
+    document.addEventListener('click', (event) => {
       const userNav = document.querySelector('.user__nav');
-      if(!(event.target as HTMLElement).classList.contains('nav-control')){
+      if (!(event.target as HTMLElement).classList.contains('nav-control')) {
         userNav.classList.add('hidden');
       }
-    })
+    });
 
     BTN_LOGOUT.addEventListener('click', () => {
+      http.addLog<ILog>('info', `Выход из аккаунта!`);
       localStorage.removeItem('userId');
       appStore.reset();
       document.cookie = 'token=;expires=Thu, 01 Jan 1970 00:00:00 GMT';

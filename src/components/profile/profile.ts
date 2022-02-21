@@ -3,6 +3,10 @@ import './profile.scss';
 import appStore from '../appStore';
 import { IResLog } from '../../interface/IResLog';
 import http from '../http';
+import user from '../user/user';
+import message from '../message/message';
+import { IResUser } from '../../interface/IResUser';
+import { ILog } from '../../interface/ILog';
 
 class Profile extends Component {
   beforeRender() {
@@ -12,6 +16,9 @@ class Profile extends Component {
       time: this.formatGameTime(appStore.user.time),
       mistakes: this.percentMistakes(appStore.user.mistakes),
       username: appStore.user.username !== '' ? appStore.user.username : 'незнакомец',
+      avatar: appStore.user.avatar,
+      experience: appStore.user.experience.toString(),
+      level: appStore.user.level.toString(),
     };
   }
 
@@ -39,19 +46,63 @@ class Profile extends Component {
   }
 
   async afterRender() {
+    const name = document.querySelector('.personal-name');
+    const photoInput = document.getElementById('photo-input') as HTMLInputElement;
+    const photoContainer = document.querySelector('.photo-container') as HTMLImageElement;
+
+    name.textContent = appStore.user.username;
+    function handleFiles() {
+      const fileList = this.files;
+      const reader = new FileReader();
+
+      reader.readAsDataURL(fileList[0]);
+      reader.onload = (event) => {
+        const imgPhoto = document.createElement('img');
+        imgPhoto.src = `${event.target.result}`;
+
+        imgPhoto.onload = async () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          canvas.width = 180;
+          canvas.height = 180;
+
+          ctx.drawImage(imgPhoto, 0, 0, 180, 180);
+
+          const imgUrl = canvas.toDataURL('image/png');
+
+          appStore.user.avatar = `${imgUrl}`;
+          const resUser = await http.updateUser<IResUser>();
+
+          if (resUser.error === 'NO') {
+            photoContainer.src = `${imgUrl}`;
+            user.beforeRender();
+            user.render();
+            user.afterRender();
+          } else {
+            message.view('Ошибка обновления аватара.', 'warning');
+          }
+        };
+      };
+    }
+
+    photoInput.addEventListener('change', handleFiles);
+
     const resLog = await http.getLog<IResLog>();
     if (resLog.error === 'NO') {
       const logs = resLog.info;
 
       const logContainer = document.querySelector('.table-races');
-      logs.forEach((value) => {
+      logs.forEach((value: ILog) => {
         const logCard = document.createElement('div');
+        console.log(value.time)
+        const date = new Date(value.time)
+
         logCard.insertAdjacentHTML(
           'beforeend',
           `
-          <div class="table-races__date">${this.formatGameDate(value.time)}</div>
-          <div class="table-races__time">${this.formatGameTime(value.time)}</div>
-          <div class="table-races__status">${value.type}</div>
+          <div class="table-races__date">${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}</div>
+          <div class="table-races__time">${date.getHours()}:${date.getMinutes()}</div>
           <div class="table-races__text">${value.text}</div>
         `
         );
@@ -86,19 +137,23 @@ const profile = new Profile({
                 </div>
               </div>
             </div>
-            <div class="main-acc-container">
+            <div class="main-acc-container profile-acc-container">
               <div class="personal-info">
                 <div class="personal-photo">
-                  <div class="photo-container"></div>
+                  <img class="photo-container" src="{{ avatar }}"></img>
+                  <input type="file" id="photo-input" class="hidden">
+                  <label for="photo-input" class="photo-changer">Изменить</label>
                 </div>
                 <p class="personal-name">{{ username }}</p>
+                <p class="personal-expirience">Ваш уровень: {{ level }}</p>
+                <p class="personal-expirience">Опыт: {{ experience }}</p>
+
               </div>
               <div class="table-races">
-                </div>
+                <h2 class="table-title">Ваши последние действия:</h2>
               </div>
             </div>
-
-`,
+  `,
 });
 
 export default profile;

@@ -3,9 +3,11 @@
   background-position-y: top;
   height: 300px;
 }
+
 .background {
   background: #444;
 }
+
 .button {
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
@@ -32,6 +34,7 @@
   text-transform: uppercase;
   color: #f8d632;
 }
+
 .depot__nav-ul {
   display: flex;
 }
@@ -41,7 +44,6 @@
 }
 .wrapper-content {
   padding: 15px 25px;
-  // background: #444;
 }
 
 .depot__button:hover {
@@ -63,15 +65,16 @@
 }
 
 .depot__car {
-  /* display: flex; */
   text-transform: uppercase;
   color: #ffffff;
   text-shadow: 1px 1px 1px #000000;
 }
+
 .depot__nav {
   margin-bottom: 10px;
   margin-top: 10px;
 }
+
 @keyframes move {
   from {
     transform: rotate(-360deg);
@@ -80,7 +83,6 @@
 
 .variants-wrap {
   margin-top: 50px;
-
   display: flex;
   justify-content: space-evenly;
 }
@@ -104,6 +106,8 @@
 .radio__label {
   margin-bottom: 10px;
   display: flex;
+  height: 30px;
+  align-items: center;
   cursor: pointer;
 }
 
@@ -161,6 +165,46 @@
 }
 
 .car-img__img {
-  width: 258px;
-  height: 87px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 260px;
+  height: 260px;
+}
+
+.depot__title {
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 64px;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #ffffff;
+}
+.depot__title::after {
+  content: '';
+  position: absolute;
+  left: 443px;
+  right: 0;
+  background-color: #9e0030;
+  width: 245px;
+  height: 4px;
+  bottom: -7px;
+}
+
+.color-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 100px;
+}
+
+.color-text {
+  margin-left: 10px;
+  display: flex;
+  text-transform: uppercase;
+  align-items: center;
+  text-align: center;
+  color: #fff;
 }

@@ -14,6 +14,7 @@
   &__logo {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__user {
@@ -54,4 +55,12 @@
       color: $primary-color;
     }
   }
+}
+
+.buttons-container{
+  width: 530px;
+  margin-left: 250px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

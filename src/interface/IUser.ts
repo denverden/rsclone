@@ -11,7 +11,9 @@ export interface IUser {
   time: number;
   mistakes: number;
   speed: number;
+  color: number;
   avatar: string;
+  car: string;
   token?: string;
   [key: string]: string | number | Array<string>;
 }

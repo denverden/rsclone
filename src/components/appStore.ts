@@ -15,6 +15,12 @@ class AppStore {
 
   public type: string;
 
+  public current: number;
+
+  public currentcpu: number;
+
+  public race: number;
+
   constructor() {
     this.reset();
     this.apiUrl = 'https://keyboardrace.herokuapp.com';
@@ -35,7 +41,9 @@ class AppStore {
       time: localStorage.getItem('time') ? parseInt(localStorage.getItem('time'), 10) : 0,
       mistakes: localStorage.getItem('mistakes') ? parseInt(localStorage.getItem('mistakes'), 10) : 0,
       speed: localStorage.getItem('speed') ? parseInt(localStorage.getItem('speed'), 10) : 0,
-      avatar: '',
+      color: localStorage.getItem('color') ? parseInt(localStorage.getItem('color'), 10) : 0,
+      avatar: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
+      car: localStorage.getItem('car') ? localStorage.getItem('car') : 'sedan',
       token: getCookie('token') ? getCookie('token') : '',
     };
   }

@@ -6,6 +6,7 @@ import http from '../http';
 import user from '../user/user';
 import message from '../message/message';
 import { IResUser } from '../../interface/IResUser';
+import { ILog } from '../../interface/ILog';
 
 class Profile extends Component {
   beforeRender() {
@@ -16,6 +17,8 @@ class Profile extends Component {
       mistakes: this.percentMistakes(appStore.user.mistakes),
       username: appStore.user.username !== '' ? appStore.user.username : 'незнакомец',
       avatar: appStore.user.avatar,
+      experience: appStore.user.experience.toString(),
+      level: appStore.user.level.toString(),
     };
   }
 
@@ -90,14 +93,16 @@ class Profile extends Component {
       const logs = resLog.info;
 
       const logContainer = document.querySelector('.table-races');
-      logs.forEach((value) => {
+      logs.forEach((value: ILog) => {
         const logCard = document.createElement('div');
+        console.log(value.time)
+        const date = new Date(value.time)
+
         logCard.insertAdjacentHTML(
           'beforeend',
           `
-          <div class="table-races__date">${this.formatGameDate(value.time)}</div>
-          <div class="table-races__time">${this.formatGameTime(value.time)}</div>
-          <div class="table-races__status">${value.type}</div>
+          <div class="table-races__date">${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}</div>
+          <div class="table-races__time">${date.getHours()}:${date.getMinutes()}</div>
           <div class="table-races__text">${value.text}</div>
         `
         );
@@ -140,8 +145,13 @@ const profile = new Profile({
                   <label for="photo-input" class="photo-changer">Изменить</label>
                 </div>
                 <p class="personal-name">{{ username }}</p>
+                <p class="personal-expirience">Ваш уровень: {{ level }}</p>
+                <p class="personal-expirience">Опыт: {{ experience }}</p>
+
               </div>
-              <div class="table-races"></div>
+              <div class="table-races">
+                <h2 class="table-title">Ваши последние действия:</h2>
+              </div>
             </div>
   `,
 });

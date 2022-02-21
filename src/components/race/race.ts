@@ -59,10 +59,18 @@ class Race extends Component {
     });
 
     this.car.innerHTML = cars[appStore.user.car];
+    this.car.querySelectorAll('.car .body').forEach((patch) => {
+      patch.setAttribute('style', `fill: ${appStore.user.carcolor}`);
+    });
+
+    console.log(appStore.user.color)
+
     if (appStore.type === 'learn') {
       const res = Object.keys(cars);
       const randCar = Math.floor(Math.random() * Object.keys(cars).length);
       const randColor = `#${Math.random().toString(16).substring(2, 8).toUpperCase()}`;
+
+
 
       this.carCpu.innerHTML = cars[res[randCar]];
       this.carCpu.querySelectorAll('.car--cpu .body').forEach((patch) => {
@@ -135,7 +143,15 @@ const race = new Race({
   selector: '.race',
   template: `
       <div class="race__street"></div>
-      <div class="race__road"><div class="race__container"><div class="car"></div><div class="car car--user1"></div><div class="car car--user2"></div><div class="car car--user3"></div><div class="car car--cpu"></div></div></div>
+      <div class="race__road">
+        <div class="race__container">
+          <div class="car"></div>
+          <div class="car car--user1"></div>
+          <div class="car car--user2"></div>
+          <div class="car car--user3"></div>
+          <div class="car car--cpu"></div>
+        </div>
+      </div>
       </div>
     `,
 });

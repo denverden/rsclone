@@ -36,22 +36,7 @@ const garage = new Garage({
             <div class="main-acc-container garage-container background">
 						<section class="depot">
 						<div class="wrapper-content">
-							<nav class="depot__nav">
-								<ul class="depot__nav-ul">
-									<li class="depot__item ">
-										<a class="depot__button depot--active" href="#" data-toggle="tab">Кузов</a>
-									</li>
-									<li class="depot__item">
-										<a href="#" class="depot__button" data-toggle="tab">Краска</a>
-									</li>
-									<li class="depot__item">
-										<a href="#" class="depot__button" data-toggle="tab">Стекла</a>
-									</li>
-									<li class="depot__item">
-										<a href="#" class="depot__button" data-toggle="tab">Диски</a>
-									</li>
-								</ul>
-							</nav>
+            <h2 class="depot__title">Гараж</h2>
 							<div class="variants-wrap">
 								<div class="variants">
 									<h4 class="variants__title">Варианты: </h4>
@@ -113,6 +98,10 @@ const garage = new Garage({
 								</div>
 								<div class="car-img"><div class="car-img__img">${cars.sedan}</div></div>
 							</div>
+              <div style="color" class="color-wrapper">
+              <input id="body" type="color" value="#89CA86" />
+              <div class="color-text">Покраска</div>
+              </div>
 							<div class="depot__save">
 								<a href="#" class="depot__button depot__button--save" data-toggle="tab">Сохранить изменения</a>
 							</div>

@@ -43,7 +43,11 @@ const UserModel = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  color: {
+  countcolor: {
+    type: Number,
+    default: 0,
+  },
+  countcar: {
     type: Number,
     default: 0,
   },
@@ -55,6 +59,10 @@ const UserModel = new mongoose.Schema({
   car: {
     type: String,
     default: 'sedan',
+  },
+  carcolor: {
+    type: String,
+    default: '#89CA86',
   },
   roles: [{ type: String, ref: 'Role' }],
 });

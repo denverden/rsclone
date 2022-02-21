@@ -6,6 +6,7 @@ const page = new Component({
   template: `
     <div class="page__header"></div>
     <section class="page__messages"></section>
+    <!-- <div class="page__load"><hr/><hr/><hr/><hr/></div> -->
     <div class="page__main"></div>
     <div class="page__footer"></div>
   `,

@@ -39,6 +39,11 @@
     &--gray {
       opacity: 0.5;
     }
+
+    &--current {
+      background-color: #fcaf3e;
+      white-space: break-spaces;
+    }
   }
 
   &__keys {

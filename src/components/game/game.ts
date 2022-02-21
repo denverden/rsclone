@@ -1,7 +1,14 @@
 import Component from '../component';
+import appStore from '../appStore';
 import './game.scss';
 
-const game = new Component({
+class Game extends Component {
+  beforeRender() {
+    appStore.type = 'game';
+  }
+}
+
+const game = new Game({
   selector: '.page__main',
   template: `
       <section class="game"><h2 class="game__title">ЗАЕЗД</h2></section>

@@ -1,0 +1,57 @@
+.achievement-parallax {
+  background-image: url('./img/wallpaperbetter.com_1920x1080.webp');
+  height: 300px;
+}
+.main__title {
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 64px;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #333333;
+}
+.main__title::after {
+  content: '';
+  position: absolute;
+  left: 415px;
+  right: 0;
+  background-color: #9e0030;
+  width: 340px;
+  height: 4px;
+  bottom: -7px;
+}
+.achievement {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+
+  &__img-item {
+    width: 182px;
+    height: 98px;
+  }
+
+  &__item--filter {
+    filter: grayscale(100%);
+    color: #949191;
+  }
+
+  &__item {
+    width: 185px;
+    height: 134px;
+    background: url(./img/wreath.svg) no-repeat;
+    background-position: 50% 50%;
+  }
+
+  &__text {
+    margin-top: 5px;
+    text-align: center;
+  }
+}

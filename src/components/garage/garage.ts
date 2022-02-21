@@ -2,6 +2,7 @@
 import Component from '../component';
 import './garage.scss';
 import { cars } from '../cars';
+import appStore from '../appStore';
 
 class Garage extends Component {
   radio() {

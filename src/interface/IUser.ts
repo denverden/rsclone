@@ -11,7 +11,7 @@ export interface IUser {
   time: number;
   mistakes: number;
   speed: number;
-  color: number;
+  color: string | number;
   avatar: string;
   car: string;
   token?: string;

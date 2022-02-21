@@ -2,6 +2,8 @@
 import Component from '../component';
 import './garage.scss';
 import { cars } from '../cars';
+import appStore from '../appStore';
+import http from '../http';
 
 class Garage extends Component {
   radio() {
@@ -28,6 +30,29 @@ class Garage extends Component {
 
   afterRender() {
     this.radio();
+    const saveBTN = document.querySelector('.depot__button--save');
+    const radioInputsCars = document.querySelectorAll('.radio__input');
+    const inputColor = document.querySelector('.input__color') as HTMLInputElement;
+    const carImg = document.querySelector('.car-img__img')
+    saveBTN.addEventListener('click', (event)=>{
+      event.preventDefault()
+      radioInputsCars.forEach((input: HTMLInputElement) =>{
+        if(input.checked){
+
+          appStore.user.car = `${input.value}`
+          appStore.user.color = inputColor.value
+          http.updateUser()
+          localStorage.setItem('color', inputColor.value)
+        }
+      })
+    })
+
+    inputColor.addEventListener('change', ()=>{
+      carImg.querySelectorAll(`.body`).forEach((patch) => {
+        patch.setAttribute('style', `fill: ${inputColor.value}`);
+      });
+    })
+
   }
 }
 const garage = new Garage({
@@ -99,7 +124,7 @@ const garage = new Garage({
 								<div class="car-img"><div class="car-img__img">${cars.sedan}</div></div>
 							</div>
               <div style="color" class="color-wrapper">
-              <input id="body" type="color" value="#89CA86" />
+              <input id="body" type="color" class="input__color" value="#89CA86" />
               <div class="color-text">Покраска</div>
               </div>
 							<div class="depot__save">

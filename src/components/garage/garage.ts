@@ -36,6 +36,12 @@ class Garage extends Component {
     const inputColor = document.querySelector('.input__color') as HTMLInputElement;
     const carImg = document.querySelector('.car-img__img')
 
+    radioInputsCars.forEach(inp =>{
+      if(Number((inp as HTMLElement).dataset.exp) > appStore.user.experience){
+        inp.setAttribute('disabled', '')
+      }
+    })
+
     carImg.innerHTML = cars[appStore.user.car];
     carImg.querySelectorAll('.body').forEach((patch) => {
       patch.setAttribute('style', `fill: ${appStore.user.carcolor}`);
@@ -52,7 +58,7 @@ class Garage extends Component {
             appStore.user.countcar++
             http.addLog('', 'Вы сменили машину')
           }
-          if(appStore.user.car !== inputColor.value){
+          if(appStore.user.carcolor !== inputColor.value){
             appStore.user.carcolor = inputColor.value
             appStore.user.countcolor++
             http.addLog('', 'Вы сменили цвет машины')
@@ -89,50 +95,46 @@ const garage = new Garage({
 												<input class="radio__input" type="radio" name="body" id="sedan"  value="sedan" >
 												<div class="radio__img">${cars.sedan}</div>
 												<b class="radio__title">Седан</b>
-												— бесплатно
+												— стартовый набор
 											</label>
 										</div>
 										<div class="radio ">
 											<label class="radio__label">
-												<input class="radio__input" type="radio" name="body" id="hatchback" value="hatchback" >
+												<input class="radio__input" data-exp="10" type="radio" name="body" id="hatchback" value="hatchback" >
 												<div class="radio__img">${cars.hatchback}</div>
 												<b class="radio__title">Хэтчбек</b>
 												<span class="price">
-													<span>300</span> <small>опыта </small>
-													<a class="radio__buy" href="#">купить</a>
+													<span>10</span> <small>опыта </small>
 												</span>
 											</label>
 										</div>
 										<div class="radio ">
 											<label class="radio__label">
-												<input class="radio__input" type="radio" name="body" id="convertible" value="convertible" >
+												<input class="radio__input" data-exp="100" type="radio" name="body" id="convertible" value="convertible" >
 												<div class="radio__img">${cars.convertible}</div>
 												<b class="radio__title">Смарт</b>
 												<span class="price">
-													<span>300</span> <small>опыта </small>
-													<a class="radio__buy" href="#">купить</a>
+													<span>100</span> <small>опыта </small>
 												</span>
 											</label>
 										</div>
 										<div class="radio">
 											<label class="radio__label">
-												<input class="radio__input" type="radio" name="body" id="smart" value="smart" >
+												<input class="radio__input" data-exp="500" type="radio" name="body" id="smart" value="smart" >
 												<div class="radio__img">${cars.smart}</div>
 												<b class="radio__title">Кабриолет</b>
 												<span class="price">
-													<span>300</span> <small>опыта </small>
-													<a class="radio__buy" href="#">купить</a>
+													<span>500</span> <small>опыта </small>
 												</span>
 											</label>
 										</div>
 										<div class="radio">
 											<label class="radio__label">
-												<input class="radio__input" type="radio" name="body"  id="vehicle" value="vehicle" >
+												<input class="radio__input" data-exp="1000" type="radio" name="body"  id="vehicle" value="vehicle" >
 												<div class="radio__img">${cars.vehicle}</div>
 												<b class="radio__title">Внедорожник</b>
 												<span class="price">
-													<span>300</span> <small>опыта </small>
-													<a class="radio__buy" href="#">купить</a>
+													<span>1000</span> <small>опыта </small>
 												</span>
 											</label>
 										</div>

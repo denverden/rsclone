@@ -93,7 +93,7 @@ class Profile extends Component {
       const logs = resLog.info;
 
       const logContainer = document.querySelector('.table-races');
-      logs.reverse().forEach((value: ILog) => {
+      logs.reverse().slice(0, 14).forEach((value: ILog) => {
         const logCard = document.createElement('div');
         console.log(value.time)
         const date = new Date(value.time)

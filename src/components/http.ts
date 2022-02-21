@@ -38,7 +38,7 @@ class HTTP {
         Authorization: `Bearer ${appStore.user.token}`,
       },
       body: JSON.stringify({
-        time: Math.floor(Date.now() / 1000),
+        time: Date.now(),
         type,
         text,
       }),

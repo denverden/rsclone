@@ -22,7 +22,7 @@ class Race extends Component {
   constructor(data: IData) {
     super(data);
 
-    this.timerId = setInterval(() => console.log(''), 1000);
+    this.timerId = null;
     this.car = null;
     this.carUser1 = null;
     this.carUser2 = null;
@@ -63,14 +63,12 @@ class Race extends Component {
       patch.setAttribute('style', `fill: ${appStore.user.carcolor}`);
     });
 
-    console.log(appStore.user.color)
+    console.log(appStore.user.color);
 
     if (appStore.type === 'learn') {
       const res = Object.keys(cars);
       const randCar = Math.floor(Math.random() * Object.keys(cars).length);
       const randColor = `#${Math.random().toString(16).substring(2, 8).toUpperCase()}`;
-
-
 
       this.carCpu.innerHTML = cars[res[randCar]];
       this.carCpu.querySelectorAll('.car--cpu .body').forEach((patch) => {

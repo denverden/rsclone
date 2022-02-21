@@ -93,22 +93,25 @@ class Profile extends Component {
       const logs = resLog.info;
 
       const logContainer = document.querySelector('.table-races');
-      logs.reverse().slice(0, 14).forEach((value: ILog) => {
-        const logCard = document.createElement('div');
-        console.log(value.time)
-        const date = new Date(value.time)
+      logs
+        .reverse()
+        .slice(0, 14)
+        .forEach((value: ILog) => {
+          const logCard = document.createElement('div');
 
-        logCard.insertAdjacentHTML(
-          'beforeend',
-          `
+          const date = new Date(value.time);
+
+          logCard.insertAdjacentHTML(
+            'beforeend',
+            `
           <div class="table-races__date">${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}</div>
           <div class="table-races__time">${date.getHours()}:${date.getMinutes()}</div>
           <div class="table-races__text">${value.text}</div>
         `
-        );
-        logCard.classList.add('table-races__item');
-        logContainer.append(logCard);
-      });
+          );
+          logCard.classList.add('table-races__item');
+          logContainer.append(logCard);
+        });
     }
   }
 }

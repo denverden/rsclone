@@ -52,7 +52,6 @@ class AppStore {
 
   async saveUser() {
     if (this.user._id !== '' && this.user.token !== '') {
-      http.addLog<ILog>('info', `Завершен урок №${this.user.lesson}`);
       await http.updateUser<IResUser>();
     } else {
       localStorage.setItem('lesson', this.user.lesson.toString());

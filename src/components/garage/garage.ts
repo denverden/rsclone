@@ -65,7 +65,7 @@ class Garage extends Component {
           }
 
           http.updateUser()
-          localStorage.setItem('carcolor', inputColor.value)
+          // localStorage.setItem('carcolor', inputColor.value)
         }
       })
     })
@@ -73,7 +73,6 @@ class Garage extends Component {
     inputColor.addEventListener('change', ()=>{
       carImg.querySelectorAll(`.body`).forEach((patch) => {
         patch.setAttribute('style', `fill: ${inputColor.value}`);
-
       });
     })
 

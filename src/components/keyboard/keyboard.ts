@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { IData } from '../../interface/IData';
 import { IText } from '../../interface/IText';
 import HTTP from '../http';
@@ -9,7 +10,6 @@ import appStore from '../appStore';
 import message from '../message/message';
 import learn from '../learn/learn';
 import race from '../race/race';
-import { ILog } from '../../interface/ILog';
 
 class Keyboard extends Component {
   private keysContainer: HTMLElement;
@@ -20,7 +20,7 @@ class Keyboard extends Component {
 
   private text: string;
 
-  private startTime: number;
+  public startTime: number;
 
   private speedText: number;
 
@@ -121,11 +121,12 @@ class Keyboard extends Component {
 
       if (event.key === this.text[appStore.current]) {
         appStore.current++;
-        const typedText = this.text.slice(0, appStore.current);
-        const futurText = this.text.slice(appStore.current);
-        (
-          document.querySelector('.keyboard__text') as HTMLElement
-        ).innerHTML = `<span class="keyboard__text--black">${typedText}</span><span class="keyboard__text--gray">${futurText}</span>`;
+        const typedText = appStore.current > 0 ? this.text.slice(0, appStore.current) : '';
+        const futurText = appStore.current + 1 <= appStore.race ? this.text.slice(appStore.current + 1) : '';
+        const currentText = appStore.current < appStore.race ? this.text[appStore.current] : '';
+
+        (document.querySelector('.keyboard__text') as HTMLElement).innerHTML = `
+          <span class="keyboard__text--black">${typedText}</span><span class="keyboard__text--current">${currentText}</span><span class="keyboard__text--gray">${futurText}</span>`;
         this.view(this.text[appStore.current], this.text[appStore.current - 1]);
         appStore.user.signs++;
       } else {
@@ -133,8 +134,14 @@ class Keyboard extends Component {
         appStore.user.mistakes++;
         (document.querySelector('.instrumentation__error') as HTMLElement).textContent = this.error.toString();
       }
+
       if (appStore.type === 'learn' && this.text.length === appStore.current) {
         appStore.user.races++;
+        appStore.user.experience += 10;
+        if (appStore.user.experience >= 1000) {
+          appStore.user.level++;
+          appStore.user.experience -= 1000;
+        }
         appStore.user.lesson++;
         appStore.user.time += Math.round(new Date().getTime() / 1000 - this.startTime);
         appStore.saveUser();
@@ -144,6 +151,11 @@ class Keyboard extends Component {
 
       if (appStore.type === 'game' && this.text.length === appStore.current) {
         appStore.user.races++;
+        appStore.user.experience += 10;
+        if (appStore.user.experience >= 1000) {
+          appStore.user.level++;
+          appStore.user.experience -= 1000;
+        }
         appStore.user.time += Math.round(new Date().getTime() / 1000 - this.startTime);
         appStore.saveUser();
         message.view('Заезд завершён.', 'success');
@@ -211,7 +223,9 @@ class Keyboard extends Component {
 
   async loadText() {
     const txt = appStore.type === 'learn' ? await HTTP.getLesson<IText>(appStore.user.lesson) : await HTTP.getText<IText>();
-    this.elem.querySelector('.keyboard__text').innerHTML = `<span class="keyboard__text--gray">${txt.info.text}</span>`;
+    this.elem.querySelector('.keyboard__text').innerHTML = `<span class="keyboard__text--current">${
+      txt.info.text[0]
+    }</span><span class="keyboard__text--gray">${txt.info.text.slice(1)}</span>`;
     this.text = txt.info.text;
     this.lang = txt.info.lang;
   }

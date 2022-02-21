@@ -7,6 +7,7 @@ import car from './car.jpg';
 import user from './user.svg';
 import key from './key.svg';
 import './signin.scss';
+import { ILog } from '../../interface/ILog';
 
 class SignIn extends Component {
   beforeRender() {
@@ -35,6 +36,7 @@ class SignIn extends Component {
       appStore.user = JSON.parse(JSON.stringify(resUser.info));
       localStorage.setItem('userId', appStore.user._id);
       document.cookie = `token=${appStore.user.token}; max-age=86400`;
+      http.addLog<ILog>('info', `Вход в аккаунт!`);
       window.location.hash = '#profile';
     } else {
       message.view(resUser.apiMessage, 'error');

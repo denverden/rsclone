@@ -5,6 +5,7 @@ import { cars } from '../cars';
 import appStore from '../appStore';
 import http from '../http';
 
+
 class Garage extends Component {
   radio() {
     const variants = document.querySelector('.variants');
@@ -34,15 +35,31 @@ class Garage extends Component {
     const radioInputsCars = document.querySelectorAll('.radio__input');
     const inputColor = document.querySelector('.input__color') as HTMLInputElement;
     const carImg = document.querySelector('.car-img__img')
+
+    carImg.innerHTML = cars[appStore.user.car];
+    carImg.querySelectorAll('.body').forEach((patch) => {
+      patch.setAttribute('style', `fill: ${appStore.user.carcolor}`);
+    });
+
+    inputColor.value = appStore.user.carcolor
+
     saveBTN.addEventListener('click', (event)=>{
       event.preventDefault()
       radioInputsCars.forEach((input: HTMLInputElement) =>{
         if(input.checked){
+          if(appStore.user.car !== input.value){
+            appStore.user.car = `${input.value}`
+            appStore.user.countcar++
+            http.addLog('', 'Вы сменили машину')
+          }
+          if(appStore.user.car !== inputColor.value){
+            appStore.user.carcolor = inputColor.value
+            appStore.user.countcolor++
+            http.addLog('', 'Вы сменили цвет машины')
+          }
 
-          appStore.user.car = `${input.value}`
-          appStore.user.color = inputColor.value
           http.updateUser()
-          localStorage.setItem('color', inputColor.value)
+          localStorage.setItem('carcolor', inputColor.value)
         }
       })
     })
@@ -50,6 +67,7 @@ class Garage extends Component {
     inputColor.addEventListener('change', ()=>{
       carImg.querySelectorAll(`.body`).forEach((patch) => {
         patch.setAttribute('style', `fill: ${inputColor.value}`);
+
       });
     })
 
@@ -68,7 +86,7 @@ const garage = new Garage({
 									<div class="variants__group">
 										<div class="radio radio--active">
 											<label class="radio__label">
-												<input class="radio__input" type="radio" name="body" id="sedan"  value="sedan" checked="checked">
+												<input class="radio__input" type="radio" name="body" id="sedan"  value="sedan" >
 												<div class="radio__img">${cars.sedan}</div>
 												<b class="radio__title">Седан</b>
 												— бесплатно

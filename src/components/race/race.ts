@@ -60,7 +60,7 @@ class Race extends Component {
 
     this.car.innerHTML = cars[appStore.user.car];
     this.car.querySelectorAll('.car .body').forEach((patch) => {
-      patch.setAttribute('style', `fill: ${appStore.user.color}`);
+      patch.setAttribute('style', `fill: ${appStore.user.carcolor}`);
     });
 
     console.log(appStore.user.color)

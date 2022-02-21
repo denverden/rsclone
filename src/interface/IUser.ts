@@ -11,9 +11,11 @@ export interface IUser {
   time: number;
   mistakes: number;
   speed: number;
-  color: string | number;
+  countcolor: number;
+  countcar: number;
   avatar: string;
   car: string;
+  carcolor: string;
   token?: string;
   [key: string]: string | number | Array<string>;
 }

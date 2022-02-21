@@ -19,6 +19,7 @@ const learn = new Learn({
   selector: '.page__main',
   template: `
     <section class="learn"><h2 class="learn__title">УРОК №{{ lesson }}</h2></section>
+    <div class="page__popup"></div>
     <section class="keyboard"></section>
     <section class="race"></section>
   `,

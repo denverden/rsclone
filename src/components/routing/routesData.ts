@@ -12,12 +12,13 @@ import features from '../features/features';
 import rating from '../rating/rating';
 import achievement from '../achievement/achievement';
 import garage from '../garage/garage';
+import popup from '../popup/popup';
 import buttonsHeader from '../buttons-header/buttons-header';
 import race from '../race/race';
 
 const routes: Array<IRoute> = [
   { path: '', components: [user, features, welcome, rating] },
-  { path: 'learn', components: [learn, keyboard, user, buttonsHeader, race] },
+  { path: 'learn', components: [learn, keyboard, user, buttonsHeader, race, popup] },
   { path: 'game', components: [game, keyboard, user, buttonsHeader, race] },
   { path: 'signin', components: [signin, user, buttonsHeader] },
   { path: 'signup', components: [signup, user, buttonsHeader] },
